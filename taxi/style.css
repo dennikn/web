@@ -1,0 +1,100 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    width: 100%;
+}
+
+
+.info {
+    font: 14px/14px Arial, Helvetica, sans-serif;
+    background: #ffffff00;
+    padding-right: 15px;
+    
+    
+    
+}
+.info h4 {
+}
+
+#leg {
+    display: inline-block;
+}
+
+.legend {
+    color: white;
+    font-size: 14px;
+}
+
+.legend span, .legend label {
+    display: block;
+    width: 40px;
+    height: 13px;
+    float: left;
+    opacity: 1;
+    text-align: center;
+    font-size: 12px;
+    color: white;
+
+  }
+  .legend .circle {
+    display: inline-block;    
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+  }
+
+
+
+p {
+    font-size: 18px;
+    color: white;
+    opacity: 1;
+}
+
+#switchid {
+    display: inline-block;
+}
+
+#startid {
+    background-color: crimson;
+	color: white;
+    display: inline-block;
+    font-size: 18px;
+    border: solid;
+    border-width: medium;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 6px;
+    padding-left: 6px; 
+    border-color: crimson;
+}
+
+#startid:hover {
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+}
+
+#endid {
+    background-color: crimson;
+	color: white;
+    display: inline-block;
+    border: solid;
+    border-width: medium;
+    font-size: 18px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 6px;
+    padding-left: 6px;
+    border-color: crimson;
+}
+
+#endid:hover {
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+}
+

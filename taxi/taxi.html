@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title></title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="leaflet.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+</head>
+<body>
+		
+<div id="map" style="width: 100%; height: 100%;">
+		
+</div>
+<script>
+var map  = L.map('map').setView([48.1456638,17.1344829], 12);
+
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}{r}.png', {
+   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+   subdomains: 'abcd',
+   maxZoom: 17,
+   minZoom:10,
+}).addTo(map);
+
+map.doubleClickZoom.disable(); 
+
+
+
+
+var info = L.control({position: 'topright'});
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); 
+    this.update();
+    return this._div;
+};
+
+info.update = function () {
+    this._div.innerHTML = '<h3 id="startid">Štart</h3>         ' + '         <h3 id="endid">Cieľ</h3><br>';
+};
+
+info.addTo(map);
+
+
+var start_check = true;
+var end_check = true;
+
+
+function start_on() {
+	map.addLayer(start);
+}
+function start_off() {
+	map.removeLayer(start);
+}
+
+function end_on() {
+	map.addLayer(end);
+}
+function end_off() {
+	map.removeLayer(end);
+}
+
+window.onload = function() {
+    document.getElementById("startid").onclick = function switcher() {
+        if (start_check == false) {
+			 start_on();
+			 start_check = true;
+			$('#startid').css({
+				'background-color': 'crimson',
+				'color': 'white',
+				'border-color': 'crimson'
+			});
+		} else if (start_check == true) {
+			 start_off();
+			 start_check = false;
+			 $('#startid').css({
+				'background-color': 'white',
+				'color': 'black',
+				'border-color': 'black'
+			});
+		}
+			
+		}
+		document.getElementById("endid").onclick = function switcher2() {
+        if (end_check == false) {
+			 end_on();
+			 end_check = true;
+			 $('#endid').css({
+				'background-color': 'crimson',
+				'color': 'white',
+				'border-color': 'crimson'
+			});
+		} else if (end_check == true) {
+			 end_off();
+			 end_check = false;
+			 $('#endid').css({
+				'background-color': 'white',
+				'color': 'black',
+				'border-color': 'black'
+			});
+		}
+			
+		}
+    }
+
+
+
+
+var start1= L.circle([48.145630, 17.108241], { color: '#f03b20', fillColor: '#f03b20', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Alizé, počet objednávok: 759')
+var start2= L.circle([48.141737, 17.108768], { color: '#f03b20', fillColor: '#f03b20', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z hotela Carlton, počet objednávok: 513')
+var start3= L.circle([48.157876, 17.106630], { color: '#f03b20', fillColor: '#f03b20', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Hlavnej stanice, počet objednávok: 347')
+var start4= L.circle([48.172854, 17.142533], { color: '#f03b20', fillColor: '#f03b20', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Lakeside Park, počet objednávok: 344')
+var start5= L.circle([48.141114, 17.107258], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Hviezdoslavovho námestia 7, počet objednávok: 242')
+var start6= L.circle([48.143566, 17.112975], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: zo Štúrovej 2, počet objednávok: 230')
+var start7= L.circle([48.170002, 17.199418], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z letiska, počet objednávok: 297')
+var start8= L.circle([48.148929, 17.113571], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Vysokej - Panda, počet objednávok: 162')
+var start9= L.circle([48.140468, 17.106511], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z hotela Danube, počet objednávok: 151')
+var start10= L.circle([48.157488, 17.129262], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z OC Central, počet objednávok: 147')
+var start11= L.circle([48.144607, 17.130003], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z autobusovej stanice, počet objednávok: 134')
+var start12= L.circle([48.142976, 17.111030], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Gorkého 7, počet objednávok: 111')
+var start13= L.circle([48.145266, 17.110633], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Namestia SNP 30, počet objednávok: 109')
+var start14= L.circle([48.145780, 17.103495], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: zo Zochovej, počet objednávok: 105')
+var start15= L.circle([48.140683, 17.122376], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: zo Sheratonu, počet objednávok: 103')
+var start16= L.circle([48.147676, 17.107988], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: Z CrownPlaza, počet objednávok: 187')
+var start17= L.circle([48.141701, 17.090374], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Grand Hotelu River park, počet objednávok: 99')
+var start18= L.circle([48.130306, 17.116553], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: zo Černyševského 50 - Tatra Banka, počet objednávok: 97')
+var start19= L.circle([48.140724, 17.121353], { color: '#f03b20', fillColor: '#f03b20', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Eurovei, počet objednávok: 341')
+var start20= L.circle([48.152029, 17.158281], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z OC Retro , počet objednávok: 94')
+var start21= L.circle([48.162761, 17.139981], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Troch veží, počet objednávok: 93')
+var start22= L.circle([48.133111, 17.106411], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Auparku, počet objednávok: 172')
+var start23= L.circle([48.145260, 17.111790], { color: '#ffffb2', fillColor: '#ffffb2', fillOpacity: 0.8, radius: 40}).bindTooltip('Štart: z Námestia SNP 12, počet objednávok: 85')
+
+var start = L.layerGroup([start1, start2, start3, start4, start5, start6, start7, start8, start9, start10, start11, start12, start13, start14, start15, start16, start17, start18, start19, start20, start21, start22, start23]);
+
+var end1= L.circle([48.157838, 17.106201], { color: '#3182bd', fillColor: '#3182bd', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Hlavná stanica, počet objednávok: 530')
+var end2= L.circle([48.170002, 17.201018], { color: '#3182bd', fillColor: '#3182bd', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: letisko, počet objednávok: 346')
+var end3= L.circle([48.140565, 17.119331], { color: '#3182bd', fillColor: '#3182bd', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Eurovea, počet objednávok: 371')
+var end4= L.circle([48.141357, 17.108549], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Olympic Casino Carlton, počet objednávok: 228')
+var end5= L.circle([48.144607, 17.129003], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: autobusova stanica, počet objednávok: 203')
+var end6= L.circle([48.133111, 17.106411], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Aupark, počet objednávok: 200')
+var end7= L.circle([48.157488, 17.130262], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Central, počet objednávok: 192')
+var end8= L.circle([48.145630, 17.107541], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Alizé, počet objednávok: 143')
+var end9= L.circle([48.168113, 17.138212], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Polus City Center, počet objednávok: 130')
+var end10= L.circle([48.141862, 17.089689], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: River Park, počet objednávok: 240')
+var end11= L.circle([48.141525, 17.107328], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Sky Bar Restaurant, počet objednávok: 90')
+var end12= L.circle([48.130177, 17.107123], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Digital Park, počet objednávok: 81')
+var end13= L.circle([48.141549, 17.109432], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Carlton, počet objednávok: 75')
+var end14= L.circle([48.148904, 17.112710], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Vysoká, Obchodná, počet objednávok: 72')
+var end15= L.circle([48.160647, 17.137651], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Double Tree Hilton, počet objednávok: 70')
+var end16= L.circle([48.166573, 17.180856], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Avion, počet objednávok: 66')
+var end17= L.circle([48.145286, 17.123827], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Twin City Business Center, počet objednávok: 65')
+var end18= L.circle([48.130306, 17.116553], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Černyševského 50 - Tatra Banka, počet objednávok: 65')
+var end19= L.circle([48.139641, 17.104688], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Most SNP, počet objednávok: 64')
+var end20= L.circle([48.152144, 17.157609], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Retro Shopping gallery, počet objednávok: 63')
+var end21= L.circle([48.151771, 17.107199], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Fabrika The Beer pub, počet objednávok: 62')
+var end22= L.circle([48.144239, 17.113056], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Steinplatz, počet objednávok: 60')
+var end23= L.circle([48.148425, 17.108790], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Hodžovo námestie 3, počet objednávok: 59')
+var end24= L.circle([48.145502, 17.142107], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Plynárenská 7, počet objednávok: 59')
+var end25= L.circle([48.150631, 17.106662], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Štefaníkova 13, počet objednávok: 58')
+var end26= L.circle([48.121796, 17.098577], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: Kopčianska 1, počet objednávok: 57')
+var end27= L.circle([48.147675, 17.108939], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: CrownPlaza, počet objednávok: 57')
+var end28= L.circle([48.166171, 17.177552], { color: '#9ecae1', fillColor: '#9ecae1', fillOpacity: 0.8, radius: 40}).bindTooltip('Cieľ: NH Bratislava Gate One, počet objednávok: 55')
+
+var end = L.layerGroup([end1, end2, end3, end4, end5, end6, end7, end8, end9, end10, end10, end11, end12, end13, end14, end15, end16, end17, end18, end19, end20, end21, end22, end23, end24, end25, end26, end27, end28]);
+
+
+
+
+map.addLayer(start)
+map.addLayer(end)
+
+
+function getColor(d) {
+    return d < 301 ? '#ffffb2' :
+		   d < 800 ? '#f03b20' :
+                      '';
+}
+
+
+function getColor2(d) {
+    return d < 301 ? '#9ecae1' :
+		   d < 800 ? '#3182bd' :
+                      '';
+}
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+var div = L.DomUtil.create('div', 'info legend'),
+	grades = [50, 300, 301],
+	labels = ['50-300', '301+'];
+
+	div.innerHTML +=
+		'<div id="leg"><div class="toto"><b>Počet objednávok:</b><br><br><b>Štart</b><br>' + '<i class="circle" style="background:'  + '"></i> ' + '<span class="circle" style="background:' + getColor(grades[1]) + '"></span> '  + '</i> ' + '<span class="circle" style="background:' + getColor(grades[2]) + '"></span><br><br>' + '85-759</div>' + '<br><b>Cieľ</b><br>' + '<i class="circle" style="background:'  + '"></i> ' + '<span class="circle" style="background:' + getColor2(grades[1]) + '"></span> '  + '</i> ' + '<span class="circle" style="background:' + getColor2(grades[2]) + '"></span><br><br>' + '55-530</div></div>';
+
+return div;        
+};
+
+
+legend.addTo(map);
+
+
+</script>
