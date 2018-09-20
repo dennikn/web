@@ -1,0 +1,115 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100%;
+    width: 100%;
+}
+
+
+.info {
+    font: 14px/14px Arial, Helvetica, sans-serif;
+    background: #ffffff00;
+    padding-right: 15px;
+    
+    
+    
+}
+.info h4 {
+}
+
+.legend {
+    color: white;
+}
+
+.legend span, .legend label {
+    display: block;
+    width: 40px;
+    height: 16px;
+    float: left;
+    opacity: 1;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+
+  }
+  .legend .circle {
+      
+    border-radius: 70%;
+    width: 14px;
+    height: 14px;
+  }
+
+
+p {
+    font-size: 18px;
+    color: white;
+    opacity: 1;
+}
+
+#switchid {
+    display: inline-block;
+}
+
+#adults {
+    background-color: royalblue;
+	color: white;
+    display: inline-block;
+    font-size: 18px;
+    border: solid;
+    border-width: medium;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border-color: royalblue;
+}
+
+#adults:hover {
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+}
+
+#kids {
+    background-color: crimson;
+	color: white;
+    display: inline-block;
+    border: solid;
+    border-width: medium;
+    font-size: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border-color: crimson;
+}
+
+#kids:hover {
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+}
+
+
+#nohospitals {
+    background-color: black;
+	color: white;
+    display: inline-block;
+    border: solid;
+    border-width: medium;
+    font-size: 18px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    border-color: black;
+}
+
+#nohospitals:hover {
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+}
+

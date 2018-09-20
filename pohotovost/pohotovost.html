@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<script src="leaflet.js"></script>
+<link rel="stylesheet" href="leaflet.css" />
+<script src="leaflet.ajax.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+      
+
+<div id="mapid" style="width: 100%; height: 100%;">
+</div>
+<script>
+
+	var map = L.map('mapid', {minZoom: 7, maxZoom: 16, zoomControl:true}).setView([48.6101004, 19.6989536], 7);
+
+    L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+}).addTo(map)
+
+
+
+map.doubleClickZoom.disable(); 
+
+
+
+
+var info = L.control({position: 'topright'});
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); 
+    this.update();
+    return this._div;
+};
+
+info.update = function () {
+    this._div.innerHTML = '<h3 id="adults">Dospelí</h3>         ' + '         <h3 id="kids">Deti</h3>         ' + '<br>';
+};
+
+info.addTo(map);
+
+
+var adults_check = true;
+var kids_check = true;
+
+
+function adults_on() {
+	map.addLayer(adults);
+}
+function adults_off() {
+	map.removeLayer(adults);
+}
+
+function kids_on() {
+	map.addLayer(kids);
+}
+function kids_off() {
+	map.removeLayer(kids);
+}
+
+
+window.onload = function() {
+    document.getElementById("adults").onclick = function switcher() {
+        if (adults_check == false) {
+			 adults_on();
+			 adults_check = true;
+			$('#adults').css({
+				'background-color': 'royalblue',
+				'color': 'white',
+				'border-color': 'royalblue'
+			});
+		} else if (adults_check == true) {
+			 adults_off();
+			 adults_check = false;
+			 $('#adults').css({
+				'background-color': 'white',
+				'color': 'black',
+				'border-color': 'black'
+			});
+		}
+			
+		}
+		document.getElementById("kids").onclick = function switcher2() {
+        if (kids_check == false) {
+			 kids_on();
+			 kids_check = true;
+			 $('#kids').css({
+				'background-color': 'crimson',
+				'color': 'white',
+				'border-color': 'crimson'
+			});
+		} else if (kids_check == true) {
+			 kids_off();
+			 kids_check = false;
+			 $('#kids').css({
+				'background-color': 'white',
+				'color': 'black',
+				'border-color': 'black'
+			});
+		}
+			
+		}
+       
+			
+		}
+    
+                                                
+var adult1= L.circle([48.167162, 17.138352], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Bratislava')
+var adult2= L.circle([48.110972, 17.11129], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Bratislava')
+var adult3= L.circle([48.439005, 17.023253], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Malacky')
+var adult4= L.circle([48.318254, 17.226333], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Pezinok')
+var adult5= L.circle([47.989309, 17.620142], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Dunajská Streda')
+var adult6= L.circle([48.19105, 17.727063], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Galanta')
+var adult7= L.circle([48.427884, 17.798782], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Hlohovec')
+var adult8= L.circle([48.589525, 17.821385], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Piešťany')
+var adult9= L.circle([48.678756, 17.366153], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Senica')
+var adult10= L.circle([48.845208, 17.227913], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Skalica')
+var adult11= L.circle([48.376765, 17.585818], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Trnava')
+var adult12= L.circle([48.721667, 18.259826], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Bánovce nad Bebravou')
+var adult13= L.circle([48.998567, 18.23076], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Ilava')
+var adult14= L.circle([48.755409, 17.567531], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Myjava')
+var adult15= L.circle([48.75638, 17.832697], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Nové Mesto nad Váhom')
+var adult16= L.circle([48.626409, 18.373007], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Partizánske')
+var adult17= L.circle([49.115932, 18.446994], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Považská Bystrica')
+var adult18= L.circle([48.77104, 18.623306], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Prievidza')
+var adult19= L.circle([49.123928, 18.323956], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Púchov')
+var adult20= L.circle([48.892358, 18.039372], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Trenčín')
+var adult21= L.circle([47.757408, 18.129825], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Komárno')
+var adult22= L.circle([48.216319, 18.600087], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Levice')
+var adult23= L.circle([48.31295, 18.089459], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Nitra')
+var adult24= L.circle([48.151379, 17.874859], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Šaľa')
+var adult25= L.circle([49.223575, 18.558683], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Bytča')
+var adult26= L.circle([49.440819, 18.788221], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Čadca')
+var adult27= L.circle([49.299918, 18.786508], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Kysucké Nové Mesto')
+var adult28= L.circle([49.083248, 19.616497], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Liptovský Mikuláš')
+var adult29= L.circle([49.072492, 18.929193], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Martin')
+var adult30= L.circle([49.409512, 19.480783], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Námestovo')
+var adult31= L.circle([49.081572, 19.303417], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Ružomberok')
+var adult32= L.circle([49.38997, 19.591761], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Trstená')
+var adult33= L.circle([49.223485, 18.739268], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Žilina')
+var adult34= L.circle([48.738403, 19.157349], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Banská Bystrica')
+var adult35= L.circle([48.458093, 18.898841], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Banská Štiavnica')
+var adult36= L.circle([48.805335, 19.640961], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Brezno')
+var adult37= L.circle([48.683333, 20.116667], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Revúca')
+var adult38= L.circle([48.38336, 20.018058], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Rimavská Sobota')
+var adult39= L.circle([48.209343, 19.349037], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Veľký Krtíš')
+var adult40= L.circle([48.591018, 18.850089], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Žiar nad Hronom')
+var adult41= L.circle([49.292687, 21.275603], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Bardejov')
+var adult42= L.circle([48.935003, 21.902027], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Humenné')
+var adult43= L.circle([49.136209, 20.43087], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Kežmarok')
+var adult44= L.circle([49.025112, 20.587999], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Levoča')
+var adult45= L.circle([49.054152, 20.29764], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Poprad')
+var adult46= L.circle([48.997631, 21.240187], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Prešov')
+var adult47= L.circle([49.102621, 21.097567], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Sabinov')
+var adult48= L.circle([48.990062, 22.155625], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Snina')
+var adult49= L.circle([49.297258, 20.687317], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Stará Ľubovňa')
+var adult50= L.circle([49.308508, 21.573351], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Svidník')
+var adult51= L.circle([48.889151, 21.682232], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Vranov nad Topľou')
+var adult52= L.circle([48.713668, 21.22982], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Košice')
+var adult53= L.circle([48.751438, 21.921195], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Michalovce')
+var adult54= L.circle([48.654392, 20.531184], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Rožňava')
+var adult55= L.circle([48.943534, 20.562964], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Spišská Nová Ves')
+var adult56= L.circle([48.425708, 21.983668], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Kráľovský Chlmec')
+var adult57= L.circle([ 48.682386, 20.993317 ], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Košice - Okolie')
+var adult58= L.circle([49.214524, 19.385317], { color: 'royalblue', fillColor: 'royalblue', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre dospelých: Dolný Kubín')
+
+
+var kids1= L.circle([48.167162, 17.188352000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Bratislava')
+var kids2= L.circle([48.318254, 17.276333], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Pezinok')
+var kids3= L.circle([47.989309, 17.670142000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Dunajská Streda')
+var kids4= L.circle([48.19105, 17.777063000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Galanta')
+var kids5= L.circle([48.589525, 17.871385], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Piešťany')
+var kids6= L.circle([48.678756, 17.416153], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Senica')
+var kids7= L.circle([48.845208, 17.277913], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Skalica')
+var kids8= L.circle([48.376765, 17.635818], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Trnava')
+var kids9= L.circle([48.755409, 17.617531], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Myjava')
+var kids10= L.circle([48.75638, 17.882697], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Nové Mesto nad Váhom')
+var kids11= L.circle([48.626409, 18.423007000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Partizánske')
+var kids12= L.circle([49.115932, 18.496994], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Považská Bystrica')
+var kids13= L.circle([48.77104, 18.673306], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Prievidza')
+var kids14= L.circle([49.123928, 18.373956], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Púchov')
+var kids15= L.circle([48.892358, 18.089372], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Trenčín')
+var kids16= L.circle([47.757408, 18.179825], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Komárno')
+var kids17= L.circle([48.216319, 18.650087], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Levice')
+var kids18= L.circle([48.31295, 18.139459000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Nitra')
+var kids19= L.circle([47.986184, 18.213141], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Nové Zámky')
+var kids20= L.circle([48.151379, 17.924859], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Šaľa')
+var kids21= L.circle([48.559435, 18.225439], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Topoľčany')
+var kids22= L.circle([49.440819, 18.838221], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Čadca')
+var kids23= L.circle([49.214524, 19.345317], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Dolný Kubín')
+var kids24= L.circle([49.083248, 19.666497], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Liptovský Mikuláš')
+var kids25= L.circle([49.072492, 18.979193000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Martin')
+var kids26= L.circle([49.409512, 19.530783], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Námestovo')
+var kids27= L.circle([49.081572, 19.353417], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Ružomberok')
+var kids28= L.circle([49.38997, 19.641761000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Trstená')
+var kids29= L.circle([49.223485, 18.789268], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Žilina')
+var kids30= L.circle([48.738403, 19.207349], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Banská Bystrica')
+var kids31= L.circle([48.805335, 19.690961], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Brezno')
+var kids32= L.circle([48.38336, 20.068058], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Rimavská Sobota')
+var kids33= L.circle([48.576348, 19.178539], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Zvolen')
+var kids34= L.circle([48.591018, 18.900089], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Žiar nad Hronom')
+var kids35= L.circle([49.292687, 21.325603], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Bardejov')
+var kids36= L.circle([48.935003, 21.952027], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Humenné')
+var kids37= L.circle([49.136209, 20.48087], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Kežmarok')
+var kids38= L.circle([49.025112, 20.637999], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Levoča')
+var kids39= L.circle([49.054152, 20.347640000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Poprad')
+var kids40= L.circle([48.997631, 21.290187], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Prešov')
+var kids41= L.circle([49.102621, 21.147567000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Sabinov')
+var kids42= L.circle([48.990062, 22.205625], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Snina')
+var kids43= L.circle([49.297258, 20.737317], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Stará Ľubovňa')
+var kids44= L.circle([49.308508, 21.623351], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Svidník')
+var kids45= L.circle([48.889151, 21.732232], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Vranov nad Topľou')
+var kids46= L.circle([48.713668, 21.27982], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Košice')
+var kids47= L.circle([48.601647, 21.036260000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Moldava nad Bodvou')
+var kids48= L.circle([48.751438, 21.971195], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Michalovce')
+var kids49= L.circle([48.654392, 20.581184], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Rožňava')
+var kids50= L.circle([48.943534, 20.612964], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Spišská Nová Ves')
+var kids51= L.circle([48.425708, 22.033668000000002], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Kráľovský Chlmec')
+var kids52= L.circle([48.688329, 21.030972], { color: 'crimson', fillColor: 'crimson', fillOpacity: 0.8, radius: 4000}).bindTooltip('Pohotovosť pre deti: Košice - Okolie')
+
+
+var adults = L.layerGroup([adult1, adult2, adult3, adult4, adult5, adult6, adult7, adult8, adult9, adult10, adult11, adult12, adult13, adult14, adult15, adult16, adult17, adult18, adult19, adult20, adult21, adult22, adult23, adult24, adult25, adult26, adult27, adult28, adult29, adult30, adult31, adult32, adult33, adult34, adult35, adult36, adult37, adult38, adult39, adult40, adult41, adult42, adult43, adult44, adult45, adult46, adult47, adult48, adult49, adult50, adult51, adult52, adult53, adult54, adult55, adult56, adult57, adult58])
+       
+
+var kids = L.layerGroup([kids1, kids2, kids3, kids4, kids5, kids6, kids7, kids8, kids9, kids10, kids11, kids12, kids13, kids14, kids15, kids16, kids17, kids18, kids19, kids20, kids21, kids22, kids23, kids24, kids25, kids26, kids27, kids28, kids29, kids30, kids31, kids32, kids33, kids34, kids35, kids36, kids37, kids38, kids39, kids40, kids41, kids42, kids43, kids44, kids45, kids46, kids47, kids48, kids49, kids50, kids51, kids52])
+
+
+map.addLayer(adults)
+map.addLayer(kids)
+
+
+
+</script>
+
+
+
+</body>
+</html>
