@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style_force.css" type="text/css" media="screen" />
+    <meta charset="utf-8">
+    <script src="d3-3-5-5.min.js"></script>
+
+    <style>
+    body {
+        background: white;
+    }
+    </style>
+
+</head>
+
+<body>
+<div id="link_box">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p style="text-decoration:underline; color:	#DC143C">Kto zomrel</p>&nbsp;&nbsp;&nbsp;<p style="text-decoration:underline; color:#DC143C">Typ nehody</p>&nbsp;&nbsp;&nbsp;<p style="text-decoration:underline; color:#DC143C">Vek vodiča - vinníka</p>
+</div>
+<svg></svg>
+<script>
+var width = 400,
+    height = 500;
+
+var count = 88,
+    radius = 6,
+    padding = 1,
+    cluster_padding = 10;
+
+var svg = d3.select("svg")
+    .attr("viewBox", "-80 0 900 900")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+
+var places = {
+    "all": { x: 150, y: 200, color: "black" },
+    "first": { x: 80, y: 320, color: "red" },
+    "second": { x: 300, y: 320, color: "blue" },
+    "third": { x: 80, y: 50, color: "orange" },
+    "fourth": { x: 300, y: 50, color: "green" },
+};
+
+  var info = svg.selectAll("svg")
+      .data(["Obete nehôd"])
+      .enter()
+      .append("text")
+      .attr("y", 300)
+      .attr("x", 100)
+      .attr("opacity", 1)
+      .attr("font-size", 20)
+      .text(function (d) { return d });
+      
+  var nodes = d3.range(count).map(function(i) {
+	return {
+		radius: radius,
+		where: "all",
+	}
+});
+
+   var force = d3.layout.force()
+      .nodes(nodes)
+      .size([width, height])
+      .gravity(0)
+      .friction(.9)
+      .charge(.8)
+      .on("tick", tick)
+      .start();
+
+    var circle = svg.selectAll("circle")
+      .data(nodes)
+      .enter()
+      .append("circle")
+      .attr("class", "node")
+      .style("fill", function (d) { return places[d.where].color; });
+
+
+    circle
+      .transition()
+      .duration(1500)
+      .delay(300)
+      .attrTween("r", function (d) {
+        return function (t) { return t=6; };
+      });
+
+   function tick(e) {
+      circle
+        .each(gravity(.061 * e.alpha))
+        .each(collide(.5))
+        .style("fill", function (d) { return places[d.where].color; })
+        .attr("cx", function (d) { return d.x; })
+        .attr("cy", function (d) { return d.y; });
+    }
+
+    function gravity(alpha) {
+      return function (d) {
+        d.y += (places[d.where].y - d.y) * alpha;
+        d.x += (places[d.where].x - d.x) * alpha;
+      };
+    }
+
+function collide(alpha) {
+    var quadtree = d3.geom.quadtree(nodes);
+    return function(d) {
+      var r = d.radius + radius + padding,
+          nx1 = d.x - r,
+          nx2 = d.x + r,
+          ny1 = d.y - r,
+          ny2 = d.y + r;
+      quadtree.visit(function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== d)) {
+          var x = d.x - quad.point.x,
+              y = d.y - quad.point.y,
+              l = Math.sqrt(x * x + y * y),
+              r = d.radius + quad.point.radius + padding;
+          if (l < r) {
+            l = (l - r) / l * alpha;
+            d.x -= x *= l;
+            d.y -= y *= l;
+            quad.point.x += x;
+            quad.point.y += y;
+          }
+        }
+        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+      });
+    };
+  }
+
+
+d3.select("#link_box > p:nth-child(1)")
+				.on("click", function() {
+          svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+          .data(["Vodiči - vinníci (41)"])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 30)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Nevinní vodiči, spolujazdci (21)"])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 250)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Chodci (22)"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 50)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Cyklisti (4)"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 250)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+
+          var first_w = d3.keys(places)[1];
+          var second_w = d3.keys(places)[2];
+          var third_w = d3.keys(places)[3];
+          var fourth_w = d3.keys(places)[4];
+
+  for (i=0; i<41; i++){  
+  
+	nodes[i].where = first_w;
+}
+for (i=41; i<62; i++){  
+	nodes[i].where = second_w;
+}
+for (i=62; i<84; i++){  
+	nodes[i].where = third_w;
+}
+for (i=84; i<89; i++){  
+
+	nodes[i].where = fourth_w;
+  force.resume();
+}
+      });
+
+  d3.select("#link_box > p:nth-child(2)")
+				.on("click", function() {
+          svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+          .data(["Čelná zrážka (22)"])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 30)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Zrážka (6)"])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 250)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Strom, prekážka (22)"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 50)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Vlak (4)"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 250)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+      .data(["Iné (chodci,..)"])
+      .enter()
+      .append("text")
+      .transition()
+      .duration(1000)
+      .attr("y", 260)
+      .attr("x", 100)
+      .attr("opacity", 1)
+      .attr("font-size", 15)
+      .text(function (d) { return d });
+          var all_w = d3.keys(places)[0];
+          var first_w = d3.keys(places)[1];
+          var second_w = d3.keys(places)[2];
+          var third_w = d3.keys(places)[3];
+          var fourth_w = d3.keys(places)[4];
+
+  for (i=0; i<22; i++){  
+  nodes[i].cx = places[first_w].x;
+	nodes[i].cy = places[first_w].y;
+	nodes[i].where = first_w;
+}
+for (i=22; i<28; i++){  
+  nodes[i].cx = places[second_w].x;
+	nodes[i].cy = places[second_w].y;
+	nodes[i].where = second_w;
+}
+for (i=28; i<50; i++){  
+  nodes[i].cx = places[third_w].x;
+	nodes[i].cy = places[third_w].y;
+	nodes[i].where = third_w;
+}
+for (i=50; i<54; i++){  
+  nodes[i].cx = places[fourth_w].x;
+	nodes[i].cy = places[fourth_w].y;
+	nodes[i].where = fourth_w;
+}
+for (i=54; i<89; i++){  
+  nodes[i].cx = places[all_w].x;
+	nodes[i].cy = places[all_w].y;
+	nodes[i].where = all_w;
+  force.resume();
+}
+      });
+
+      d3.select("#link_box > p:nth-child(3)")
+				.on("click", function() {
+                    svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+          .data(["do 21 rokov"])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 60)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["22-30 rokov "])
+          .enter()
+          .append("text")
+          .attr("y", 400)
+          .attr("x", 280)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["31-40 rokov"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 50)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["41-50"])
+          .enter()
+          .append("text")
+          .attr("y", 100)
+          .attr("x", 280)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+      .data(["51 a starší"])
+      .enter()
+      .append("text")
+      .transition()
+      .duration(1000)
+      .attr("y", 260)
+      .attr("x", 150)
+      .attr("opacity", 1)
+      .attr("font-size", 15)
+      .text(function (d) { return d });
+          var first_w = d3.keys(places)[1];
+          var second_w = d3.keys(places)[2];
+          var third_w = d3.keys(places)[3];
+          var fourth_w = d3.keys(places)[4];
+          var all_w = d3.keys(places)[0];
+
+  for (i=0; i<11; i++){  
+  nodes[i].cx = places[first_w].x;
+	nodes[i].cy = places[first_w].y;
+	nodes[i].where = first_w;
+}
+for (i=11; i<27; i++){  
+  nodes[i].cx = places[second_w].x;
+	nodes[i].cy = places[second_w].y;
+	nodes[i].where = second_w;
+}
+for (i=27; i<49; i++){  
+  nodes[i].cx = places[third_w].x;
+	nodes[i].cy = places[third_w].y;
+	nodes[i].where = third_w;
+}
+for (i=49; i<55; i++){  
+  nodes[i].cx = places[fourth_w].x;
+	nodes[i].cy = places[fourth_w].y;
+	nodes[i].where = fourth_w;
+}
+for (i=55; i<89; i++){  
+  nodes[i].cx = places[all_w].x;
+	nodes[i].cy = places[all_w].y;
+	nodes[i].where = all_w;
+  force.resume();
+}
+      });
+
+</script>
+
+
+</body>

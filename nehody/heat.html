@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="sk" >
+<!––  Heatmap built from Jeff Everhart tutorial https://jeffreyeverhart.com/2016/03/12/heat-map-d3/
+https://github.com/JEverhart383 -->
+<head>
+
+  <meta charset="UTF-8">
+
+<style>
+
+.axis text {
+  font-size: 9pt;
+  fill: #000;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: none;
+}
+</style>
+
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+<div style="display: inline-block;
+font-size:30px;margin-left:55px;"><p style="text-decoration:underline; color:#DC143C;float:left;">Spolu</p>&nbsp;&nbsp;&nbsp;&nbsp;<p style="text-decoration:underline; color:#DC143C;float:right;">Chodci</p>
+</div>
+<body translate="no" >
+    <div class="heatmap"></div>
+
+
+  <script src='d3-3-5-5.min.js'></script>
+
+
+
+    <script >
+
+     
+    var margin = {top: -10, right: 0, bottom: 0, left: 50};
+    var width = 900 - margin.left - margin.right,
+    height = 900 - margin.top - margin.bottom;
+
+    var svg = d3.select(".heatmap").append("svg")
+    .attr("viewBox", "0 0 900 300")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      var data = [
+          {
+            "day": 1,
+            "hour" : 0,
+            "value": 1
+          },
+        {
+          "day": 1,
+          "hour" : 1,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 2,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 3,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 4,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 5,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 6,
+          "value": 1
+        },
+        {
+          "day": 1,
+          "hour" : 7,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 8,
+          "value": 1
+        },
+        {
+          "day": 1,
+          "hour" : 9,
+          "value": 2
+        },
+        {
+          "day": 1,
+          "hour" : 10,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 11,
+          "value": 3
+        },
+        {
+          "day": 1,
+          "hour" : 12,
+          "value": 1
+        },
+        {
+          "day": 1,
+          "hour" : 13,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 14,
+          "value": 2
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 15,
+          "value": 2
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 16,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 17,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 18,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 19,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 20,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 21,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 22,
+          "value": 0
+      },
+      {
+        "day": 1,
+        "hour" : 23,
+        "value": 1
+    },
+    {
+      "day": 2,
+      "hour" : 0,
+      "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 1,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 2,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 3,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 4,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 5,
+    "value": 2
+    },
+    {
+    "day": 2,
+    "hour" : 6,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 7,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 8,
+    "value": 1
+    },
+    {
+    "day": 2,
+    "hour" : 9,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 10,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 11,
+    "value": 1
+    },
+    {
+    "day": 2,
+    "hour" : 12,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 13,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 14,
+    "value": 2
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 15,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 16,
+    "value": 1
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 17,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 18,
+    "value": 1
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 19,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 20,
+    "value": 3
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 21,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 22,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 23,
+    "value": 2
+    },
+    {
+      "day": 3,
+      "hour" : 0,
+      "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 1,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 2,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 3,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 4,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 5,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 6,
+    "value": 3
+    },
+    {
+    "day": 3,
+    "hour" : 7,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 8,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 9,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 10,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 11,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 12,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 13,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 14,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 15,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 16,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 17,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 18,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 19,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 20,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 21,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 22,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 23,
+    "value": 0
+},
+{
+  "day": 4,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 4,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 5,
+"value": 2
+},
+{
+"day": 4,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 15,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 16,
+"value": 1
+}
+,
+{
+"day": 4,
+"hour" : 17,
+"value": 2
+}
+,
+{
+"day": 4,
+"hour" : 18,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 19,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 20,
+"value": 1
+}
+,
+{
+"day": 4,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 23,
+"value": 0
+},
+{
+  "day": 5,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 5,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 5,
+"value": 1
+},
+{
+"day": 5,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 12,
+"value": 1
+},
+{
+"day": 5,
+"hour" : 13,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 15,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 16,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 17,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 18,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 19,
+"value": 2
+}
+,
+{
+"day": 5,
+"hour" : 20,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 23,
+"value": 1
+},
+{
+  "day": 6,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 6,
+"hour" : 1,
+"value": 2
+},
+{
+"day": 6,
+"hour" : 2,
+"value": 1
+},
+{
+"day": 6,
+"hour" : 3,
+"value": 1
+},
+{
+"day": 6,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 5,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 6,
+"value": 1
+},
+{
+"day": 6,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 12,
+"value": 1
+},
+{
+"day": 6,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 15,
+"value": 2
+}
+,
+{
+"day": 6,
+"hour" : 16,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 17,
+"value": 2
+}
+,
+{
+"day": 6,
+"hour" : 18,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 19,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 20,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 22,
+"value": 1
+},
+{
+"day": 6,
+"hour" : 23,
+"value": 0
+},
+{
+  "day": 7,
+  "hour" : 0,
+  "value": 1
+},
+{
+"day": 7,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 4,
+"value": 1
+},
+{
+"day": 7,
+"hour" : 5,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 11,
+"value": 1
+},
+{
+"day": 7,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 15,
+"value": 1
+}
+,
+{
+"day": 7,
+"hour" : 16,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 17,
+"value": 1
+}
+,
+{
+"day": 7,
+"hour" : 18,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 19,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 20,
+"value": 3
+}
+,
+{
+"day": 7,
+"hour" : 21,
+"value": 1
+}
+,
+{
+"day": 7,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 23,
+"value": 0
+}];
+
+
+ var colorDomain = d3.extent(data, function(d){
+      return d.value;
+    });
+
+
+    var rectangles = svg.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect");
+
+    rectangles
+    .attr("x", function(d){
+      return d.hour * 30;
+
+    })
+    .attr("y", function(d){
+      return d.day * 30;
+    })
+    .attr("width", 30)
+    .attr("stroke-width", 1.5)
+    .attr("stroke", "white")
+    .attr("height", 30).
+    style("fill", function(d){
+      if (d.value < 1) {
+        return '#fee0d2'
+      } else if (d.value < 2) {
+        return '#fc9272'
+      } else if (d.value < 3) {
+        return '#cb181d'
+      } else if (d.value > 2) {
+        return '#252525'
+      }
+    });
+
+var legend1 = svg.selectAll(".heatmap")
+  .data(["00"])
+  .enter()
+  .append("rect")
+  .attr("x", 150)
+  .attr("y", 255)
+  .attr("width", 25)
+  .attr("height", 25)
+  .style("fill", '#fee0d2');
+
+var zero = svg.selectAll(".heatmap")
+	.data(["0"])
+	.enter()
+	.append("text");
+	
+zero.attr("y", 275)
+  .attr("x", 185)
+  .attr("font-size", 20)
+	.text(function(d){ return d});
+
+  
+var legend2 = svg.selectAll(".heatmap")
+  .data(["01"])
+  .enter()
+  .append("rect")
+  .attr("x", 210)
+  .attr("y", 255)
+  .attr("width", 25)
+  .attr("height", 25)
+  .style("fill", '#fc9272');
+
+
+var one = svg.selectAll(".heatmap")
+	.data(["1"])
+	.enter()
+	.append("text");
+	
+one.attr("y", 275)
+  .attr("x", 245)
+  .attr("font-size", 20)
+  .text(function(d){ return d});
+    
+var legend3 = svg.selectAll(".heatmap")
+  .data(["01"])
+  .enter()
+  .append("rect")
+  .attr("x", 270)
+  .attr("y", 255)
+  .attr("width", 25)
+  .attr("height", 25)
+  .style("fill", '#cb181d');
+
+
+var two = svg.selectAll(".heatmap")
+	.data(["2"])
+	.enter()
+	.append("text");
+	
+two.attr("y", 275)
+  .attr("x", 305)
+  .attr("font-size", 20)
+  .text(function(d){ return d});
+
+  var legend4 = svg.selectAll(".heatmap")
+  .data(["01"])
+  .enter()
+  .append("rect")
+  .attr("x", 330)
+  .attr("y", 255)
+  .attr("width", 25)
+  .attr("height", 25)
+  .style("fill", '#252525');
+    
+
+var three = svg.selectAll(".heatmap")
+	.data(["3+"])
+	.enter()
+	.append("text");
+	
+three.attr("y", 275)
+  .attr("x", 365)
+  .attr("font-size", 20)
+  .text(function(d){ return d});
+
+  d3.select(".heatmap")
+	.append("svg")
+	.attr("width", 400)
+	.attr("height", 100);
+
+var hours = svg.selectAll(".heatmap")
+  .data(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"])
+	.enter()
+	.append("text");
+	
+hours.attr("y", 25)
+	.attr("x", function(d,i){ return 8 + 30*i})
+	.text(function(d){ return d});
+
+var po = svg.selectAll(".heatmap")
+.data(["Po"])
+	.enter()
+	.append("text");
+	
+po.attr("y", 50)
+	.attr("x", -30)
+	.text(function(d){ return d});
+
+var ut = svg.selectAll(".heatmap")
+.data(["Ut"])
+	.enter()
+	.append("text");
+	
+ut.attr("y", 80)
+	.attr("x", -30)
+	.text(function(d){ return d});
+
+var st = svg.selectAll(".heatmap")
+.data(["St"])
+	.enter()
+	.append("text");
+	
+st.attr("y", 110)
+	.attr("x", -30)
+	.text(function(d){ return d});
+    	
+var stv = svg.selectAll(".heatmap")
+.data(["Št"])
+	.enter()
+	.append("text");
+	
+stv.attr("y", 140)
+	.attr("x", -30)
+	.text(function(d){ return d});      
+
+var pi = svg.selectAll(".heatmap")
+.data(["Pia"])
+	.enter()
+	.append("text");
+	
+pi.attr("y", 170)
+	.attr("x", -30)
+	.text(function(d){ return d});
+  
+var so = svg.selectAll(".heatmap")
+  .data(["So"])
+	.enter()
+	.append("text");
+	
+so.attr("y", 200)
+	.attr("x", -30)
+	.text(function(d){ return d});   
+
+var ne = svg.selectAll(".heatmap")
+  .data(["Ne"])
+	.enter()
+	.append("text");
+	
+ne.attr("y", 230)
+	.attr("x", -30)
+	.text(function(d){ return d});   
+
+    
+      d3.select("body > div:nth-child(1) > p:nth-child(2)")
+				.on("click", function() {
+
+					var data2 = [
+          {
+            "day": 1,
+            "hour" : 0,
+            "value": 0
+          },
+        {
+          "day": 1,
+          "hour" : 1,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 2,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 3,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 4,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 5,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 6,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 7,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 8,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 9,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 10,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 11,
+          "value": 1
+        },
+        {
+          "day": 1,
+          "hour" : 12,
+          "value": 0
+        },
+        {
+          "day": 1,
+          "hour" : 13,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 14,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 15,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 16,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 17,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 18,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 19,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 20,
+          "value": 1
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 21,
+          "value": 0
+        }
+        ,
+        {
+          "day": 1,
+          "hour" : 22,
+          "value": 0
+      },
+      {
+        "day": 1,
+        "hour" : 23,
+        "value": 1
+    },
+    {
+      "day": 2,
+      "hour" : 0,
+      "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 1,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 2,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 3,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 4,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 5,
+    "value": 1
+    },
+    {
+    "day": 2,
+    "hour" : 6,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 7,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 8,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 9,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 10,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 11,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 12,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 13,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 14,
+    "value": 1
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 15,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 16,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 17,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 18,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 19,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 20,
+    "value": 1
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 21,
+    "value": 0
+    }
+    ,
+    {
+    "day": 2,
+    "hour" : 22,
+    "value": 0
+    },
+    {
+    "day": 2,
+    "hour" : 23,
+    "value": 0
+    },
+    {
+      "day": 3,
+      "hour" : 0,
+      "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 1,
+    "value": 1
+    },
+    {
+    "day": 3,
+    "hour" : 2,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 3,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 4,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 5,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 6,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 7,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 8,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 9,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 10,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 11,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 12,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 13,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 14,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 15,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 16,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 17,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 18,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 19,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 20,
+    "value": 0
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 21,
+    "value": 1
+    }
+    ,
+    {
+    "day": 3,
+    "hour" : 22,
+    "value": 0
+    },
+    {
+    "day": 3,
+    "hour" : 23,
+    "value": 0
+},
+{
+  "day": 4,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 4,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 5,
+"value": 2
+},
+{
+"day": 4,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 15,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 16,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 17,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 18,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 19,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 20,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 4,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 4,
+"hour" : 23,
+"value": 0
+},
+{
+  "day": 5,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 5,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 5,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 15,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 16,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 17,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 18,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 19,
+"value": 2
+}
+,
+{
+"day": 5,
+"hour" : 20,
+"value": 1
+}
+,
+{
+"day": 5,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 5,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 5,
+"hour" : 23,
+"value": 0
+},
+{
+  "day": 6,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 6,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 4,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 5,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 15,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 16,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 17,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 18,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 19,
+"value": 1
+}
+,
+{
+"day": 6,
+"hour" : 20,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 6,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 6,
+"hour" : 23,
+"value": 0
+},
+{
+  "day": 7,
+  "hour" : 0,
+  "value": 0
+},
+{
+"day": 7,
+"hour" : 1,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 2,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 3,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 4,
+"value": 1
+},
+{
+"day": 7,
+"hour" : 5,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 6,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 7,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 8,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 9,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 10,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 11,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 12,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 13,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 14,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 15,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 16,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 17,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 18,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 19,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 20,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 21,
+"value": 0
+}
+,
+{
+"day": 7,
+"hour" : 22,
+"value": 0
+},
+{
+"day": 7,
+"hour" : 23,
+"value": 0
+}
+    ];
+		
+    svg.selectAll("rect")
+      .data(data2)
+      .transition()
+			.duration(1000)
+      .attr("x", function(d){
+       return d.hour * 30;
+    })
+    .attr("y", function(d){
+      return d.day * 30;
+    })
+    .attr("width", 30)
+    .attr("stroke-width", 1.5)
+    .attr("stroke", "white")
+    .attr("height", 30)
+    .style("fill", function(d){
+      if (d.value < 1) {
+        return '#fee0d2'
+      } else if (d.value < 2) {
+        return '#fc9272'
+      } else if (d.value < 3) {
+        return '#cb181d'
+      } else if (d.value > 2) {
+        return '#252525'
+      }
+    });
+   
+    });
+    d3.select("body > div:nth-child(1) > p:nth-child(1)")
+				.on("click", function() {
+          svg.selectAll("rect")
+      .data(data)
+      .transition()
+			.duration(1000)
+      .attr("x", function(d){
+       return d.hour * 30;
+    })
+    .attr("y", function(d){
+      return d.day * 30;
+    })
+    .attr("width", 30)
+    .attr("stroke-width", 1.5)
+    .attr("stroke", "white")
+    .attr("height", 30)
+    .style("fill", function(d){
+      if (d.value < 1) {
+        return '#fee0d2'
+      } else if (d.value < 2) {
+        return '#fc9272'
+      } else if (d.value < 3) {
+        return '#cb181d'
+      } else if (d.value > 2) {
+        return '#252525'
+      }
+    });
+   
+    });
+    
+    </script>
+
+
+
+
+
+
+</body>
+
+</html>
