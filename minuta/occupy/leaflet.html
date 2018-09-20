@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="leaflet.js"></script>
+    <script src="leaflet.ajax.min.js"></script>
+    <link rel="stylesheet" href="leaflet.css"/>
+    <script src="leaflet.ajax.min.js"></script>
+    <script src="MovingMarker.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+            width: 100vw;
+        }
+
+
+        .info {
+            font: 14px/14px Arial, Helvetica, sans-serif;
+            background: #ffffff00;
+            padding-right: 15px;
+
+
+
+        }
+        .info2 {
+            font: 14px/14px Arial, Helvetica, sans-serif;
+            width: 100%;
+            color: white;
+            background-color: rgba(0,0,0,.85);
+            word-wrap:break-word;
+
+
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: rgb(5, 5, 5);
+        }
+
+        .legend {
+            line-height: 28px;
+            color: #555;
+            font-size: 14px;
+            opacity: 1;
+        }
+
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 6px;
+            font-size: 14px;
+            border-style: dotted;
+            border-width: 2px;
+        }
+
+        p {
+            font-size: 18px;
+            color: white;
+            opacity: 1;
+        }
+
+        #img1 {
+            top: 70%;
+            left: 90%;
+            height: 30px;
+            width: 30px;
+            z-index: 100;
+            position: absolute;
+            opacity: 1;
+        }
+
+        #img1:hover {
+            opacity: 0.5;
+        }
+
+
+        #switchid {
+            display: inline-block;
+        }
+
+        #time {
+            padding: 2%;
+
+           
+            
+        }
+        #button1 {
+            background-color: crimson;
+            color: white;
+            display: inline-block;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+
+        #button1:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+        #button2 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+
+        #button2:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+        #button3 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+
+        #button3:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+        #startid {
+            background-color: crimson;
+            color: white;
+            display: inline-block;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+
+        #startid:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+        #next {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button4 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button5 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button6 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button7 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button8 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button9 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #button10 {
+            background-color: crimson;
+            color: white;
+            display: none;
+            font-size: 18px;
+            border: solid;
+            border-radius: 8px;
+            border-width: medium;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+            opacity:0;
+            position:absolute;
+            top: 70vh;
+            right: 40vw;
+        }
+        #next:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+        #endid {
+            background-color: crimson;
+            color: white;
+            display: inline-block;
+            border: solid;
+            border-width: medium;
+            font-size: 18px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            padding-right: 6px;
+            padding-left: 6px;
+            border-color: crimson;
+        }
+
+        #endid:hover {
+            text-decoration: underline;
+            cursor: pointer;
+            border-width: medium;
+        }
+
+        .my-label {
+    position: absolute;
+    width:40px;
+    font-size:12px;
+    color: white;
+    background-color: rgba(255, 0, 0, 0);
+    border-color: rgba(255, 0, 0, 0);
+    box-shadow: 0px 0px;
+}
+    </style>
+</head>
+
+<body>
+
+    <div id="mapid" style="width: 100%; height: 100%;">
+    </div>
+    <script>
+
+    const map = L.map('mapid', { minZoom: 3, maxZoom: 18, zoomControl: false }).setView([48.275482, 17.718538], 4);
+
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+}).addTo(map);
+
+
+
+
+function panning(lat, long, zoom) {
+    map.flyTo([lat, long], zoom)
+}
+   
+   
+   var geojson;
+
+let id = 0;
+function createButton() {
+    let button = document.createElement("div");
+    button.setAttribute("class", "button");
+    button.id = `button${id++}`;
+    info.appendChild(button);
+}
+
+        var info = L.control({ position: 'topright' });
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+
+        info.update = function () {
+            this._div.innerHTML = '<h3 id="button1">Štart</h3>         ' + '<h3 id="button2">Ďalej</h3>         ' + '<h3 id="button3">Ďalej</h3>         '  + '<h3 id="button4">Ďalej</h3>         '  + '<h3 id="button5">Ďalej</h3>         '  + '<h3 id="button6">Ďalej</h3>         '  + '<h3 id="button7">Ďalej</h3>         ' + '';
+        };
+
+        info.addTo(map);
+
+ var info2= L.control({ position: 'topleft' });
+
+info2.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info2');
+    this.update();
+    return this._div;
+};
+
+info2.update = function () {
+    this._div.innerHTML = '<h3 id="time"></h3> ' + '';
+};
+
+info2.addTo(map);
+
+        function style(feature) {
+            return {
+                fillColor: 'white',
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '1',
+                fillOpacity: 0
+            };
+        }
+
+
+
+        geojson = new L.GeoJSON.AJAX("czsk.geojson", { style: style });
+        geojson.addTo(map);
+
+
+
+const cities = [];
+
+function City(name, radius, coordinates) {
+    this.name = name,
+    this.radius = radius,
+    this.coordinates = coordinates.split(",")
+}
+const michalovce = new City("Michalovce", 1000, "48.751433, 21.912827");
+const presov = new City("Prešov", 1000, "48.998630, 21.236395");
+const poprad = new City("Poprad", 1000, "49.063441, 20.307472");
+const trencin = new City("Trenčín", 1000, "48.891434, 18.038502");
+const kosice = new City("Košice", 6000, "48.717041, 21.237812");
+const hung1 = new City("Hung1", 1000, "47.929278, 19.163722");
+const sahy = new City("Šahy", 1000, "48.070288, 18.950985");
+const levice = new City("Levice", 1000, "48.212193, 18.615314");
+const hlohovec = new City("Hlohovec", 1000, "48.433798, 17.799630");
+const novezamky = new City("Nové Zámky", 1000, "47.983938, 18.168309");
+const sered = new City("Sereď", 1000, "48.275482, 17.718538");
+const komarom = new City("Komarom", 1000, "47.692237, 18.107187");
+const komarno = new City("Komárno", 1000, "47.795556, 18.102145");
+const bratislava = new City("Bratislava", 6000, "48.167162, 17.138352");
+const senica = new City("Senica", 1000, "48.684789, 17.366036");
+const brno = new City("Brno", 6000, "49.182884, 16.612265");
+const mikulov = new City("Mikulov", 1000, "48.805087, 16.633280");
+const polskytesin = new City("Czsesin", 200, "49.768777, 18.665459");
+const ceskytesin = new City("Český Tešín", 1000, "49.729261, 18.590756");
+const germany1 = new City("Germany1", 10, "50.447496, 12.922044");
+const bozidar = new City ("Boží dar", 1000, "50.447496, 12.922044");
+const germany2 = new City("Germany2", 10, "50.448163, 12.678777");
+const germany3 = new City("Germany3", 1000, "50.370625, 12.467933");
+const horniblatne = new City ("Horní Blatné", 1000, "50.391714, 12.769933");
+const holesov = new City("Holešov", 1000, "49.326130, 17.582874");
+const sternberk = new City("Šternberk", 1000, "49.728305, 17.301827");
+const police = new City("Police", 1000, "48.964835, 15.623302");
+const krnov = new City("Krnov", 1000, "50.088646, 17.695974");
+const rymarov = new City("Rýmařov", 1000, "49.935270, 17.275362");
+const polsko = new City("Poľsko", 0, " 48.760711, 21.916616 ");
+const martin = new City("Martin", 3000, "49.4409972, 18.6581369");
+const uzhorod = new City("Uzhorod", 0, "48.617204, 22.292339");
+const sturovo = new City("Štúrovo", 3000, "47.793119, 18.713420");
+const praha = new City("Praha", 8000, "50.070455, 14.455641");
+const budapest = new City("Budapešť", 8000, "47.476696, 19.073969");
+const cadca = new City("Čadca", 3000, "49.4409972, 18.6581369");
+const zilina = new City("Žilina", 5000, "49.2200814, 18.6082485");
+const bystrica = new City("Banská Bystrica", 5000, "48.7389705, 18.8507959");
+const moskva = new City("Moskva", 0, "55.706947, 37.641037");
+const ruzyn = new City("Praha", 5000, "50.101364, 14.263414");
+const airplane = new City("Airplane" , 0, "51.756655, 22.629191");
+const turany = new City("Turany" , 1000, "49.152586, 16.693493");
+const vranov = new City("Vranov nad Topľou" , 1000, "48.885222, 21.678309");
+const trebisov = new City("Trebišov" , 1000, "48.637337, 21.716989");
+const karlovyvary = new City("Karlovy Vary", 1000, "50.232557, 12.854057");
+const kyselka = new City("Kyselka", 1000, "50.263908, 12.999029");
+const sokolov = new City("Sokolov", 1000, "50.174245, 12.659461");
+const adorf = new City("Adorf", 0, "50.326544, 12.245609");
+const cheb = new City("Cheb", 1000, "50.074947, 12.365227");
+const polland1 = new City("Polland1", 0, "50.667835, 16.188121");
+const polland2 = new City("Polland2", 0, "50.701581, 16.003055");
+const trutnov = new City("Trutnov", 1000, "50.554292, 15.914232");
+const liberec = new City("Liberec", 1000, "50.763891, 15.056086");
+const polland3 = new City("Polland3", 0, "51.026988, 15.061432");
+const turnov = new City("Turnov", 1000, "50.587223, 15.156915");
+const germany4 = new City("Germany4", 0, "51.006920, 14.591415");
+const ceskalipa = new City("Česká Lípa", 1000, "50.680700, 14.540839");
+const schmilka = new City("Schmilka", 0, "50.892047, 14.231618");
+const hrensko = new City("Hřensko", 1000, "50.874553, 14.245535");
+const litomerice = new City("Litomeřice", 1000, "50.532564, 14.134636");
+const terezin = new City("Terezín", 1000, "50.508968, 14.149975");
+const germany5 = new City("Germany5", 0, "50.765524, 13.724116");
+const cinovec = new City("Cínovec", 1000, "50.731135, 13.768976");
+const teplice = new City("Teplice", 1000, "50.644213, 13.835445");
+const bilina = new City("Bilína", 1000, "50.551563, 13.769296");
+const slane = new City("Slané", 1000, "50.228037, 14.084591");
+const louny = new City("Louny", 1000, "50.354675, 13.804982");
+const rakovnik = new City("Rakovnik", 1000, "50.104089, 13.731591");
+const podborany = new City("Podbořany", 1000, "50.238692, 13.417303");
+const germany6 = new City("Germany6", 0, "50.678644, 13.164217");
+const germany7 = new City("Germany7", 0, "50.673797, 13.297618");
+const horasvkateriny = new City("Hora Svaté Kateřiny", 1000, "50.597670, 13.438846");
+const most = new City("Most", 1000, "50.516900, 13.633036");
+const chomutov = new City("Chomutov", 1000, "50.464401, 13.410088");
+const plzen = new City("Plzeň", 1000, "49.746806, 13.373317");
+const laznekyn = new City("Lázne", 1000, "50.007389, 12.627315");
+const tachov = new City("Tachov", 1000, "49.797140, 12.635586");
+const strasice = new City("Strašice", 1000, "49.738413, 13.754954");
+const bor = new City("Bor", 1000, "49.711589, 12.775959");
+const klatovy = new City("Klatovy", 1000, "49.396734, 13.292861");
+const ceskakubice = new City("Česká Kubice", 1000, "49.370765, 12.862492");
+const janovce = new City("Janovce nad Uhlavou", 1000, "49.344027, 13.218503");
+const sumperk = new City("Šumperk", 1000, " 49.964866, 16.977185 ");
+const ceskaskalice = new City("Česká Skalice", 1000, "50.393325, 16.041253");
+const hradeckralove = new City("Hradec Králové", 1000, "50.207821, 15.832275");
+const germany8 = new City("Germany8", 1000, "50.770018, 13.750237");
+const kraslice = new City("Kraslice", 1000, "50.316448, 12.512939");
+const germany9 = new City("Germany9", 1000, "50.318145, 12.327769");
+const luby = new City("Luby", 1000, "50.252783, 12.405507");
+const hranice = new City("Hranice", 1000, "49.552711, 17.720094");
+const vojtanov = new City("Vojtanov", 1000, "50.166612, 12.316492");
+const decin = new City("Dečín", 1000, "50.780799, 14.220347");
+const zeleznaruda = new City("Železná Ruda", 1000, "49.175694, 13.218056");
+const susice = new City("Sušice", 1000, "49.229770, 13.520682");
+const vodochody = new City("Vodochody", 1000, "50.205236, 14.398591");
+const staraboleslav = new City("Stará Boleslav", 1000, "50.197312, 14.661307");
+const rumburk = new City("Rumburk", 1000, "50.955100, 14.556228");
+const germany10 = new City("Germany10", 1000, "51.006196, 14.590236");
+const jablonne = new City("jablonne", 1000, "50.773632, 14.762892");
+const bela = new City("bela", 1000, "50.502251, 14.801983");
+const frydlant = new City("frydlant", 1000, "50.922255, 15.078960");
+const zawidow = new City("zawidow", 1000, "51.025762, 15.054903");
+const harachov = new City("harachov", 1000, "50.773830, 15.428149");
+const poreba = new City("poreba", 1000, "50.832414, 15.525874");
+const horice = new City("horice", 1000, "50.373272, 15.628904");
+const moravskyberoun = new City("moravsky beroun", 1000, "49.806419, 17.447952");
+const olomouc = new City("olomouc", 1000, "49.582892, 17.263498");
+const pisz = new City("pisz", 1000, "50.001447, 17.915393");
+const opava = new City("opava", 1000, "49.936227, 17.899630");
+const zvolen = new City("zvolen", 1000, "48.574852, 19.115382");
+const nitra = new City("nitra", 1000, "48.317821, 18.082826");
+const hung2 = new City("hung2", 0, "47.770642, 18.758577");
+const hung3 = new City("hung3", 0, "47.734269, 17.660495");
+const medvedov = new City("medvedov", 1000, "47.805682, 17.665017");
+const rajka = new City("xxxx", 1000, "47.969769, 17.209003");
+const xxsxx = new City("xxxx", 1000, "xxxxxxx");
+const xxyxx = new City("xxxx", 1000, "xxxxxxx");
+
+// do 4 
+// const xxxx = new City("xxxx", 1000, "xxxxxxx");
+
+
+cities.push(michalovce, presov, poprad, trencin, kosice, hung1, sahy, levice, hlohovec, novezamky, sered, komarom, komarno, bratislava, senica, brno, mikulov, polskytesin, ceskytesin, holesov, sternberk, police, krnov, rymarov, polsko, martin, uzhorod, sturovo, praha, budapest, cadca, zilina, bystrica, germany1, germany2, bozidar, horniblatne, ruzyn, moskva, airplane, turany, vranov, karlovyvary, kyselka, germany3, sokolov, adorf, cheb, polland1, polland2, trutnov, liberec, polland3, turnov, germany4, ceskalipa, schmilka, hrensko, litomerice, terezin, germany5, cinovec, teplice, bilina, slane, louny, rakovnik, podborany, germany6, germany7, horasvkateriny, most, chomutov, plzen, laznekyn, tachov, strasice, bor, klatovy, ceskakubice, janovce, sumperk, ceskaskalice, hradeckralove, germany8, kraslice, germany9, luby, hranice, vojtanov, decin, zeleznaruda, susice, vodochody, staraboleslav, rumburk, germany10, jablonne, bela, frydlant, zawidow, harachov, poreba, horice, moravskyberoun, olomouc, pisz, opava, zvolen, nitra, hung2, hung3, medvedov, rajka);
+
+function createCities(cities) {
+    for (let i=0; i<cities.length; i++) {
+         L.circle([cities[i].coordinates[0], cities[i].coordinates[1]], { color: "#ffffff00", fillColor: "#ffffff00", fillOpacity: 0, radius: cities[i].radius}).addTo(map);
+    }
+}
+
+function redCity(city) {
+            L.circle([city.coordinates[0], city.coordinates[1]], { color: 'red', fillColor: 'red', fillOpacity: 0.8, radius: city.radius + 1000 }).addTo(map)
+        }
+
+
+createCities(cities);
+
+        const tankIcon_up = L.icon({
+            iconUrl: 'tank_up.png',
+            iconSize: [20, 20],
+        });
+
+        const tankIcon_left = L.icon({
+            iconUrl: 'tank_left.png',
+            iconSize: [20, 20],
+        });
+     
+        const tankIcon_down = L.icon({
+            iconUrl: 'tank_po.png',
+            iconSize: [20, 20],
+        });
+     
+        const planeIcon = L.icon({
+            iconUrl: 'plane.png',
+            iconSize: [20, 20],
+        });
+     ///remove JQUERY
+        function hide_button(button) {
+    var button_format = "#" + button 
+$(button_format).animate({
+        'opacity': 0
+    }, 400, function() {
+        $(button_format).css({
+			    'display': 'none',
+			}, 400);
+    });
+}
+function show_button(button) {
+    var button_format = "#" + button 
+$(button_format).animate({
+        'opacity': 1
+    }, 600, function() {
+        $(button_format).css({
+			    'display': 'block',
+			}, 600);
+    });
+}
+
+/////
+
+        window.onload = function () {
+            document.getElementById("button1").onclick = function () {
+                hide_button('button1')
+                phase1();
+                setTimeout(function () { show_button('button2') }, 10000);
+            }
+            }
+    
+            document.getElementById("button2").onclick = function() {
+                hide_button('button2')
+                phase2();
+                setTimeout(function () { show_button('button3') }, 10000);
+            }
+            document.getElementById("button3").onclick = function() {
+                hide_button('button3')
+                phase3();
+                setTimeout(function () { show_button('button4') }, 10000);
+            }
+            document.getElementById("button4").onclick = function() {
+                hide_button('button4')
+                phase4();
+                setTimeout(function () { show_button('button5') }, 10000);
+            }
+            document.getElementById("button5").onclick = function() {
+                hide_button('button5')
+                phase5();
+                setTimeout(function () { show_button('button6') }, 10000);
+            }
+            document.getElementById("button6").onclick = function() {
+                hide_button('button6')
+                phase6();
+                setTimeout(function () { show_button('button7') }, 10000);
+            }
+            document.getElementById("button7").onclick = function() {
+                hide_button('button7')
+                phase7();
+                setTimeout(function () { show_button('button8') }, 10000);
+            }
+
+time("20:00-22:00", "Na vojenskom letisku v Brne pristáva o 21:05 sovietsky špeciál Antonov An-24 s príslušníkmi KGB, ktorí sa prezliekli za civilistov. O 21:52 pristáva na letisku v Prahe aj civilný špeciál An-12 z Moskvy. Nikto z neho nevystúpi.")
+movePlane(airplane, turany, 2000)
+
+ movePlane(moskva, ruzyn, 7000)
+ setTimeout(function () { panning(ruzyn.coordinates[0], ruzyn.coordinates[1],6) }, 5000);
+
+ function panning(gpsA, gpsB, zoom) {
+    map.flyTo([gpsA, gpsB], zoom)
+}
+
+function moveTank(cityFrom, cityTo, speed) {
+    let tankMarker = L.Marker.movingMarker([[cityFrom.coordinates[0], cityFrom.coordinates[1]], [cityTo.coordinates[0], cityTo.coordinates[1]]], [speed], { icon: tankIcon_up}).addTo(map)
+    tankMarker.start();
+}
+function movePlane(cityFrom, cityTo, speed) {
+    let planeMarker = L.Marker.movingMarker([[cityFrom.coordinates[0], cityFrom.coordinates[1]], [cityTo.coordinates[0], cityTo.coordinates[1]]], [speed], { icon: planeIcon}).addTo(map)
+    planeMarker.start();
+}
+
+//22-00
+//speed, distance, chain
+const phase1 = function() {
+    setTimeout(function () { panning(uzhorod.coordinates[0], uzhorod.coordinates[1], 10) }, 1000);
+    time("22:00 - 24:00", "Vojská Varšavskej zmluvy o 23:00 prekročia hranice. Najsilnejšia sovietsko-poľská armáda postupuje zo severu. Z Užhorodu prekračuje hranice na východnom Slovensku bulharská armáda, juh Slovenska obsadzuje sovietsko-maďarská armáda.")
+    move(uzhorod, michalovce, 15000, 10)
+    setTimeout(function () { panning(komarom.coordinates[0], komarom.coordinates[1], 10) }, 6000);
+    setTimeout(function () { move(komarom, komarno, 10000, 7)
+ }, 6000);
+
+    move(polskytesin, ceskytesin, 13000, 3)
+    move(germany1, bozidar, 13000, 3)
+    move(germany2, horniblatne, 13000, 3)
+    move(schmilka, hrensko, 13000, 3)
+    move(germany5, cinovec, 13000, 3)
+    move(germany6, horasvkateriny, 13000, 3)
+    move(germany7, horasvkateriny, 13000, 3)
+    move(germany8, cinovec, 13000, 3)
+    move(germany3, kraslice, 10000, 3)
+    move(germany9, luby, 10000, 3)
+    move(adorf, hranice, 10000, 3, vojtanov)
+    move(germany10, rumburk, 10000, 3)
+    move(zawidow, frydlant, 10000, 3)
+    move(pisz, opava, 10000, 3)
+    move(hung3, medvedov, 10000, 3)
+
+}
+
+//00-02
+const phase2 = function() {
+    panning(bratislava.coordinates[0], bratislava.coordinates[1], 6)
+    time("00:00 - 2:00", "Cez Petržalku prichádzajú krátko po polnoci tanky do Bratislavy. Maďarská armáda pred druhou hodinou ráno obsadí Štúrovo. V Prahe pristávajú lietadla s výsadkármi, ktorí obsadia letisko.")
+    move(hung1, sahy, 5000, 4)
+    move(komarno, bratislava, 5000, 10)
+    move(uzhorod, trebisov, 10000, 3)
+    move(michalovce, vranov, 10000, 3)
+    move(horniblatne, karlovyvary, 10000, 3)
+    move(vojtanov, cheb, 10000, 3)
+    move(polland1, trutnov, 10000, 3)
+    move(polland2, trutnov, 10000, 3)
+    move(frydlant, liberec, 10000, 3)
+    move(rumburk, ceskalipa, 10000, 3)
+    move(hrensko, litomerice, 13000, 3, terezin)
+    move(cinovec, teplice, 13000, 3, bilina)
+    move(horasvkateriny, most, 13000, 3)
+    move(horasvkateriny, chomutov, 13000, 3)
+    move(kraslice, sokolov, 10000, 3)
+    move(rumburk, jablonne, 10000, 3)
+    move(poreba, harachov, 10000, 3)
+    move(opava, moravskyberoun, 10000, 3)
+    move(hung2, sturovo, 10000, 3)
+    move(rajka, bratislava, 10000, 8)
+
+
+}
+
+//02-04
+const phase3 = function() {
+    time("2:00 - 4:00", "Sovietske lietadlá pristávajú o druhej hodine v Prahe, o tretej aj v Brne, Hradšanoch, Hradec Králové, Mladej, Mošnove, Námestí nad Oslavou, Pradubiciach, Slatine a Žatci. Výsadkári z vrtulníkov obsadzujú letisko vo Vajnoroch.")
+    move(sahy, levice, 5000, 4)
+    move(komarno, bratislava, 5000, 10)
+    move(trebisov, kosice, 10000, 3)
+    move(vranov, presov, 10000, 3)
+    move(karlovyvary, kyselka, 10000, 3)
+    move(sturovo, novezamky, 10000, 3)
+    move(krnov, rymarov, 10000, 3)
+    move(liberec, turnov, 10000, 3)
+    move(harachov, turnov, 10000, 3)
+    move(bilina, louny, 10000, 3)
+    move(terezin, praha, 5000, 4)
+
+}
+
+//04-06
+const phase4 = function() {
+    time("4:00 - 6:00")
+    move(presov, poprad, 10000, 3)
+    move(louny, slane, 13000, 3)
+    move(louny, rakovnik, 13000, 3)
+    move(louny, podborany, 13000, 3)
+    move(cheb, laznekyn, 13000, 3)
+    move(trutnov, horice, 13000, 3)
+    move(police, ceskaskalice, 13000, 3)
+    move(moravskyberoun, sternberk, 10000, 3)
+    move(kosice, zvolen, 13000, 3)
+    move(levice, nitra, 13000, 3) //???
+
+}
+
+//06-08
+const phase5 = function() {
+    time("6:00 - 8:00")
+    move(kyselka, plzen, 13000, 3)
+    move(rymarov, sumperk, 13000, 3)
+    move(staraboleslav, vodochody, 13000, 3, praha)
+    move(sternberk, olomouc, 10000, 3)
+
+
+}
+
+//08-10
+const phase6 = function() {
+    time("8:00 - 10:00")
+    move(laznekyn, tachov, 13000, 3)
+    move(plzen, strasice, 13000, 3)
+    move(plzen, bor, 13000, 3)
+    move(plzen, klatovy, 13000, 3)
+    move(bratislava, senica, 13000, 10)
+
+}
+
+//10-12
+const phase7 = function() {
+    time("10:00 - 12:00")
+    move(plzen, ceskakubice, 13000, 3, zeleznaruda)
+    move(plzen, janovce, 13000, 3)
+    move(ceskaskalice, hradeckralove, 13000, 3)
+    move(jablonne, bela, 13000, 3)
+    move(poprad, trencin, 13000, 12)
+    move(nitra, hlohovec, 13000, 3) //???
+    move(nitra, sered, 13000, 3) //???
+    move(senica, brno, 13000, 10)
+
+}
+
+const phaseXX = function() {
+
+    move(klatovy, susice, 13000, 3) //15:30
+}
+
+function move(cityFrom, cityTo, speed, distance, chain) {
+    let wait = 0;
+    for (i=0; i<distance; i++){
+        setTimeout(function () { moveTank(cityFrom, cityTo, speed)}, wait + 1000);
+        wait += 1000;
+        if (i === distance - 1) {
+            setTimeout(function () { redCity(cityTo) }, wait + 2000);
+    }
+    if (chain) {
+        let wait = 0;
+        console.log("chain");
+        for (i=0; i<distance; i++){
+        setTimeout(function () { moveTank(cityTo, chain, speed)}, wait + 1000);
+        wait += 1000;
+        if (i === distance - 1) {
+            setTimeout(function () { redCity(chain) }, wait + 2000);
+    }}
+    }}}
+
+
+function time(part1, part2) {
+    let time = document.querySelector("#time");
+    time.style.opacity = 0;
+    time.innerHTML = "";
+    time.style.opacity = 1;
+    time.innerHTML = `<b>${part1}</b><br><br>${part2}`;
+}
+
+    </script>
+
+
+
+</body>
+
+</html>
