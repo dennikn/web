@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery.animateNumber.min.js"></script>
+</head>
+
+<body>
+    <div id='main'>
+    <div id='chat_box'>
+        <h2 id='title'>Mladá rodina</h2>
+        <div id='progress'>
+            <p id='time'>Dátum:</p>
+            <div id='money'>
+            <p id='bank'>Úspory: <p id ='sum'></p><p id='change'></p></p>
+            <p id='minus'></p>
+        </div>
+            <p id='debt'>Dlh:</p>
+
+            </div>
+        <div id='text'>
+        </div>
+      
+
+
+    </div>
+    <div id='user_text'>
+        <h4 id='start'>Spustiť</h4>
+        <h4 id='next'>Vyberte si obtiažnosť</h4>
+        <h4 id='next2'>Vyberte si kraj</h4>
+        <h4 id='start2'>Začať</h4>
+        <h4 id='easy'>1 dieťa</h4>
+        <h4 id='hard'>2 deti</h4>
+        <h4 id='ba'>Bratislava</h4>
+        <h4 id='other'>Brezno</h4>
+            <h4 id='continue'>Pokračovať</h4>
+            <h4 id='yes'>Áno</h4>
+            <h4 id='no'>Nie</h4>
+    </div>
+</div>
+<script>
+var bank = 0;
+var time;
+var debt = 0;
+var rent;
+var social; // peniaze z podpory
+var kids;
+var place;
+var paycheck;
+var phone_check = 10;
+
+function start_game() {
+    $('#start').css({
+				'visibility': 'visible',
+			});
+}
+
+function game() {
+
+}
+
+
+function money_hide(){
+              $('#change').animate({
+                  'opacity': 0
+              }, 400
+              )};
+
+function text_hide(){
+              $('#text').animate({
+                  'opacity': 0
+              }, 400
+              )};            
+
+function plus_money(i){
+              $('#change').animate({
+                  'opacity': 0
+              }, 0, function(){
+                  $(this).html('<p style="color: green"> + ' + i + ' eur</p>').animate({'opacity': 1}, 300);
+              })};
+
+function minus_money(i){
+              $('#change').animate({
+                  'opacity': 0
+              }, 0, function(){
+                  $(this).html('<p style="color: red"> - ' + i + ' eur</p>').animate({'opacity': 1}, 300);
+              })};
+
+function sum_money(){
+                $('#sum').animateNumber({ number: bank },'slow');
+            };
+
+
+function run_paycheck() {
+            text = 'Prišla vám výplata'
+            setTimeout(warning(text), 200)
+            setTimeout(plus_money(paycheck), 500)
+            bank += paycheck;
+            setTimeout(money_hide, 800)
+            setTimeout(sum_money(), 5000)
+            setTimeout(text_hide, 2000)
+            console.log(bank)
+            return bank;        
+};
+
+function run_social() {
+            text = 'Prišli vám rodinné prídavky'
+            setTimeout(warning(text), 200)
+            setTimeout(plus_money(social), 500)
+            bank += social;
+            setTimeout(money_hide, 800)
+            setTimeout(sum_money(), 5000)
+            setTimeout(text_hide, 2000)  
+            console.log(bank)
+            return bank;      
+
+};
+
+function run_rent() {
+            text = 'Zaplatili ste nájom'
+            setTimeout(warning(text), 200)
+            setTimeout(minus_money(rent), 500)
+            bank -= rent;
+            setTimeout(money_hide, 800)
+            setTimeout(sum_money(), 5000)
+            setTimeout(text_hide, 2000)   
+            console.log(bank)
+            return bank;
+     
+};
+
+function run_payment() {
+            text = 'Zaplatili ste účet za telefón'
+            setTimeout(warning(text), 200)
+            setTimeout(minus_money(phone_check), 500)
+            bank -= phone_check;
+            setTimeout(money_hide, 800)
+            setTimeout(sum_money(), 5000)
+            setTimeout(text_hide, 2000)     
+            console.log(bank)
+            return bank;   
+};
+
+function warning(text) {
+    $('#text').animate({
+        'opacity': 0
+    }, 300, function() {
+        $(this).html('<h4>' + text + '</h4>')
+        .animate({'opacity': 1}, 300);
+    })};
+
+
+function roll() { 
+    return Math.floor((Math.random() * 10) +1); //random number between 1 - 10
+}
+
+function yes_no() {
+    $('#yes').css({
+		'visibility': 'visible',
+		});
+    $('#no').css({
+		'visibility': 'visible',
+	});
+}
+
+function clear(tag) {
+    $('#yes').css({
+		'visibility': 'hidden',
+		});
+    $('#no').css({
+		'visibility': 'hidden',
+	});
+}
+
+
+
+window.onload = function() {
+    setTimeout(start_game, 200)
+    };
+
+
+document.getElementById("start").onclick = function game() {
+             $('#start').css({
+			    'visibility': 'hidden',
+			});
+            $('#next').css({
+				'visibility': 'visible',
+			});
+			$('#easy').css({
+				'visibility': 'visible',
+			});
+            $('#hard').css({
+				'visibility': 'visible',
+			});
+		}
+
+document.getElementById("easy").onclick = function game() {
+             $('#easy').css({
+			    'visibility': 'hidden',
+			});
+            $('#next').css({
+				'visibility': 'hidden',
+			});
+            $('#next2').css({
+				'visibility': 'visible',
+			});
+			$('#easy').css({
+				'visibility': 'hidden',
+			});
+            $('#hard').css({
+				'visibility': 'hidden',
+			});
+            $('#ba').css({
+				'visibility': 'visible',
+			});
+            $('#other').css({
+				'visibility': 'visible',
+			});
+            kids = 1;
+            social = 30;
+            return kids,social;
+
+		}
+
+document.getElementById("hard").onclick = function game() {
+            $('#easy').css({
+			    'visibility': 'hidden',
+			});
+            $('#next').css({
+				'visibility': 'hidden',
+			});
+            $('#next2').css({
+				'visibility': 'visible',
+			});
+			$('#easy').css({
+				'visibility': 'hidden',
+			});
+            $('#hard').css({
+				'visibility': 'hidden',
+			});
+            $('#ba').css({
+				'visibility': 'visible',
+			});
+            $('#other').css({
+				'visibility': 'visible',
+			});
+            kids = 2;
+            social = 60;
+            return kids,social;
+		}
+
+document.getElementById("ba").onclick = function game() {
+            $('#next2').css({
+				'visibility': 'hidden',
+			});
+            $('#ba').css({
+				'visibility': 'hidden',
+			});
+            $('#other').css({
+				'visibility': 'hidden',
+			});
+            document.getElementById('bank').innerHTML = 'Úspory: <p id="sum">' + bank + '</p> eur';
+            $('#progress').css({
+				'visibility': 'visible',
+			});
+            $('#start2').css({
+				'visibility': 'visible',
+			});
+            place = 'Bratislava';
+            rent = 400;
+            paycheck = 800;
+            setTimeout(run_paycheck, 100);
+            setTimeout(run_social, 3000);
+            setTimeout(run_rent, 4000);
+            setTimeout(run_payment, 5000);
+        
+            return bank, place, rent, paycheck;
+		}
+
+document.getElementById("other").onclick = function game() {
+            $('#next2').css({
+				'visibility': 'hidden',
+			});
+            $('#ba').css({
+				'visibility': 'hidden',
+			});
+            $('#other').css({
+				'visibility': 'hidden',
+			});
+            document.getElementById('bank').innerHTML = 'Úspory: <p id="sum">' + bank + '</p> eur';
+            $('#progress').css({
+				'visibility': 'visible',
+			});
+            $('#start2').css({
+				'visibility': 'visible',
+			});
+            place = 'Brezno';
+            rent = 280;
+            paycheck = 600;
+            
+            
+
+            
+            return place, rent, paycheck;	
+            }
+
+document.getElementById("next3").onclick = function game() {
+            $('#next2').css({
+				'visibility': 'hidden',
+			});
+            $('#ba').css({
+				'visibility': 'hidden',
+			});
+            $('#other').css({
+				'visibility': 'hidden',
+			});
+            document.getElementById('bank').innerHTML = 'Úspory: <p id="sum"' + bank + '</p> eur';
+            $('#progress').css({
+				'visibility': 'visible',
+			});
+            place = 'Brezno';
+            rent = '280';
+            paycheck = '600';
+            return place, rent, paycheck;	
+            }            
+
+
+
+
+    
+
+function emergency_kitchen() {
+            roll();
+            console.log(roll())
+            if (roll() > 1) { 
+            document.getElementById('text').innerHTML = 'Pokazila sa vám chladnička. Opravíte ju?';
+            setTimeout(yes_no, 1000);
+            document.getElementById("yes").onclick = function game() {
+			clear('yes_no');
+            minus = 30;
+            document.getElementById('text').innerHTML = 'Oprava vás bude stáť ' + minus + ' eur.' ;
+            setTimeout(money_minus, 500, minus);
+            setTimeout(bank_update, 300);
+            setTimeout(wait, 500);
+            }
+            document.getElementById("no").onclick = function game() {
+			clear('yes_no');
+            document.getElementById('text').innerHTML = 'Ušetrili ste, na oprave, ale pokazilo sa vám jedlo.' ;
+            }
+}}
+
+</script>
+
+</body>
+</html>

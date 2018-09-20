@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+  <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Mada" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery.animateNumber.min.js"></script>
+</head>
+
+<body>
+    <div id='main'>
+
+    <h3 id='title'>Denník N</h3>
+    <div id='progress'>
+            <p id='time'>Nedeľa, 10. jún </p>
+            <p id='bank'>Úspory: &nbsp;<p id='sum'></p><p id='change'></p></p>
+        </div>
+        <div id='line'> &nbsp;</div>
+
+        <div id='text-box'>&nbsp;
+            <p id='info'></p>&nbsp;
+            <div id='line'> &nbsp;</div>
+    </div>
+    <div id='buttons'>
+            <h5 id='woman'>Samoživiteľka</h5>
+            <h5 id='family'>Mladá rodina</h5>
+            <h5 id='left'>1 dieťa</h5>
+            <h5 id='right'>2 deti</h5>
+            <h5 id='ba'>Bratislava</h5>
+            <h5 id='other'>Brezno</h5>
+            <h5 id='smoker_yes'>Áno</h5>
+            <h5 id='smoker_no'>Nie</h5>
+            <h5 id='food'>Pokračovať</h5>
+            <h5 id='continue'>Pokračovať</h5>
+            <h5 id='yes'>Áno</h5>
+            <h5 id='no'>Nie</h5>
+            <h5 id='random'>Pokračovať</h5>
+            <h5 id='continue3'>Pokračovať</h5>
+            <h5 id='food_more'>Spravím väčší nákup na celý týždeň</h5>
+            <h5 id='food_less'>Spravím menší nákup na tri dni</h5>
+            <h5 id='better_food'>Doprajeme si</h5>
+            <h5 id='worse_food'>Uskromníme sa</h5>
+            <h5 id='yes2'>Áno</h5>
+            <h5 id='no2'>Nie</h5>
+            <h5 id='friday'>Pokračovať</h5>
+            <h5 id='friday_yes'>Áno, potrebujem sa odreagovať</h5>
+            <h5 id='friday_no'>Tento piatok si pivo odpustím</h5>
+            <h5 id='beer_yes'>Áno</h5>
+            <h5 id='beer_no'>Stačilo</h5>
+            <h5 id='cinema'>Pokračovať</h5>
+            <h5 id='yes3'>Áno</h5>
+            <h5 id='no3'>Nie</h5>
+            <h5 id='food_more2'>Spravím väčší nákup na celý týždeň</h5>
+            <h5 id='food_less2'>Spravím menší nákup na tri dni</h5>
+
+            <h5 id='do'>Zavolám opravára</h5>
+            <h5 id='wait'>Poradíme si aj bez nej</h5>
+           
+
+
+
+        </div>
+        <img id='img' src="N.png" alt="n">
+
+</div>
+
+
+
+<script>
+var title;
+var bank = 0;
+var time;
+var debt = 0;
+var rent;
+var social; // peniaze z podpory
+var kids;
+var place;
+var paycheck;
+var phone_check = -10;
+var happyness = 0;
+var toy_test = false;
+var ticket_test = false;
+var broken_test = false;
+var paycheck_index;
+var rent_index;
+var hungry;
+var hungry_check;
+var people;
+var bill;
+var smoker = false;
+var single = false;
+var food_quality;
+var sweet;
+var sweet_check;
+var day;
+var beer_count;
+var beer_check = true;
+var cinema_ticket;
+
+
+function start_game() {
+   warning('Kto ste?')
+   setTimeout(show_button('woman'), 1000)
+   setTimeout(show_button('family'), 1000)
+}
+
+function money_hide(){
+              $('#change').animate({
+                  'opacity': 0
+              }, 500
+              )};
+
+function text_hide(){
+              $('#info').animate({
+                  'opacity': 0
+              }, 400
+              )};            
+
+function plus_money(i){
+              $('#change').animate({
+                  'opacity': 0
+              }, 0, function(){
+                  $(this).html('<p id="plus">&nbsp; +' + i + ' eur</p>').animate({'opacity': 1}, 500);
+              })};
+
+function minus_money(i){
+              $('#change').animate({
+                  'opacity': 0
+              }, 0, function(){
+                  $(this).html('<p id="minus">&nbsp; -' + i + ' eur</p>').animate({'opacity': 1}, 500);
+              })};
+
+function sum_money(bank, change){
+                $('#sum')
+                .prop('number', bank)
+                .animateNumber(
+                    {
+                    number: bank + change
+                    },
+                    2000
+                );
+            };
+
+
+function run_paycheck() {
+            text = 'Prišla vám výplata'
+            setTimeout(warning(text), 1)
+            setTimeout(plus_money(paycheck), 100) //1000
+            setTimeout(sum_money(bank, paycheck), 30) //3000
+            bank += paycheck;
+            setTimeout(money_hide, 300) //3000
+            setTimeout(text_hide, 500) //5000
+            console.log(bank)
+            return bank;        
+};
+
+function run_social() {
+            text = 'Prišli vám rodinné prídavky'
+            setTimeout(warning(text), 100)
+            setTimeout(plus_money(social), 120) //1200
+            setTimeout(sum_money(bank, social), 160) //1600
+            bank += social;
+            setTimeout(money_hide, 300) //3000
+            setTimeout(text_hide, 500)  //5000
+            console.log(bank)
+            return bank;      
+
+};
+
+function run_single() {
+            text = 'Dostali ste na účet výživné'
+            setTimeout(warning(text), 100)
+            setTimeout(plus_money(social), 120) //1200
+            setTimeout(sum_money(bank, social), 160) //1600
+            bank += social;
+            setTimeout(money_hide, 300) //3000
+            setTimeout(text_hide, 500)  //5000
+            console.log(bank)
+            return bank;      
+
+};
+
+function run_rent() {
+            text = 'Zaplatili ste nájom'
+            setTimeout(warning(text), 100)
+            setTimeout(minus_money(rent), 120) //1200
+            setTimeout(sum_money(bank, rent), 160) //1600
+            bank += rent;
+            setTimeout(money_hide, 300)//3000
+            setTimeout(text_hide, 500)   //5000
+            console.log(bank)
+            return bank;
+     
+};
+
+function run_phone() {
+            text = 'Zaplatili ste účet za telefón'
+            setTimeout(warning(text), 100)
+            setTimeout(minus_money(phone_check), 120) //1200
+            setTimeout(sum_money(bank, phone_check), 160)//1600
+            bank += phone_check;
+            setTimeout(money_hide, 500)//5000
+            setTimeout(text_hide, 700)     //7000
+            console.log(bank)
+            return bank;   
+};
+
+function run_pay(money) {
+            setTimeout(minus_money(money), 120)//1200
+            setTimeout(sum_money(bank, money), 160)//1600
+            bank += money;
+            setTimeout(money_hide, 500)//5000
+            console.log(bank)
+            return bank;   
+};
+
+
+
+function warning(text) {
+    $('#info').animate({
+        'opacity': 0
+    }, 300, function() {
+        $(this).html('<h4>' + text + '</h4>')
+        .animate({'opacity': 1}, 300);
+    })};
+
+function title(text) {
+    $('#title').animate({
+        'opacity': 0
+    }, 300, function() {
+        $(this).html(text)
+        .animate({'opacity': 1}, 300);
+    })};
+
+
+function warning_hide() {
+    $('#info').animate({
+        'opacity': 0
+    }, 300
+    )};
+
+
+function time(change) {
+    $('#time').animate({
+        'opacity': 0
+    }, 300, function() {
+        $(this).html(change)
+        .animate({'opacity': 1}, 300);
+    })};
+
+function roll() { 
+    return Math.floor((Math.random() * 10) +1); //random number between 1 - 10
+}
+
+function hide_button(button) {
+    var button_format = "#" + button 
+$(button_format).animate({
+        'opacity': 0
+    }, 400, function() {
+        $(button_format).css({
+			    'display': 'none',
+			}, 400);
+    });
+}
+function show_button(button) {
+    var button_format = "#" + button 
+$(button_format).animate({
+        'opacity': 1
+    }, 600, function() {
+        $(button_format).css({
+			    'display': 'block',
+			}, 600);
+    });
+}
+function show_button_delay(button, delay) {
+    var button_format = "#" + button 
+$(button_format).animate({
+        'opacity': 1
+    }, delay, function() {
+        $(button_format).css({
+			    'display': 'block',
+			}, delay);
+    });
+}
+
+function check_happyness(i) {
+    happyness += i;
+    if (happyness < 0 && kids == 1) {
+        text = 'Koniec hry, vaše dieťa je príliš smutné';
+    }
+    else if (happyness < 0 && kids == 2) {
+        text = 'Koniec hry, vaše deti sú príliš smutné';
+    }
+    $('#info').animate({
+        'opacity': 0
+    }, 300, function() {
+        $(this).html('<h4>' + text + '</h4>')
+        .animate({'opacity': 1}, 300);
+    })
+}
+
+
+window.onload = function() {
+    setTimeout(warning('Je deň pred výplatou a vy rovnako ako xx percent ďalších rodín ste si nič nedokázali počas predošlého mesiaca ušetriť. Budete hospodáriť lepšie?'))
+    setTimeout(start_game, 6000)
+    };
+
+
+document.getElementById("woman").onclick = function () {
+            hide_button('woman')
+            hide_button('family')
+            text = 'Samoživiteľka'
+            setTimeout(title(text), 200);
+            warning('Koľko máte detí?');
+			setTimeout(show_button('left'), 200);
+			setTimeout(show_button('right'), 200);
+            people = 1;
+            single = true;
+            paycheck_index = 0;
+            rent_index = 1;
+            return single, title, people, paycheck_index, rent_index
+		}
+
+document.getElementById("family").onclick = function () {
+            hide_button('woman')
+            hide_button('family')
+            text = 'Mladá rodina'
+            setTimeout(title(text), 200);
+            warning('Koľko máte detí?');
+			setTimeout(show_button('left'), 200);
+			setTimeout(show_button('right'), 200);
+            people = 2;
+            paycheck_index = 1;
+            rent_index = 1.2;
+            return title, people, paycheck_index, rent_index
+		}
+
+document.getElementById("left").onclick = function () {
+            hide_button('left')
+            hide_button('right')
+            warning('Kde žijete?')
+            show_button('ba')
+            show_button('other')
+            kids = 1;
+            people += kids;
+            social = 40; //výška prídavkov
+            return people, kids, social;
+		}
+
+document.getElementById("right").onclick = function () {
+            hide_button('left')
+            hide_button('right')
+            warning('Kde žijete?')
+            show_button('ba')
+            show_button('other')
+            kids = 2;
+            people += kids;
+            social = 100; 
+            return people, kids, social;
+		}
+
+document.getElementById("ba").onclick = function () {
+            hide_button('ba')
+            hide_button('other')
+            document.getElementById('bank').innerHTML = 'Úspory: <p id="sum">' + bank + '</p> eur';
+            $('#progress').css({
+				'visibility': 'visible',
+			});
+            place = 'Bratislava';
+            rent = -400 * rent_index;
+            paycheck = 650 + (paycheck_index * (650 * 1.2)); // + man paycheck
+            setTimeout(run_paycheck, 100);
+            setTimeout(run_social, 5000);
+            if (single = true) {
+                setTimeout(run_single, 7000);
+            };
+            setTimeout(run_rent, 10000);
+            setTimeout(run_phone, 12000);
+            warning('Fajčíte?')
+            show_button('smoker_yes', 1200);
+            show_button('smoker_no', 1200);
+            return bank, place, rent, paycheck;
+		}
+
+document.getElementById("other").onclick = function () {
+            hide_button('ba')
+            hide_button('other')
+            document.getElementById('bank').innerHTML = 'Úspory: <p id="sum">' + bank + '</p> eur';
+            $('#progress').css({
+				'visibility': 'visible',
+			});
+            place = 'Brezno';
+            rent = -280 * rent_index;
+            paycheck = 500 + (paycheck_index * (500 * 1.2));
+            warning('Fajčíte?')
+            show_button_delay('smoker_yes', 1200);
+            show_button_delay('smoker_no', 1200);
+            return bank, place, rent, paycheck;	
+            }
+
+document.getElementById("smoker_yes").onclick = function () {
+            hide_button('smoker_yes')
+            hide_button('smoker_no')
+            setTimeout(run_paycheck, 100);
+            setTimeout(run_social, 5000);
+            if (single = true) {
+                setTimeout(run_single, 7000);
+            };
+            setTimeout(run_rent, 8000);
+            setTimeout(run_phone, 11000);
+            setTimeout(warning('Kúpili ste si krabičku cigariet'), 13000);
+            setTimeout(run_pay(-3), 14000);
+            show_button('food')
+            smoker = true;
+            return bank, smoker;
+		}
+
+document.getElementById("smoker_no").onclick = function () {
+            hide_button('smoker_yes')
+            hide_button('smoker_no')
+            setTimeout(run_paycheck, 100);
+            setTimeout(run_social, 5000);
+            if (single = true) {
+                setTimeout(run_single, 7000);
+            };
+            setTimeout(run_rent, 8000);
+            setTimeout(run_pay, 11000);
+            show_button('food')
+            return bank;
+		}
+
+
+document.getElementById("food").onclick = function () {
+            hide_button('food')
+            time('Streda, 13. jún')
+            setTimeout(warning('Musíte ísť do obchodu, vaša chladnička je takmer prázdna. Nakúpite radšej na šesť dní alebo urobíte menší nákup na tri dni?'), 200);
+            setTimeout(show_button('food_more'), 600)
+            setTimeout(show_button('food_less'), 600)
+            }
+
+document.getElementById("food_more").onclick = function () {
+            hide_button('food_more')
+            hide_button('food_less')
+            hungry = 6 //dni
+            hungry_check = 6
+            setTimeout(warning('Kúpite iba základné a lacné suroviny - zemiaky, lacné kuracie mäso, šošovicu alebo si doprajete - ryby, viac ovocia a zeleniny?'), 200);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+            return hungry, hungry_check;
+           }
+
+document.getElementById("food_less").onclick = function () {
+            hide_button('food_more')
+            hide_button('food_less')
+            hungry = 3 //dni
+            hungry_check = 3
+            setTimeout(warning('Kúpite iba základné a lacné suroviny - zemiaky, lacné kuracie mäso, šošovicu alebo si doprajete - ryby, viac ovocia a zeleniny?'), 200);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+            return hungry, hungry_check;
+           }
+
+document.getElementById("better_food").onclick = function () {
+            hide_button('better_food')
+            hide_button('worse_food')
+            food_quality = 1.8;
+            if (kids == 1){
+                setTimeout(warning('Vaše dieťa by chcelo aj čokoládu. Kúpite mu ju?'), 200);
+            } else if (kids == 2) {
+                setTimeout(warning('Vaše deti by chceli aj čokoládu. Kúpite im ju?'), 200);
+            }
+            setTimeout(show_button('yes'), 600)
+            setTimeout(show_button('no'), 600)
+            return food_quality;
+           }
+
+document.getElementById("worse_food").onclick = function () {
+            hide_button('better_food')
+            hide_button('worse_food')
+            food_quality = 1;
+            if (kids == 1){
+                setTimeout(warning('Vaše dieťa by chcelo aj čokoládu. Kúpite mu ju?'), 200);
+            } else if (kids == 2) {
+                setTimeout(warning('Vaše deti by chceli aj čokoládu. Kúpite im ju?'), 200);
+            }
+            setTimeout(show_button('yes'), 600)
+            setTimeout(show_button('no'), 600)
+            return food_quality;
+           }
+
+document.getElementById("yes").onclick = function () {
+            hide_button('yes')
+            hide_button('no')
+            sweet_check += 1;
+            sweet = 1.2;
+            if (smoker == true && hungry == 3) {
+                bill = ((((2 * food_quality) * people) * hungry) + (sweet * kids) + 3); 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet a 1,2 eur čokoláda pre deti.';
+            } else if (smoker == true && hungry == 6) {
+                bill = ((((2 * food_quality) * people) * hungry) + (sweet * kids) + 6);
+                text = 'Za nákup na šesť dni zaplatíte ' + bill + ' eur, z toho šesť eur vás stoja dve krabičky cigariet a 1,2 eur čokoláda pre deti.';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('friday'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("no").onclick = function () {
+            hide_button('yes')
+            hide_button('no')
+            sweet_check -= 1;
+            if (smoker == true && hungry == 3) {
+                bill = ((2 * food_quality) * people) * hungry + 3; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet';
+            } else if (smoker == true && hungry == 7) {
+                bill = ((2 * food_quality) * people) * hungry + 6; //2 je cena na osobu na den * kvalita jedla * pocet ludi * pocet dni + cigarety
+                text = 'Za nákup na šesť dni zaplatíte ' + bill + ' eur, z toho šesť eur vás stoja dve krabičky cigariet';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('friday'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("friday").onclick = function () {
+            hide_button('friday')
+            time('Piatok, 15. jún')
+            setTimeout(warning('Konečne je piatok. Vybehnete s kamarátmi na pivo?'),200)
+            hungry_check -= 3;
+            setTimeout(show_button('friday_yes'), 1600);
+            setTimeout(show_button('friday_no'), 1600);
+            return hungry_check;
+           }
+
+document.getElementById("friday_yes").onclick = function () {
+            hide_button('friday_yes')
+            hide_button('friday_no')
+            beer_count = 1;
+            bill = 0;
+            setTimeout(warning('Prvé pivo ste vypili rýchlo. Dáte si ešte jedno?'),200)
+            setTimeout(show_button('beer_yes'), 600);
+            setTimeout(show_button('beer_no'), 600);
+            return beer_count, bill;
+           }
+
+document.getElementById("beer_yes").onclick = function () {
+            hide_button('beer_yes')
+            hide_button('beer_no')
+            if (beer_count > 11) {
+                if (place == 'Bratislava') {
+                price = 1.5;
+                } else {
+                price = 1.2;
+                }
+                bill = beer_count * price;
+                setTimeout(warning('Už máte dosť, ste opitý. Platí sa na bare. Za ' + beer_count + ' veľkých pív to bude ' + bill + ' eur.'),200)
+                setTimeout(run_pay(-bill))
+                return bank;
+            } else {
+            beer_count += 1;
+            setTimeout(warning('Ešte jedno?'),200)
+            setTimeout(show_button('beer_yes'), 600);
+            setTimeout(show_button('beer_no'), 600);
+            return beer_count;
+            }
+           }
+
+document.getElementById("beer_no").onclick = function () {
+            hide_button('beer_yes')
+            hide_button('beer_no')
+            if (place == 'Bratislava') {
+                price = 1.5;
+            } else {
+                price = 1.2;
+            }
+            bill = beer_count * price; //SOLVE: floor to two decimals
+            setTimeout(warning('Platí sa na bare. Za ' + beer_count + ' veľkých pív to bude ' + bill + ' eur.'),200)
+            setTimeout(run_pay(-bill))
+            setTimeout(show_button('cinema'), 1600);
+            return bank;
+           }
+
+document.getElementById("friday_no").onclick = function () {
+            hide_button('friday_yes')
+            hide_button('friday_no')
+            setTimeout(warning('Idete sa domov vyspať.'),200)
+            setTimeout(show_button('cinema'), 1600);
+           }
+
+document.getElementById("food_less2").onclick = function () {
+            hide_button('food_more2')
+            hide_button('food_less2')
+            hungry_check += 3 //dni
+            hungry = 3
+            setTimeout(warning('Kúpite iba základné a lacné suroviny - zemiaky, lacné kuracie mäso, šošovicu alebo si doprajete - ryby, viac ovocia a zeleniny?'), 200);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+            console.log(hungry_check + ' ::::   ' + hungry)
+            return hungry_check, hungry;
+           }
+
+document.getElementById("food_more2").onclick = function () {
+            hide_button('food_more2')
+            hide_button('food_less2')
+            hungry_check += 7 //dni
+            hungry = 7
+            setTimeout(warning('Kúpite iba základné a lacné suroviny - zemiaky, lacné kuracie mäso, šošovicu alebo si doprajete - ryby, viac ovocia a zeleniny?'), 200);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+            console.log(hungry_check + ' ::::   ' + hungry)
+            return hungry_check, hungry;
+           }
+
+
+document.getElementById("yes3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            sweet_check += 1;
+            sweet = 1.2;
+            if (smoker == true && hungry == 3) {
+                bill = ((((2 * food_quality) * people) * hungry) + (sweet * kids) + 3); 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet a 1,2 eur čokoláda pre deti.';
+            } else if (smoker == true && hungry == 6) {
+                bill = ((((2 * food_quality) * people) * hungry) + (sweet * kids) + 6);
+                text = 'Za nákup na šesť dni zaplatíte ' + bill + ' eur, z toho šesť eur vás stoja dve krabičky cigariet a 1,2 eur čokoláda pre deti.';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('cinema'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("no3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            sweet_check -= 1;
+            if (smoker == true && hungry == 3) {
+                bill = ((2 * food_quality) * people) * hungry + 3; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet';
+            } else if (smoker == true && hungry == 7) {
+                bill = ((2 * food_quality) * people) * hungry + 6; //2 je cena na osobu na den * kvalita jedla * pocet ludi * pocet dni + cigarety
+                text = 'Za nákup na šesť dni zaplatíte ' + bill + ' eur, z toho šesť eur vás stoja dve krabičky cigariet';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('cinema'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("yes3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            sweet_check += 1;
+            sweet = 1.2;
+            if (smoker == true && hungry == 3) {
+                bill = ((((2 * food_quality) * people) * hungry) + (sweet * kids) + 3); 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet a 1,2 eur čokoláda pre deti.';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('cinema'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("no3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            sweet_check -= 1;
+            if (smoker == true && hungry == 3) {
+                bill = ((2 * food_quality) * people) * hungry + 3; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho tri eurá vás stojí krabička cigariet';
+            } else if (smoker == true && hungry == 7) {
+                bill = ((2 * food_quality) * people) * hungry + 6; //2 je cena na osobu na den * kvalita jedla * pocet ludi * pocet dni + cigarety
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur, z toho šesť eur vás stoja dve krabičky cigariet';
+            } else {
+                bill = ((2 * food_quality) * people) * hungry; 
+                text = 'Za nákup na tri dni zaplatíte ' + bill + ' eur.';
+            }
+            console.log(hungry_check, hungry, bill);
+            setTimeout(warning(text),200)
+            setTimeout(run_pay(-bill), 1200)
+            setTimeout(show_button('cinema'), 1600);
+            return sweet_check, bank;
+           }
+
+document.getElementById("cinema").onclick = function () {
+            hide_button('cinema')
+            time('Sobota, 16. jún')
+            if (place == 'Bratislava') {
+                    cinema_ticket = 7.8 + (kids * 5.8)  
+                } else {
+                    cinema_ticket = 5.5 + (kids * 5.5) 
+                }
+            if (hungry_check == 0) {
+                setTimeout(warning('Musíte ísť do obchodu, vaša chladnička je takmer prázdna. Nakúpite radšej na celý týždeň alebo urobíte menší nákup na tri dni?'), 200);
+                setTimeout(show_button('food_more2'), 600)
+                setTimeout(show_button('food_less2'), 600)
+            } else {
+                if (kids == 1){
+                    text = 'Vaše dieťa sa už od Vianoc teší na nový diel Avengers. Bude mať dobré vysvedčenie a za odmenu by chcel ísť do kina. Lístky budú stáť ' + cinema_ticket + ' eur. Zoberiete ho?'
+                    setTimeout(warning(text),200)
+                } else if (kids == 2){
+                    text = 'Vaše deti sa už od Vianoc tešia na nový diel Avengers. Budú mať dobré vysvedčenie a za odmenu by chceli ísť do kina. Lístky budú stáť ' + cinema_ticket + ' eur. Zoberiete ich?'
+                    setTimeout(warning(text),200)
+                }
+            setTimeout(show_button('cinema_yes'), 1600);
+            setTimeout(show_button('cinema_no'), 1600);
+            return cinema_ticket;
+           }
+}
+
+document.getElementById("cinema_yes").onclick = function () {
+            hide_button('cinema_yes')
+            hide_button('cinema_no')
+            text = 'Film bol úžasný. Za lístky ste zaplatili ' + cinema_ticket + ' eur'
+            setTimeout(warning(text), 200);
+            setTimeout(run_pay(-cinema_ticket), 600);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+            return bank
+           }
+
+document.getElementById("cinema_no").onclick = function () {
+            hide_button('cinema_yes')
+            hide_button('cinema_no')
+            if (kids == 1) {
+                text = 'Vaše dieťa je smutné, snáď nabudúce.'
+            } else {
+                text = 'Vaše deti sú smutné, snáď nabudúce.' 
+            }
+            setTimeout(warning(text), 200);
+            setTimeout(show_button('better_food'), 600)
+            setTimeout(show_button('worse_food'), 600)
+           }
+
+
+
+
+document.getElementById("food_lessaa").onclick = function () {
+            hide_button('food_more')
+            hide_button('food_less')
+            if (kids == 1){
+            setTimeout(warning('Doprajete dieťaťu sladkosť?'), 200);
+            } else if (kids == 2) {
+            setTimeout(warning('Doprajete deťom sladkosť?'), 200);
+            }
+            bill = (people * 3) * 3;
+            hungry += 3
+            setTimeout(show_button('yes'), 1400);
+            setTimeout(show_button('no'), 1400);
+            return bill, hungry;
+           }
+
+
+document.getElementById("random").onclick = function () {
+            hide_button('random')
+            time('Dátum: 5. jún')
+            roll();
+            if (roll() < 11) {
+            setTimeout(warning('Pokazila sa vám práčka. Nová stojí aspoň 200 eur, nemáte na to. Počkáte do výplaty alebo si ju necháte opraviť za 80 eur?'))
+            setTimeout(show_button('do'), 1400);
+            setTimeout(show_button('wait'), 1400);
+            broken_test = true;
+            return broken_test;
+            }
+            else if (roll() > 22) { //test value
+            setTimeout(warning('Musíte sa zviezť autobusom do centra mesta. Kúpite si lístok?'), 600);
+            setTimeout(show_button('yes2'), 1400);
+            setTimeout(show_button('no2'), 1400);
+            ticket_test = true;
+            return ticket_test;
+            }
+            }
+
+document.getElementById("do").onclick = function () {
+            hide_button('do')
+            hide_button('wait')
+            if (place == 'Bratislava'){
+            setTimeout(warning('Za opravu zaplatíte 95 eur.'), 600);
+            setTimeout(pay(-95), 500);} else if (place == 'Brezno') {
+            setTimeout(warning('Za opravu zaplatíte 75 eur.'), 600);
+            setTimeout(pay(-75), 500);}
+            show_button_delay('continue2', 2500);
+            return bank;
+            }
+
+document.getElementById("wait").onclick = function () {
+            hide_button('do')
+            hide_button('wait')
+            setTimeout(warning('Váš kamarát sa ponúkol, že si u neho môže oprať oblečenie. Musíte ísť autobusom, býva tri kilometre od vás. Kúpite si spiatočný lístok za 1,6 eur?'), 600);
+            setTimeout(show_button('yes2'), 1000)
+            setTimeout(show_button('no2'), 1000)
+            }
+
+document.getElementById("yes3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            setTimeout(warning('Na cestu ste minuli 1.6 eur.'), 600);
+            setTimeout(pay(-1.6),1200);
+            show_button_delay('continue2', 2500);
+            return bank;
+            }
+
+document.getElementById("no3").onclick = function () {
+            hide_button('yes3')
+            hide_button('no3')
+            roll();
+            if (roll() < 1) {
+            setTimeout(warning('Máte šťastie, v autobuse nebol revízor.'), 600);
+            show_button_delay('continue2', 2500);
+            } else if (roll() > 0) {
+            setTimeout(warning('Revízor vás chytil bez lístka, musíte zaplatiť pokutu 40 eur.'), 600);
+            setTimeout(pay(-40),1200);
+            show_button_delay('continue2', 2500);
+            }}
+
+
+document.getElementById("222222").onclick = function () {
+            if (toy_test == true) {
+            warning_hide();
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            setTimeout(pay(kids * -15), 500);
+            show_button_delay('continue2', 2500);
+            return bank;	
+            } else if (ticket_test == true) {
+            warning_hide();
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            setTimeout(pay(-1), 500);
+            show_button_delay('continue2', 2500);
+            return bank;	
+            }
+            }
+
+
+
+
+
+document.getElementById("yyes2").onclick = function () {
+            if (toy_test == true) {
+            warning_hide();
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            setTimeout(pay(kids * -15), 500);
+            show_button_delay('continue2', 2500);
+            return bank;	
+            } else if (ticket_test == true) {
+            warning_hide();
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            setTimeout(pay(-1), 500);
+            show_button_delay('continue2', 2500);
+            return bank;	
+            }
+            }
+
+document.getElementById("yyyyy").onclick = function () {
+            if (toy_test == true) {
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            setTimeout(warning('Deti sú smutné'), 300)
+            setTimeout(check_happyness(-3), 1500);
+            show_button_delay('continue2', 2500);
+            return happyness;	
+            } else if (ticket_test == true) {
+            warning_hide();
+            text_hide();
+            hide_button('yes2')
+            hide_button('no2')
+            roll();
+            if (roll() > 9) {
+                setTimeout(warning('Máte šťastie'), 1000);
+                show_button_delay('continue2', 2500);
+            } else if (roll() < 10) {
+            setTimeout(warning('Musíte zaplatiť pokutu 40 eur'), 50)
+            setTimeout(pay(-40), 2500);
+            show_button_delay('continue2', 4500);
+           return bank;
+           }}}
+
+document.getElementById("continue2").onclick = function () {
+            time('Dátum: 5. január')
+            hide_button('continue2')
+            text_hide();
+            roll();
+            if (roll() < 11) {
+            setTimeout(warning('Chladnička je skoro prázdna, rodina je hladná. Spravíte veľký nákup a doprajete si aj maškrty?'), 400)
+            setTimeout(show_button('food_more'), 1000)
+            setTimeout(show_button('food_less'), 1000)
+            }}
+
+
+
+function emergency_kitchen() {
+            roll();
+            console.log(roll())
+            if (roll() > 1) { 
+            document.getElementById('text').innerHTML = 'Pokazila sa vám chladnička. Opravíte ju?';
+            setTimeout(yes_no, 1000);
+            document.getElementById("yes").onclick = function game() {
+			clear('yes_no');
+            minus = 30;
+            document.getElementById('text').innerHTML = 'Oprava vás bude stáť ' + minus + ' eur.' ;
+            setTimeout(money_minus, 500, minus);
+            setTimeout(bank_update, 300);
+            setTimeout(wait, 500);
+            }
+            document.getElementById("no").onclick = function game() {
+			clear('yes_no');
+            document.getElementById('text').innerHTML = 'Ušetrili ste, na oprave, ale pokazilo sa vám jedlo.' ;
+            }
+}}
+
+
+
+
+</script>
+
+</body>
+</html>
