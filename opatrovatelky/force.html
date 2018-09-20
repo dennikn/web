@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="style_opat.css" type="text/css" media="screen" />
+  <meta charset="utf-8">
+  <script src="d3-3-5-5.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style>
+    body {
+      background: white;
+    }
+  </style>
+
+</head>
+
+<body>
+  <svg>
+    <foreignobject class="node" x="85" y="25" width="500" height="100">
+
+      <div class="opat">
+        <p id="long">Dĺžka práce</p>
+        <p id="regime">Režim</p>
+        <p id="happy_work">Spokojnosť</p>
+        <p id="money">Plat</p>
+        <p id="work">Pred odchodom</p>
+        <p id="age">Vek</p>
+        <p id="education">Vzdelanie</p>
+        <p id="family">Rodina</p>
+
+      </div>
+    </foreignobject>
+  </svg>
+  <script>
+
+
+    var width = 950,
+      height = 600;
+
+    var radius = 4,
+      padding = 2,
+      cluster_padding = 5,
+      count = 291;
+
+    var svg = d3.select("svg")
+      .attr("viewBox", "0 0 600 450")
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .append("g");
+
+
+    var places = {
+      "all":{x: 300,y:170,color:"black"},
+      "first":{x:120,y:360,color:"red"},
+      "second":{x: 480,y:360,color:"blue"},
+      "third":{x: 120,y:130,color:"orange"},
+      "fourth":{x: 480,y:130,color:"green"},
+      "fifth":{x: 300,y:250,color:"gray"},
+    };
+
+    var info = svg.selectAll("svg")
+      .data(["Výskum opATrovateľky 2016"])
+      .enter()
+      .append("text")
+      .attr("x", 140)
+      .attr("y", 320)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+
+      var info2 = svg.selectAll("svg")
+      .data(["Sociologický ústav SAV"])
+      .enter()
+      .append("text")
+      .attr("x", 170)
+      .attr("y", 360)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+
+    var nodes = d3.range(count).map(function (i) {
+      return {
+        radius: radius,
+        where: "all",
+      }
+    });
+
+
+    var force = d3.layout.force()
+      .nodes(nodes)
+      .size([width, height])
+      .gravity(0)
+      .friction(.9)
+      .charge(.8)
+      .on("tick", tick)
+      .start();
+
+    var node = svg.selectAll("circle")
+      .data(nodes)
+      .enter()
+      .append("circle")
+      .attr("class", "node")
+      .style("fill", function (d) { return places[d.where].color; });
+
+   node
+      .transition()
+      .duration(1500)
+      .delay(300)
+      .attrTween("r", function (d) {
+        return function (t) { return t=4; };
+      });
+
+    function tick(e) {
+      node
+        .each(gravity(.09 * e.alpha))
+        .each(collide(.5))
+        .style("fill", function (d) { return places[d.where].color; })
+        .attr("cx", function (d) { return d.x; })
+        .attr("cy", function (d) { return d.y; });
+    }
+
+    function gravity(alpha) {
+      return function (d) {
+        d.y += (places[d.where].y - d.y) * alpha;
+        d.x += (places[d.where].x - d.x) * alpha;
+      };
+    }
+
+
+function collide(alpha) {
+    var quadtree = d3.geom.quadtree(nodes);
+    return function(d) {
+      var r = d.radius + radius + padding,
+          nx1 = d.x - r,
+          nx2 = d.x + r,
+          ny1 = d.y - r,
+          ny2 = d.y + r;
+      quadtree.visit(function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== d)) {
+          var x = d.x - quad.point.x,
+              y = d.y - quad.point.y,
+              l = Math.sqrt(x * x + y * y),
+              r = d.radius + quad.point.radius + padding;
+          if (l < r) {
+            l = (l - r) / l * alpha;
+            d.x -= x *= l;
+            d.y -= y *= l;
+            quad.point.x += x;
+            quad.point.y += y;
+          }
+        }
+        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+      });
+    };
+  }
+
+
+
+    d3.select("#long")
+      .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Ako dlho pracujú v Rakúsku?"])
+      .enter()
+      .append("text")
+      .attr("x", 160)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["0-4 roky"])
+          .enter()
+          .append("text")
+          .attr("x", 100)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["5-8 rokov"])
+          .enter()
+          .append("text")
+          .attr("x", 450)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["9-12 rokov"])
+          .enter()
+          .append("text")
+          .attr("x", 100)
+          .attr("y", 230)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["13-18 rokov"])
+          .enter()
+          .append("text")
+          .attr("x", 450)
+          .attr("y", 230)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 115; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 115; i < 230; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 230; i < 276; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 276; i < 291; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        force.start();
+        }
+      });
+
+    d3.select("#regime")
+      .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Aký majú pracovný rytmus?"])
+      .enter()
+      .append("text")
+      .attr("x", 160)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["Dva týždne v Rakúsku (79,3 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 40)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Týždeň v Rakúsku (2 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 400)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Tri týždne v Rakúsku (14 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 50)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Iné (4,5 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 440)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var all_w = d3.keys(places)[0];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 231; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 231; i < 237; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 237; i < 278; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 278; i < 291; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        }
+        force.start();
+
+      });
+
+    d3.select("#happy_work")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Ako sú spokojné s prácou?"])
+      .enter()
+      .append("text")
+      .attr("x", 160)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["Veľmi spokojná (18,9 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 50)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Spokojná (61,5 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 420)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Ani spokojná, ani nespokojná (16,8 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 40)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Nespokojná (2,8 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 420)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var all_w = d3.keys(places)[0];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 55; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 55; i < 234; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 234; i < 283; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 283; i < 291; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        }
+        force.start();
+
+      });
+
+   d3.select("#money")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Koľko zarábajú v čistom?"])
+      .enter()
+      .append("text")
+      .attr("x", 170)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["Menej ako 600 eur (1,7 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 50)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["600 - 700 eur (18,6 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 410)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["701 - 800 eur (23 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 60)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["801 - 950 eur (24 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 410)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["viac ako 950 eur (32,7 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 230)
+          .attr("y", 330)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          var fifth = d3.keys(places)[5];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+         for (i = 0; i < 5; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 5; i < 59; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 59; i < 126; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 126; i < 196; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        }
+        for (i = 196; i < 291; i++) {
+          nodes[i].cx = places[fifth].x;
+          nodes[i].cy = places[fifth].y;
+          nodes[i].where = fifth;
+        }
+        force.start();
+
+      });
+
+   d3.select("#work")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Čo robili pred prácou v Rakúsku?"])
+      .enter()
+      .append("text")
+      .attr("x", 135)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["Zamestnaná (43,6 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 60)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Živnosť (7,6 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 430)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Na materskej (1,4 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 60)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["Nezamestnaná (44,3 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 410)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["Dôchodkyňa (3,1 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 240)
+          .attr("y", 300)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var fifth_w = d3.keys(places)[5];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 127; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 127; i < 149; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 149; i < 153; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 153; i < 282; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        }
+        for (i = 282; i < 291; i++) {
+          nodes[i].cx = places[fifth_w].x;
+          nodes[i].cy = places[fifth_w].y;
+          nodes[i].where = fifth_w;
+        }
+        force.start();
+
+      });
+
+  d3.select("#age")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Aký majú vek?"])
+      .enter()
+      .append("text")
+      .attr("x", 220)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["19 - 29 (4,5 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 70)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["30 - 39 (17,9 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 430)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["40 - 49 (28,2 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 80)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["50 - 59 (37,8 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 430)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["60+ (11,7 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 260)
+          .attr("y", 300)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var fifth_w = d3.keys(places)[5];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 13; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 13; i < 65; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 65; i < 147; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 147; i < 257; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+        }
+        for (i = 257; i < 291; i++) {
+          nodes[i].cx = places[fifth_w].x;
+          nodes[i].cy = places[fifth_w].y;
+          nodes[i].where = fifth_w;
+        }
+        force.start();
+
+      });
+      d3.select("#education")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Aké majú vzdelanie?"])
+      .enter()
+      .append("text")
+      .attr("x", 180)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["základné (0,7 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 70)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["stredoškolské bez maturity (23,7 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 350)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["stredoškolské s maturitou (66,3 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 40)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["vysokoškolské (9,3 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 400)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var all_w = d3.keys(places)[0];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+
+        for (i = 0; i < 2; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 2; i < 71; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 71; i < 264; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 264; i < 291; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+
+        }
+        force.start();
+
+      });
+
+
+       d3.select("#family")
+    .on("click", function () {
+        svg.selectAll("body > svg > g > text")
+          .transition()
+          .duration(100)
+          .attr("opacity", 0)
+          svg.selectAll("svg")
+      .data(["Ako práca ovplyvnila ich rodinné vzťahy?"])
+      .enter()
+      .append("text")
+      .attr("x", 80)
+      .attr("y", 25)
+      .attr("opacity", 1)
+      .attr("font-size", 26)
+      .text(function (d) { return d });
+        svg.selectAll("svg")
+          .data(["určite k lepšiemu (23 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 40)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["skôr k lepšiemu (37,5 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 400)
+          .attr("y", 445)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["ani k lepšiemu, ani k horšiemu (36,4 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 20)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        svg.selectAll("svg")
+          .data(["skôr k horšiemu (2,8 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 410)
+          .attr("y", 210)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+          svg.selectAll("svg")
+          .data(["určite k horšiemu (0,3 %)"])
+          .enter()
+          .append("text")
+          .attr("x", 220)
+          .attr("y", 300)
+          .attr("opacity", 1)
+          .attr("font-size", 15)
+          .text(function (d) { return d })
+        var all_w = d3.keys(places)[0];
+        var first_w = d3.keys(places)[1];
+        var second_w = d3.keys(places)[2];
+        var third_w = d3.keys(places)[3];
+        var fourth_w = d3.keys(places)[4];
+        var fifth_w = d3.keys(places)[5];
+
+        for (i = 0; i < 67; i++) {
+          nodes[i].cx = places[first_w].x;
+          nodes[i].cy = places[first_w].y;
+          nodes[i].where = first_w;
+        }
+        for (i = 67; i < 176; i++) {
+          nodes[i].cx = places[second_w].x;
+          nodes[i].cy = places[second_w].y;
+          nodes[i].where = second_w;
+        }
+        for (i = 176; i < 282; i++) {
+          nodes[i].cx = places[third_w].x;
+          nodes[i].cy = places[third_w].y;
+          nodes[i].where = third_w;
+        }
+        for (i = 282; i < 290; i++) {
+          nodes[i].cx = places[fourth_w].x;
+          nodes[i].cy = places[fourth_w].y;
+          nodes[i].where = fourth_w;
+
+        }
+        for (i = 290; i < 291; i++) {
+          nodes[i].cx = places[fifth_w].x;
+          nodes[i].cy = places[fifth_w].y;
+          nodes[i].where = fifth_w;
+
+        }
+        force.start();
+
+      });     
+  </script>
+
+
+</body>

@@ -1,0 +1,138 @@
+body {
+    background: white;
+    font-family: "roboto"
+  }
+
+.opat {
+    font-size:12px;
+    width: 100%;
+    height: 25%;
+
+}
+
+.opat2 {
+    font-size:12px;
+    width: 100%;
+}
+
+.info {
+    font-size:12px;
+    height: 100%;
+    width: 100%;
+    word-wrap: break-word;
+
+}
+
+
+#long {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#long:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+
+#happy_work {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#happy_work:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+
+}
+
+#regime {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#regime:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+#money {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#money:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+
+#work {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#work:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+#age {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#age:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+#education {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#education:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+
+#family {
+    display: inline-block;
+    padding: 2px;
+    border: solid;
+    border-width: medium;
+}
+
+#family:hover {
+    color: red;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+
+
+
+

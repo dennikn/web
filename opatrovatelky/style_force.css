@@ -1,0 +1,105 @@
+body {
+    background: white;
+    font-family: "roboto"
+  }
+
+.speed {
+    font-size:14px;
+    width: 100%;
+    height: 70%;
+
+}
+.speed2 {
+    font-size:14px;
+    width: 100%;
+    padding-left: 65px;
+
+}
+.info {
+    font-size:12px;
+    height: 100%;
+    width: 100%;
+    word-wrap: break-word;
+
+}
+
+.detail {
+    word-wrap: break-word;
+    width:250px;
+    height:100px;
+}
+
+#p {
+    text-decoration: underline;
+    color: crimson;
+}
+
+#slow {
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px;
+    padding-left: 4px;    border: solid;
+    border-width: medium;
+}
+
+#slow:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+    border-width: medium;
+
+    
+}
+
+
+#normal {
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border: solid;
+    border-width: medium;
+}
+
+#normal:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+
+}
+
+#faster {
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px;
+    padding-left: 4px;    
+    border: solid;
+    border-width: medium;
+}
+
+#faster:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+#pause {
+    display: inline-block;
+    padding-right: 4px;
+    padding-left: 4px;
+    border: solid;
+    border-width: medium;
+}
+
+#pause:hover {
+    color: crimson;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+
+
+
