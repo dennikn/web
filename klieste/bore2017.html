@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+<script src="leaflet.js"></script>
+<link rel="stylesheet" href="leaflet.css" />
+<script src="leaflet.ajax.min.js"></script>
+
+</head>
+<body>
+      
+
+<div id="mapid" style="width: 100%; height: 100%;">
+</div>
+<script>
+
+	var map = L.map('mapid', {minZoom: 7, maxZoom: 9, zoomControl:false}).setView([48.6101004, 19.6989536], 7);
+
+var geojson;
+var geojson2;
+function getColor(d) {
+    return d < 0.01 ? 'white' :
+           d < 15 ? '#a6bddb' :
+           d < 30 ? '#67a9cf' :
+		   d < 60 ? '#02818a' :
+		   d < 90 ? '#016450' :
+		   d < 400 ? '#252525' :
+                      '#252525';
+}
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.percent),
+        weight: 2,
+        opacity: 1,
+        color: 'black',
+        dashArray: '1',
+        fillOpacity: 1
+    };
+}
+
+function highlightFeature(e) {
+    var layer = e.target;
+    info.update(layer.feature.properties);
+    layer.setStyle({
+        weight: 5,
+        color: 'orange',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+	info.update();
+}
+function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+    });
+}
+
+var geojson = new L.GeoJSON.AJAX("bore2017.json", {style: style, onEachFeature: onEachFeature});
+geojson.addTo(map);
+
+
+var info = L.control({position: 'topright'});
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+
+info.update = function (props) {
+    this._div.innerHTML = '<h2 style="font-size: 16px">Výskyt lymskej boreliózy v roku 2017</h2>' +  (props ?
+        '<b>' + props.TXT + '</b><br />' + '-počet ochorení:  <b>'+ props.count + '</b><br>' + '- chorobnosť na 100-tisíc obyvateľov: <b>' + props.percent + '</b>'
+        : '');
+};
+
+info.addTo(map);
+
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+    grades = [0, 5, 15, 30, 60, 90],
+        labels = [];
+
+        div.innerHTML +=
+            '<b>Počet ochorení na 100-tisíc obyvateľov</b><br>' + '<i style="background:' + getColor(grades[0]) + '"></i> ' + (grades[1 + 1] ? '' + '<br>' : '');
+            
+for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<span style="background:' + getColor(grades[i] ) + '"></span> ';
+    } 
+    div.innerHTML +=
+     '<br>';
+     div.innerHTML +=
+            '<label>' + grades[0] + (grades[0] ? '&ndash;' + grades[0] : '') + '</label>';
+            div.innerHTML +=
+            '<label>' + grades[0] + (grades[2] ? '&ndash;' + grades[2] : '') + '</label>';
+            div.innerHTML +=
+            '<label>' + grades[2] + (grades[3] ? '&ndash;' + grades[3] : '') + '</label>';
+            div.innerHTML +=
+            '<label>' + grades[3] + (grades[4] ? '&ndash;' + grades[4] : '') + '</label>';
+            div.innerHTML +=
+            '<label>' + grades[4] + (grades[5] ? '&ndash;' + grades[5] : '') + '</label>';
+            div.innerHTML +=
+            '<label>' + grades[5] + (grades[5] ? '+' : '+') + '</label>';
+    return div;        
+};
+
+legend.addTo(map);
+
+       
+</script>
+
+
+
+</body>
+</html>
