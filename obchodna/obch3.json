@@ -1,0 +1,31 @@
+{
+"type": "FeatureCollection",
+"features": [
+  { "type": "Feature", "properties": { "REF": 703.000000, "TXT": "Polícia", "info": "Policajti zvyknú strážiť Obchodnú počas víkendu z auta na rohu Poštovej ulice alebo sa prechádzajú po Obchodnej" }, "geometry": { "type": "Polygon", "coordinates": [
+    [
+      [
+        17.109012,
+        48.1478562
+      ],
+      [
+        17.1083683,
+        48.1474267
+      ],
+      [
+        17.109189,
+        48.14665
+      ],
+      [
+        17.1101332,
+        48.1470044
+      ],
+      [
+        17.1101332,
+        48.1470044
+      ],
+      [
+        17.1090227,
+        48.1478526
+      ]
+    ]    ]}}
+  ]}
