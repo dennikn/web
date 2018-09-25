@@ -10,7 +10,7 @@
             width: 100%;
             margin: 0;
         }
-        .wrapper-hurbanovo {
+        .wrapper {
             width: 100%;
             height: auto;
         }
@@ -21,13 +21,12 @@
             font-size: 15px;
         }
 
-      
-
         svg {
             display: block;
-            margin: 0;
+            margin: 0 auto;
             
         }
+
 
         .d3-infobox {
             position: absolute;
@@ -65,7 +64,7 @@
 </head>
 
 <body>
-    <div class="wrapper-hurbanovo">
+    <div class="wrapper">
         <div class="d3-infobox">
             <p class="d3-minutes"></p>
             <p class="d3-date"></p>
@@ -107,9 +106,9 @@
                 .domain([0, 10])
                 .range(colors)
 
-            var tooltip = d3.select(".wrapper-hurbanovo").append("div").attr("class", "tooltip").style("opacity", 0);
+            var tooltip = d3.select(".wrapper").append("div").attr("class", "tooltip").style("opacity", 0);
 
-            var svg = d3.select(".wrapper-hurbanovo").append("svg")
+            var svg = d3.select(".wrapper").append("svg")
             .attr("viewBox", "0 0 650 800")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .append("g");
@@ -132,7 +131,7 @@
                     "stroke": "white",
                     "stroke-width": "0.3",
                     "stroke-dotarray": "1",
-                    "height": "4.6%",
+                    "height": "2.6%",
                     "width": "4.4%",
                     "x": function (d, i) {
                         return (d.order - 1) * 25
