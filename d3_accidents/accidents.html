@@ -1,0 +1,188 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="d3.min.js"></script>
+
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        .wrapper-hurbanovo {
+            width: 100%;
+            height: auto;
+        }
+
+        .x-axis {
+            fill: none;
+            stroke: black;
+            font-size: 15px;
+        }
+
+      
+
+        svg {
+            display: block;
+            margin: 0;
+            
+        }
+
+        .d3-infobox {
+            position: absolute;
+            margin-left: 35%;
+            margin-right: 35%;
+            width: 30%;
+            height: auto;
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 1%;
+        }
+
+        .d3-minutes {
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .d3-date {
+            font-size: 16px;
+            margin: 0;
+        }
+
+
+        .order {
+            text-align: right;
+        }
+
+        svg.key {
+            margin-top: 30px;
+            position: relative;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper-hurbanovo">
+        <div class="d3-infobox">
+            <p class="d3-minutes"></p>
+            <p class="d3-date"></p>
+        </div>
+    </div>
+
+
+    <script>
+        var w = 700;
+        var h = 800;
+        var paddingBottom = 20;
+        var paddingLeft = 1;
+        var graphWidth = 500;
+        var graphHeight = 700;
+        var rowAmount = 70;
+        var rectHeight = 20;
+        var dataset;
+
+        var colors = ["#1a9850", "#66bd63", "#a6d96a", "#d9ef8b", "#ffffbf", "#fdae61", "#f46d43", "tomato", "red", "maroon", "black"];
+
+        var order = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"]
+
+
+        function getYear(num) {
+            return order[num - 1];
+        }
+
+        function returnday(val) {
+            return order[val - 1];
+        }
+
+        function buildLine() {
+            
+            var varData = dataset.map(function (item) {
+                return item.accident;
+            })
+
+            var colorScale = d3.scale.quantile()
+                .domain([0, 10])
+                .range(colors)
+
+            var tooltip = d3.select(".wrapper-hurbanovo").append("div").attr("class", "tooltip").style("opacity", 0);
+
+            var svg = d3.select(".wrapper-hurbanovo").append("svg")
+            .attr("viewBox", "0 0 650 800")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .append("g");
+            
+          
+
+
+            var keyScale = d3.scale.quantile()
+                .domain([colorScale.quantiles()[0], colorScale.quantiles()[9]])
+                .range(colors);
+
+          
+
+
+            svg.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr({
+                    "stroke": "white",
+                    "stroke-width": "0.3",
+                    "stroke-dotarray": "1",
+                    "height": "4.6%",
+                    "width": "4.4%",
+                    "x": function (d, i) {
+                        return (d.order - 1) * 25
+                    },
+                    "y": function (d, i) {
+                        return (d.hour - 1) * rectHeight + paddingBottom
+                    }
+                })
+                .style("fill", function (d) {
+                    return colorScale(d.accident)
+                })
+                .on("mouseover", debounce(function (d) {
+                    let textHover
+                    if (d.accident === 0) {
+                        textHover = " nehôd"
+                    } else if (d.accident === 1) {
+                        textHover = " nehoda"
+                    } else if (d.accident < 5) {
+                        textHover = " nehody"
+                    } else {
+                        textHover = " nehôd"
+                    }
+                    document.querySelector(".d3-minutes").textContent = d.accident + textHover
+                    document.querySelector(".d3-date").textContent = d.hour + ". hodina " + ", " + "dátum: " + d.date
+                }))
+        }
+
+        d3.json("accidents.json", function (error, data) {
+            if (error) {
+                console.log(error);
+            } else {
+                dataset = data.accidents;
+                buildLine();
+            }
+        })
+
+        function debounce(func, wait = 10, immediate) {
+            let timeout;
+            return function () {
+                let context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                }, wait);
+                if (immediate && !timeout) func.apply(context, args);
+            };
+        }
+
+
+    </script>
+
+</body>
