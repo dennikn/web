@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="votes.js"></script>
+  <script src="listeners.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #151616;
+      color: white;
+    }
+
+    .header {
+  
+    }
+
+    .names {
+      display: grid;
+      grid-auto-columns: auto;
+    }
+
+    .profile-wrapper {
+      width: 90%;
+      margin: 5%;
+      display: none;
+      grid-auto-columns: repeat(4, 1fr);
+      grid-auto-rows: repeat(4);
+      }
+
+    .profile-name {
+      grid-column: 1 / 5;
+      grid-row: 2 / 2;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .profile-photo {
+      text-align: right;
+      grid-column: 4 / 4;
+      grid-row: 1 / 3;
+    }
+
+    .profile-text {
+      grid-column: 1 / 5;
+      grid-row: 3 / 5;
+    }
+  
+
+    #imgId {
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+    }
+
+    #btn {
+      grid-column: 1 / 2;
+      grid-row: 1 / 1;
+      background: dodgerblue;
+      border-color: dodgerblue;
+      border-radius: 12px;
+      text-align: center;
+      padding: 10%;
+      width: auto;
+      height: 40%;
+    }
+    #btn:hover {
+      cursor: pointer;
+      background: navy;
+      border-color: navy;
+      text-decoration: underline;
+    }
+
+    .vote-top-wrapper {
+      top: 10%;
+      width: 100%;
+    }
+
+    .vote-text {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      font-weight: bold;
+      padding: 2%;
+      cursor: pointer;
+    }
+
+    .vote-text:hover {
+      text-decoration: underline;
+    }
+
+    .info-box {
+      padding: 2%;
+      grid-column: 1 / 3;
+      grid-row: 2 / 2;
+      display: none;
+    }
+
+    .grid-vote {
+      margin-top: 2%;
+      padding: 2%;
+      margin-left: 5%;
+      margin-right: 5%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2);
+      column-gap: 9px;
+      width: 80%;
+      border: solid 1px;
+      border-color: rgb(27, 3, 3);
+      box-shadow: #151616;
+      border-radius: 12px;
+    }
+
+    .vote-box {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+      background: black;
+      color: white;
+      border: solid 1 px;
+      border-radius: 12px;
+      padding: 4%;
+      text-align: center;
+      height: 20px;
+    }
+
+    .pool {
+      width: 98%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 20% 20% 20% 20% 20%;
+    }
+
+    .img-box {
+      width: 100%;
+      height: 100%;
+      padding: 7%;
+
+    }
+
+    .pool-img {
+      height: 40px;
+      width: 40px;
+      border: solid 4px;
+      border-radius: 50%;
+      border-color: rgba(255, 255, 255, 0);
+  
+    }
+
+    .pool-img:hover {
+      cursor: pointer;
+      background: black;
+      opacity: 0.6;
+      border-color: crimson;
+    }
+
+    .img-text {
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .button-wrapper {
+      margin-top: 2%;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2);
+      column-gap: 9px;}
+
+    .btn-filter {
+      margin: 1%;
+      padding: 1%;
+      background: black;
+      border: solid 1px;
+      cursor: pointer;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .btn-filter:hover {
+      text-decoration: underline;
+      background: rgb(8, 74, 141);
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <div class="pool">
+      <div class="imgBox"><img class="pool-img" id="augustinic" src="https://a-static.projektn.sk/2018/09/augustinic.png"><div class="img-text">Augustinič</div></div>
+      <div class="imgBox"><img class="pool-img" id="bajan" src="https://a-static.projektn.sk/2018/09/bajan.png"><div class="img-text">Bajan</div></div>
+      <div class="imgBox"><img class="pool-img" id="borgula" src="https://a-static.projektn.sk/2018/09/borgula.png"><div class="img-text">Borguľa</div></div>
+      <div class="imgBox"><img class="pool-img" id="budaj" src="https://a-static.projektn.sk/2018/09/budaj.png"><div class="img-text">Budaj</div></div>
+      <div class="imgBox"><img class="pool-img" id="bulla" src="https://a-static.projektn.sk/2018/09/bulla.png"><div class="img-text">Bulla</div></div>
+      <div class="imgBox"><img class="pool-img" id="buocik" src="https://a-static.projektn.sk/2018/09/buocik.png"><div class="img-text">Buocik</div></div>
+      <div class="imgBox"><img class="pool-img" id="cahojova" src="https://a-static.projektn.sk/2018/09/cahojova.png"><div class="img-text">Čahojová</div></div>
+      <div class="imgBox"><img class="pool-img" id="cerna" src="https://a-static.projektn.sk/2018/09/cerna.png"><div class="img-text">Černá</div></div>
+      <div class="imgBox"><img class="pool-img" id="cerny" src="https://a-static.projektn.sk/2018/09/cerny.png"><div class="img-text">Černý</div></div>
+      <div class="imgBox"><img class="pool-img" id="chren" src="https://a-static.projektn.sk/2018/09/chren.png"><div class="img-text">Chren</div></div>
+      <div class="imgBox"><img class="pool-img" id="dostal" src="https://a-static.projektn.sk/2018/09/dostal.png"><div class="img-text">Dostál</div></div>
+      <div class="imgBox"><img class="pool-img" id="drozd" src="https://a-static.projektn.sk/2018/09/drozd.png"><div class="img-text">Drozd</div></div>
+      <div class="imgBox"><img class="pool-img" id="farkasovska" src="https://a-static.projektn.sk/2018/09/farkasovska.png"><div class="img-text">Farkašovská</div></div>
+      <div class="imgBox"><img class="pool-img" id="ferencakova" src="https://a-static.projektn.sk/2018/09/ferencakova.png"><div class="img-text">Ferenčáková</div></div>
+      <div class="imgBox"><img class="pool-img" id="greksa" src="https://a-static.projektn.sk/2018/09/greksa.png"><div class="img-text">Greksa</div></div>
+      <div class="imgBox"><img class="pool-img" id="grendel" src="https://a-static.projektn.sk/2018/09/grendel.png"><div class="img-text">Grendel</div></div>
+      <div class="imgBox"><img class="pool-img" id="hanulik" src="https://a-static.projektn.sk/2018/09/hanulik.png"><div class="img-text">Hanulík</div></div>
+      <div class="imgBox"><img class="pool-img" id="hanulikova" src="https://a-static.projektn.sk/2018/09/hanulikova.png"><div class="img-text">Hanulíková</div></div>
+      <div class="imgBox"><img class="pool-img" id="hochschorner" src="https://a-static.projektn.sk/2018/09/hochschorner.png"><div class="img-text">Hochschorner</div></div>
+      <div class="imgBox"><img class="pool-img" id="hrcka" src="https://a-static.projektn.sk/2018/09/hrcka.png"><div class="img-text">Hrčka</div></div>
+      <div class="imgBox"><img class="pool-img" id="jambor" src="https://a-static.projektn.sk/2018/09/jambor.png"><div class="img-text">Jambor</div></div>
+      <div class="imgBox"><img class="pool-img" id="jegh" src="https://a-static.projektn.sk/2018/09/jegh.png"><div class="img-text">Jégh</div></div>
+      <div class="imgBox"><img class="pool-img" id="jencik" src="https://a-static.projektn.sk/2018/09/jencik.png"><div class="img-text">Jenčík</div></div>
+      <div class="imgBox"><img class="pool-img" id="kacer" src="https://a-static.projektn.sk/2018/09/kacer.png"><div class="img-text">Káčer</div></div>
+      <div class="imgBox"><img class="pool-img" id="kalisky" src="https://a-static.projektn.sk/2018/09/kalisky.png"><div class="img-text">Kaliský</div></div>
+      <div class="imgBox"><img class="pool-img" id="kimerlingova" src="https://a-static.projektn.sk/2018/09/kimerlingova.png"><div class="img-text">Kimerlingová</div></div>
+      <div class="imgBox"><img class="pool-img" id="kolek" src="https://a-static.projektn.sk/2018/09/kolek.png"><div class="img-text">Kolek</div></div>
+      <div class="imgBox"><img class="pool-img" id="korcek" src="https://a-static.projektn.sk/2018/09/korcek.png"><div class="img-text">Korček</div></div>
+      <div class="imgBox"><img class="pool-img" id="kriz" src="https://a-static.projektn.sk/2018/09/kriz.png"><div class="img-text">Kríž</div></div>
+      <div class="imgBox"><img class="pool-img" id="kuruc" src="https://a-static.projektn.sk/2018/09/kuruc.png"><div class="img-text">Kuruc</div></div>
+      <div class="imgBox"><img class="pool-img" id="mikulec" src="https://a-static.projektn.sk/2018/09/mikulec.png"><div class="img-text">Mikulec</div></div>
+      <div class="imgBox"><img class="pool-img" id="mrva" src="https://a-static.projektn.sk/2018/09/mrva.png"><div class="img-text">Mrva</div></div>
+      <div class="imgBox"><img class="pool-img" id="oleksak" src="https://a-static.projektn.sk/2018/09/oleksak.png"><div class="img-text">Olekšák</div></div>
+      <div class="imgBox"><img class="pool-img" id="patoprsta" src="https://a-static.projektn.sk/2018/09/patoprsta.png"><div class="img-text">Pätoprstá</div></div>
+      <div class="imgBox"><img class="pool-img" id="pilinsky" src="https://a-static.projektn.sk/2018/09/pilinsky.png"><div class="img-text">Pilinský</div></div>
+      <div class="imgBox"><img class="pool-img" id="plsekova" src="https://a-static.projektn.sk/2018/09/plsekova.png"><div class="img-text">Plšeková</div></div>
+      <div class="imgBox"><img class="pool-img" id="simoncicova" src="https://a-static.projektn.sk/2018/09/simoncicova.png"><div class="img-text">Šimončičová</div></div>
+      <div class="imgBox"><img class="pool-img" id="stasselova" src="https://a-static.projektn.sk/2018/09/stasselova.png"><div class="img-text">Štasselová</div></div>
+      <div class="imgBox"><img class="pool-img" id="svorenova" src="https://a-static.projektn.sk/2018/09/svorenova.png"><div class="img-text">Svoreňová</div></div>
+      <div class="imgBox"><img class="pool-img" id="tvrda" src="https://a-static.projektn.sk/2018/09/tvrda.png"><div class="img-text">Tvrdá</div></div>
+      <div class="imgBox"><img class="pool-img" id="uhler" src="https://a-static.projektn.sk/2018/09/uhler.png"><div class="img-text">Uhler</div></div>
+      <div class="imgBox"><img class="pool-img" id="vetrak" src="https://a-static.projektn.sk/2018/09/vetrak.png"><div class="img-text">Vetrák</div></div>
+      <div class="imgBox"><img class="pool-img" id="weinstuk" src="https://a-static.projektn.sk/2018/09/weinstuk.png"><div class="img-text">Weinštuk</div></div>
+      <div class="imgBox"><img class="pool-img" id="zatovicova" src="https://a-static.projektn.sk/2018/09/zatovicova.png"><div class="img-text">Zaťovičová</div></div>
+      <div class="imgBox"><img class="pool-img" id="zitny" src="https://a-static.projektn.sk/2018/09/zitny.png"><div class="img-text">Žitný</div></div>
+
+  </div>
+
+
+  <div class="header">
+
+
+    <div class="profile-wrapper">
+        <div id="btn">Späť</div>
+      <div class="profile-name"></div>
+      <div class="profile-club"></div>
+      <div class="profile-photo"></div>
+      <div class="profile-text"></div>
+    </div>
+  </div>
+  <div class="button-wrapper">
+    <div class="btn-filter" id="filter-candidates">
+      Kandidáti na starostov
+    </div>
+    <div class="btn-filter" id="filter-smer">
+      Poslanci blízki Smeru
+    </div>
+    <div class="btn-filter" id="filter-right">
+      Poslanci pravice
+    </div>
+    <div class="btn-filter" id="filter-without">
+        Nezávislí poslanci
+      </div>
+  </div>
+  <div class="vote-top-wrapper">
+  </div>
+
+
+  </div>
+
+  <script>
+    console.log(document.querySelector("#chren"))
+    document.querySelector("#augustinic").addEventListener("click", function() {console.log("click")})
+
+    function selector(element) {
+      return document.querySelector(element);
+    }
+
+    function removeSpace(word) {
+      let newWord = "";
+      for (let i = 0; i < word.length; i++) {
+        if (word[i] != " ") {
+          newWord += word[i]
+        }
+      }
+      return newWord;
+    }
+
+    function getData(name) {
+      document.querySelector(".za").textContent = ""
+      let person = data.dataset[0]
+      for (let i = 0; i < 8; i++) {
+        let list = document.createElement("li")
+        list.textContent = "Zákaz hazardu";
+        document.querySelector(".za").appendChild(list)
+      }
+    }
+    let candidates = false;
+    let smer = false;
+    let right = false;
+    let without = false;
+  
+    btnState = {candidates: false, smer: false, right: false, without: false}
+    
+    function clickBtn(btn, state) {
+      if (state) {
+        document.getElementById(btn).style.background = "dodgerblue";
+        state = false;
+        console.log(state)
+        return state
+      } else {
+        document.getElementById(btn).style.background = "black";
+        state = true;
+        console.log(state)
+        return state
+
+      }
+    }
+    document.getElementById("filter-smer").addEventListener("click", function() {
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+        selectNames(selectRight, "rgba(255, 255, 255, 0)")
+        right = false;
+        document.getElementById("filter-without").style.background = "black";
+        selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+
+      if (smer) {
+        document.getElementById("filter-smer").style.background = "black";
+        selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+        smer = false;
+        
+      } else {
+        document.getElementById("filter-smer").style.background = "dodgerblue";
+        selectNames(selectSmer, "red")
+        smer = true;
+      }
+    })
+
+        
+    document.getElementById("filter-candidates").addEventListener("click", function() {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+        selectNames(selectRight, "rgba(255, 255, 255, 0)")
+        right = false;
+        document.getElementById("filter-without").style.background = "black";
+        selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+
+      if (candidates) {
+        document.getElementById("filter-candidates").style.background = "black";
+        selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+        candidates = false;
+      } else {
+        document.getElementById("filter-candidates").style.background = "dodgerblue";
+        selectNames(selectCandidates, "dodgerblue")
+        candidates = true;
+      }
+    })
+    
+    document.getElementById("filter-right").addEventListener("click", function() {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-without").style.background = "black";
+        selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+
+      if (right) {
+        document.getElementById("filter-right").style.background = "black";
+        selectNames(selectRight, "rgba(255, 255, 255, 0)")
+        right = false;
+      } else {
+        document.getElementById("filter-right").style.background = "dodgerblue";
+        selectNames(selectRight, "orange")
+        right = true;
+      }
+    })
+
+    
+    document.getElementById("filter-without").addEventListener("click", function() {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+        selectNames(selectRight, "rgba(255, 255, 255, 0)")
+        right = false;
+
+      if (without) {
+        document.getElementById("filter-without").style.background = "black";
+        selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+      } else {
+        document.getElementById("filter-without").style.background = "dodgerblue";
+        selectNames(selectWithout, "greenyellow")
+        without = true;
+      }
+    })
+    const namesRaw = ['augustinic', 'bajan', 'borgula', 'budaj', 'bulla', 'buocik', 'cahojova', 'cerna', 'cerny', 'chren', 'dostal', 'drozd', 'farkasovska', 'ferencakova', 'greksa', 'grendel', 'hanulik', 'hanulikova', 'hochschorner', 'hrcka', 'jambor', 'jegh', 'jencik', 'kacer', 'kalisky', 'kimerlingova', 'kolek', 'korcek', 'kriz', 'kuruc', 'mikulec', 'mrva', 'oleksak', 'patoprsta', 'pilinsky', 'plsekova', 'simoncicova', 'stasselova', 'svorenova', 'tvrda', 'uhler', 'vetrak', 'weinstuk', 'zatovicova', 'zitny']
+
+    selectSmer = ["bajan", "borgula", "drozd", "farkasovska", "hanulik", "hanulikova", "oleksak", "cerna"]
+    selectCandidates = ["borgula", "buocik", "cahojova", "chren", "drozd", "hrcka", "mrva", "patoprstva", "uhler", "pilinsky", "farkasovska", "ferencakova", "greksa", "hanulik"]
+    selectRight = ["buocik", "chren", "drozd", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer","zatovicova", "zitny", "plsekova", "augustinic", "chren", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky"]
+    selectWithout = ["mrva", "pilinsky", "greksa", "svorenova", "mikulec", "cahojova", "hrcka", "stasselova"]
+
+    function selectNames(group, color) {
+      for (let i=0; i<namesRaw.length; i++) {
+        for (let j=0; j<group.length; j++) {
+          if (namesRaw[i]===group[j]){
+            document.getElementById(namesRaw[i]).style.borderColor = color;
+          }
+        }
+      }
+      }
+    
+     
+
+    const voting = [["Zákaz hazardu", "Zákaz hazardu v Bratislave poslanci schválili až na druhý pokus. Na prvom hlasovaní im chýbal jeden hlas a platnosť zákazu preto spochybnil prokurátor aj súd."], ["Parkovacia politika", "Väčšina poslancov podporila spoplatnenie parkovania, no parkovacia politika stále reálne nefunguje, lebo poslanci nechcú schváliť aj potrebné zmeny v štatúte hlavného mesta."], ["Významná investícia", "Po tom, ako mesto a primátor odmietali prezradiť svoj postoj k úľavám pre developerov HB Reavis a J&T RE mestskí poslanci odmietli podporiť výhody pre developerov a žiadali, aby mesto ich postoj tlmočilo aj vláde."], ["Mestské podniky", "Hlasovanie o výmene vedení v Dopravnom podniku, OLO, BVS a ďalších mestských firmách malo podľa primátora prebehnúť transparentným konkurzom pod dohľadom Transparency International. TIS však na záver poslancom neodporúčila zmeny schváliť, objavili sa pochybnosti najmä v súvislosti s uniknutou nahrávkou, na ktorej Nesrovnalov človek údajne kšeftoval so stoličkami výmenou za hlasy poslancov."], ["Predaj PKO", "Primátor Ivo Nesrovnal presvedčil väčšinu poslancov, aby predali developerovi Henbury Development budovy PKO za euro výmenou za urovnanie vyše 40-miliónového dlhu."], ["Štatút k parkovaniu", "Poslanci ani na desiaty pokus neschválili potrebný štatút k parkovacej politike, ktorý mal určiť napríklad kompetencie mestských častí."], ["Developerský poplatok", "Developeri musia pri každej väčšej bytovke či kanceláriách zaplatiť za meter štvorcový 35 eur. Peniaze určené napríklad na infraštruktúru si delí mesto s mestskými časťami."], ["Prenájom Trnavského mýta", "Developer Immocap Group získal od poslancov do prenájmu podchod Trnavské mýto za nájom jedno euro na najmenej 15 rokov výmenou za miliónovú rekonštrukciu. Eskalátory a výťahy za necelého pol milióna zaplatilo mesto."], ["Prenájom viníc Rozinovi", "Poslanci odmietli prenajať podnikateľovi Alexandrovi Rozinovi mestské vinice za ročné jednoeurové nájomné výmenou za časť Rozinovej úrody."], ["Dotácia pre LGBT centrum", "Dotácia pre poradenské a komunitné centrum Q-centrum pre LGBT ľudí vo výške 10-tisíc eur."]]
+
+    function createList(parrent, text, infoText) {
+      let parrentElement = document.querySelector(parrent);
+      let wrapperElement = document.createElement("div");
+      wrapperElement.setAttribute("class", "grid-vote");
+      wrapperElement.id = "vote" + removeSpace(text);
+      parrentElement.appendChild(wrapperElement);
+      let textElement = document.createElement("div");
+      textElement.setAttribute("class", "vote-text")
+      textElement.textContent = text;
+      wrapperElement.appendChild(textElement);
+      let voteElement = document.createElement("div");
+      voteElement.textContent = " ";
+      voteElement.setAttribute("class", "vote-box")
+      voteElement.id = removeSpace(text)
+      wrapperElement.appendChild(voteElement);
+      let isClicked = false;
+      let voteId = `vote${removeSpace(text)}`
+      let boxId = `box${removeSpace(text)}`
+      infoBox(`#vote${removeSpace(text)}`, infoText, `box${removeSpace(text)}`)
+      textElement.addEventListener("click", function () {
+        if (isClicked) {
+          document.getElementById(`box${removeSpace(text)}`).style.display = "none"
+          isClicked = false
+        } else {
+          isClicked = true
+          document.getElementById(`box${removeSpace(text)}`).style.display = "block"
+
+        }
+      })
+    }
+
+    function createVotes(parrent, child, text) {
+      let parrentElement = document.querySelector(parrent);
+      let element = document.createElement("div");
+      element.setAttribute("class", "vote-text");
+      element.textContent = " ";
+      parrentElement.appendChild(element);
+
+    }
+
+    function vote(parrent, text) {
+      let element = document.querySelector(parrent)
+      if (text === "za") {
+        element.style.background = "green"
+      } else if (text === "proti") {
+        element.style.background = "#BB0A21"
+      } else if (text === "zdržal sa") {
+        element.style.background = "#4B88A2"
+      } else if (text === "nehlasoval") {
+        element.style.background = "dodgerblue"
+      } else if (text === "neprítomný") {
+        element.style.background = "gray"
+      } else if (text === "neschválený" || text === "neschválená") {
+        element.style.background = "#BB0A21"
+      } else if (text === "schválený" || text === "schválená") {
+        element.style.background = "green"
+      }
+      element.textContent = text;
+    }
+
+    voting.map(vote => createList(".vote-top-wrapper", vote[0], vote[1]))
+
+    let img = document.createElement("img");
+    img.setAttribute("class", "profile-img")
+    img.id = "imgId"
+    document.querySelector(".profile-photo").appendChild(img)
+
+
+    function getVote(politic) {
+      for (var prop in politic) {
+        let parrentEle = "#" + removeSpace(prop)
+        vote(parrentEle, politic[prop])
+      }
+    }
+    function getText(name, text, pic) {
+      document.querySelector(".profile-name").textContent = name;
+      document.querySelector(".profile-text").textContent = text;
+      document.querySelector("#imgId").src = pic;
+      document.querySelector(".pool").style.display = "none"
+      document.querySelector(".profile-wrapper").style.display = "grid"
+      document.querySelector(".button-wrapper").style.display = "none";
+
+    }
+
+    function showPool() {
+      console.log("pool")
+      document.querySelector(".pool").style.display = "grid";
+      document.querySelector(".button-wrapper").style.display = "grid";
+      document.querySelector(".profile-wrapper").style.display = "none"
+      getVote(all)
+    }
+
+
+    getVote(all)
+    document.getElementById("btn").addEventListener("click", showPool)
+    function infoBox(node, text, boxId) {
+
+      let parrentNode = document.querySelector(node);
+      let box = document.createElement("div");
+      box.setAttribute("class", "info-box");
+      box.textContent = text;
+      box.id = boxId;
+      parrentNode.appendChild(box);
+    }
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
