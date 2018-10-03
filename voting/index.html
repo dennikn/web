@@ -543,7 +543,7 @@
 
     const selectSmer = ["bajan", "borgula", "drozd", "farkasovska", "hanulik", "hanulikova", "oleksak"]
     const selectCandidates = ["borgula", "buocik", "cahojova", "chren", "drozd", "hrcka", "mrva", "patoprstva", "uhler", "pilinsky", "farkasovska", "ferencakova", "greksa", "hanulik"]
-    const selectRight = ["buocik", "chren", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer", "zatovicova", "zitny", "plsekova", "augustinic", "chren", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky"]
+    const selectRight = ["buocik", "chren", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer", "zatovicova", "zitny", "plsekova", "augustinic", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky"]
     const selectWithout =  ["mrva", "pilinsky", "greksa", "svorenova", "mikulec", "cahojova", "hrcka", "stasselova"]
 
     function selectNames(group, color) {
@@ -615,11 +615,11 @@
         element.style.background = "green"
       } else if (text === "proti") {
         element.style.background = "#BB0A21"
-      } else if (text === "zdržal sa") {
+      } else if (text === "zdržal/a sa") {
         element.style.background = "#4B88A2"
-      } else if (text === "nehlasoval") {
+      } else if (text === "nehlasoval/a") {
         element.style.background = "dodgerblue"
-      } else if (text === "neprítomný") {
+      } else if (text === "neprítomný/á") {
         element.style.background = "gray"
       } else if (text === "neschválený" || text === "neschválená") {
         element.style.background = "#BB0A21"
@@ -727,95 +727,95 @@
 
     const allVotes = { "Zákaz hazardu": "neschválený", "Parkovacia politika": "schválená", "Významná investícia": "schválený", "Mestské podniky": "schválený", "Predaj PKO": "schválený", "Štatút k parkovaniu": "neschválený", "Developerský poplatok": "schválený", "Prenájom Trnavského mýta": "schválený", "Prenájom viníc Rozinovi": "neschválený", "Dotácia pre LGBT centrum": "schválený" }
 
-    const augustinic = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const augustinic = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const bajan = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const bajan = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const borgula = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const borgula = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const budaj = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný", "Významná investícia": "neprítomný", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const budaj = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Významná investícia": "neprítomný/á", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const bulla = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "nehlasoval" }
+    const bulla = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "nehlasoval/a" }
 
     const buocik = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const cahojova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal sa", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const cahojova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const cerna = { "Zákaz hazardu": "neprítomný", "Parkovacia politika": "neprítomný", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "neprítomný" }
+    const cerna = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "neprítomný/á", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const cerny = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const cerny = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const chren = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const chren = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const dostal = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "zdržal sa", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const dostal = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "zdržal/a sa", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const drozd = { "Zákaz hazardu": "zdržal sa", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const drozd = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const farkasovska = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "neprítomný", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const farkasovska = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "neprítomný/á", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const ferencakova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný", "Predaj PKO": "nehlasoval", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const ferencakova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "nehlasoval/a", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const greksa = { "Zákaz hazardu": "zdržal sa", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const greksa = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const grendel = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const grendel = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const hanulik = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const hanulik = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const hanulikova = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const hanulikova = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const hochschorner = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný", "Významná investícia": "za", "Mestské podniky": "zdržal sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const hochschorner = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Významná investícia": "za", "Mestské podniky": "zdržal/a sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const hrcka = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "nehlasoval", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const hrcka = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "nehlasoval/a", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const jambor = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const jambor = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const jegh = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "nehlasoval", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "proti" }
+    const jegh = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "nehlasoval/a", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "proti" }
 
-    const jencik = { "Zákaz hazardu": "zdržal sa", "Parkovacia politika": "za", "Významná investícia": "nehlasoval", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const jencik = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "za", "Významná investícia": "nehlasoval/a", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const kacer = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const kacer = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const kalisky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný", "Predaj PKO": "zdržal sa", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "nehlasoval", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const kalisky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "nehlasoval/a", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const kimerlingova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "nehlasoval", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval", "Dotácia pre LGBT centrum": "proti" }
+    const kimerlingova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "nehlasoval/a", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval/a", "Dotácia pre LGBT centrum": "proti" }
 
-    const kolek = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal sa", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "proti" }
+    const kolek = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "proti" }
 
-    const korcek = { "Zákaz hazardu": "neprítomný", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "neprítomný" }
+    const korcek = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const kriz = { "Zákaz hazardu": "zdržal sa", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const kriz = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const kuruc = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const kuruc = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const mikulec = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "neprítomný", "Predaj PKO": "zdržal sa", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const mikulec = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const mrva = { "Zákaz hazardu": "za", "Parkovacia politika": "zdržal sa", "Významná investícia": "za", "Mestské podniky": "neprítomný", "Predaj PKO": "zdržal sa", "Štatút k parkovaniu": "neprítomný", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const mrva = { "Zákaz hazardu": "za", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const oleksak = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const oleksak = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const patoprsta = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný" }
+    const patoprsta = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const pilinsky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const pilinsky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const plsekova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval", "Dotácia pre LGBT centrum": "neprítomný" }
+    const plsekova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const simoncicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal sa", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "za" }
+    const simoncicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "za" }
 
-    const stasselova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "zdržal sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "za" }
+    const stasselova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "zdržal/a sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "za" }
 
-    const svorenova = { "Zákaz hazardu": "nehlasoval", "Parkovacia politika": "zdržal sa", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "nehlasoval", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "neprítomný" }
+    const svorenova = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "nehlasoval/a", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "proti", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const tvrda = { "Zákaz hazardu": "neprítomný", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval", "Dotácia pre LGBT centrum": "neprítomný" }
+    const tvrda = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "nehlasoval/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
-    const uhler = { "Zákaz hazardu": "neprítomný", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
+    const uhler = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "za" }
 
-    const vetrak = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "neprítomný", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const vetrak = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const weinstuk = { "Zákaz hazardu": "zdržal sa", "Parkovacia politika": "zdržal sa", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const weinstuk = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const zatovicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "zdržal sa" }
+    const zatovicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
 
-    const zitny = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal sa", "Dotácia pre LGBT centrum": "neprítomný" }
+    const zitny = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Významná investícia": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Prenájom viníc Rozinovi": "zdržal/a sa", "Dotácia pre LGBT centrum": "neprítomný/á" }
 
 
     getVote(allVotes)
