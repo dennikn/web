@@ -15,16 +15,15 @@
 	<script src="leaflet-heat.js"></script>
 <style>
  body {
-            height: 90vh;
+            height: 70vh;
             width: 100%;
             margin: 0;
 						max-height: 550px;
         }
 
 				.legend {
-					margin-left: 40%;
-					margin-right: 25%;
-					width: 55%;
+					margin-left: 5%;
+					width: 75%;
 					height: 10%;
 					position: absolute;
 					top: 62%;
@@ -39,7 +38,7 @@
 				}
 
 				.rect_green{
-					float: left;
+					float: right;
 					background: green;
 					height: 20px;
 					width: 20px;
@@ -47,7 +46,7 @@
 
 				}
 				.rect_blue{
-					float: left;
+					float: right;
 					background: blue;
 					height: 20px;
 					width: 20px;
@@ -55,7 +54,7 @@
 
 				}
 				.rect_red{
-					float: left;
+					float: right;
 					background: red;
 					height: 20px;
 					width: 20px;
@@ -63,7 +62,7 @@
 
 				}
 				.rect_maroon{
-					float: left;
+					float: right;
 					background: maroon;
 					height: 20px;
 					width: 20px;
@@ -71,7 +70,7 @@
 
 				}
 				.rect_black{
-					float: left;
+					float: right;
 					background: black;
 					height: 20px;
 					width: 20px;
@@ -80,11 +79,11 @@
 		
 
 				.text {
-					margin-left: 2%;
-					margin-right: 3%;
+					margin-left: 5px;
+					margin-right: 6px;
 					height: 30px;
-					font-size: 17px;
-					float: left;
+					font-size: 16px;
+					float: right;
 					text-align: center;
 				}
 				
@@ -97,26 +96,37 @@
 
 </div>
 <div class="legend">
+		<div class="text" >> 10
+			</div>
+			<div class="rect_black">
+			</div>
+			<div class="text" >8
+				</div>
+			<div class="rect_maroon">
+			</div>
+			<div class="text" >6
+				</div>
+			
+			<div class="rect_red">
+			</div>
+			<div class="text" >4
+				</div>
+			<div class="rect_blue">
+			</div>
+			<div class="text" >2
+				</div>
+				
 		<div class="rect_green">
 		</div>
-		<div class="text" >2
-		</div>
-		<div class="rect_blue">
-		</div>
-		<div class="text" >4
-		</div>
-		<div class="rect_red">
-		</div>
-		<div class="text" >6
-		</div>
-		<div class="rect_maroon">
-		</div>
-		<div class="text" >8
-		</div>
-		<div class="rect_black">
-		</div>
-		<div class="text" >10 a viac
-		</div>
+	
+	
+	
+	
+	
+	
+		
+
+
 </div>
 <script>
 var map  = L.map('map').setView([48.1456638,17.1344829], 12);
