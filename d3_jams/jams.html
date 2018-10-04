@@ -22,38 +22,8 @@
             font-size: 15px;
         }
 
-        .days {
-            width: 100%;
-            margin-left: 2%;
-            display: inline-block;
-            grid-auto-columns: auto; 
-            position: absolute;
-            top: 0;
-        }
 
-        .hours {
-            top: 2.5%;
-            height: 50%;
-            display: block;
-            width: 2vw;
-            position: absolute;
-        }
 
-        .text-days {
-            float: left;
-            font-size: 2vw;
-            margin-left: 1.55%;
-            margin-top: 0;
-            font-weight: 300;
-        }
-        .text-hours {
-            font-size: 2vw;
-            margin-left: 5.55%;
-            margin-bottom: 27%;
-            margin-top: 0;
-            font-weight: 300;
-            line-height: 126%;
-        }
         svg {
             display: block;
             margin: 0;
@@ -95,13 +65,9 @@
     </style>
 </head>
 
-<body>   
-        <div class="hours"><p class="text-hours">00</p><p class="text-hours">1</p><p class="text-hours">2</p><p class="text-hours">3</p><p class="text-hours">4</p><p class="text-hours">5</p><p class="text-hours">6</p><p class="text-hours">7</p><p class="text-hours">8</p><p class="text-hours">9</p><p class="text-hours">10</p><p class="text-hours">11</p><p class="text-hours">12</p><p class="text-hours">13</p><p class="text-hours">14</p><p class="text-hours">15</p><p class="text-hours">16</p><p class="text-hours">17</p><p class="text-hours">18</p><p class="text-hours">19</p><p class="text-hours">20</p><p class="text-hours">21</p><p class="text-hours">22</p><p class="text-hours">23</p></div>
-        <div class="days">
-        <p class="text-days">S</p> <p class="text-days">N</p> <p class="text-days">P</p><p class="text-days">U</p> <p class="text-days">S</p><p class="text-days">Š</p> <p class="text-days">P</p><p class="text-days">S</p> <p class="text-days">N</p> <p class="text-days">P</p><p class="text-days">U</p> <p class="text-days">S</p><p class="text-days">Š</p> <p class="text-days">P</p><p class="text-days">S</p> <p class="text-days">N</p> <p class="text-days">P</p><p class="text-days">U</p> <p class="text-days">S</p><p class="text-days">Š</p> <p class="text-days">P</p><p class="text-days">S</p> <p class="text-days">N</p> <p class="text-days">P</p><p class="text-days">U</p> <p class="text-days">S</p><p class="text-days">Š</p> <p class="text-days">P</p><p class="text-days">S</p> <p class="text-days">N</p><p class="text-days">P</p>
-    </div>
+<body>
     <div class="wrapper">
-     
+
     </div>
 
 
@@ -158,9 +124,6 @@
                 .enter()
                 .append("rect")
                 .attr({
-                    x: function(d) {
-                    return xScale(d.year);
-                    },
                     "stroke": "white",
                     "stroke-width": "0.3",
                     "stroke-dotarray": "1",
@@ -202,7 +165,6 @@
                 buildLine();
             }
         })
-
 
 
 
