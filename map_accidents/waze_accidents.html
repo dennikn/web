@@ -15,17 +15,108 @@
 	<script src="leaflet-heat.js"></script>
 <style>
  body {
-            height: 100%;
+            height: 90vh;
             width: 100%;
             margin: 0;
+						max-height: 550px;
         }
+
+				.legend {
+					margin-left: 40%;
+					margin-right: 25%;
+					width: 55%;
+					height: 10%;
+					position: absolute;
+					top: 62%;
+					color: black;
+					display: inline-block;
+				}
+
+				.first {
+					display: grid;
+					grid-auto-columns: auto;
+
+				}
+
+				.rect_green{
+					float: left;
+					background: green;
+					height: 20px;
+					width: 20px;
+					border-radius: 3px;
+
+				}
+				.rect_blue{
+					float: left;
+					background: blue;
+					height: 20px;
+					width: 20px;
+					border-radius: 3px;
+
+				}
+				.rect_red{
+					float: left;
+					background: red;
+					height: 20px;
+					width: 20px;
+					border-radius: 3px;
+
+				}
+				.rect_maroon{
+					float: left;
+					background: maroon;
+					height: 20px;
+					width: 20px;
+					border-radius: 3px;
+
+				}
+				.rect_black{
+					float: left;
+					background: black;
+					height: 20px;
+					width: 20px;
+					border-radius: 3px;
+				}
+		
+
+				.text {
+					margin-left: 2%;
+					margin-right: 3%;
+					height: 30px;
+					font-size: 17px;
+					float: left;
+					text-align: center;
+				}
+				
 				</style>
 </head>
 
 <body>
 		
-<div id="map" style="width: 100vw; height: 100vh;">
-		
+<div id="map" style="width: 100%; height: 100%;">
+
+</div>
+<div class="legend">
+		<div class="rect_green">
+		</div>
+		<div class="text" >2
+		</div>
+		<div class="rect_blue">
+		</div>
+		<div class="text" >4
+		</div>
+		<div class="rect_red">
+		</div>
+		<div class="text" >6
+		</div>
+		<div class="rect_maroon">
+		</div>
+		<div class="text" >8
+		</div>
+		<div class="rect_black">
+		</div>
+		<div class="text" >10 a viac
+		</div>
 </div>
 <script>
 var map  = L.map('map').setView([48.1456638,17.1344829], 12);
@@ -37,7 +128,6 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}
 	maxZoom: 18,
 	ext: 'png'
 }).addTo(map);
-
 
 
 var heat = L.heatLayer([
