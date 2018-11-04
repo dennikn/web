@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <style>
+
+    body {
+      margin: 0;
+      height: 100%;
+      max-width: 600px;
+      width: 100%;
+
+    }
+    .voting-wrapper {
+      background: white;
+      color: black;
+    }
+
+
+    .names {
+      display: grid;
+      grid-auto-columns: auto;
+    }
+
+    .profile-wrapper {
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+      display: none;
+      grid-auto-columns: repeat(4, 1fr);
+      grid-auto-rows: repeat(4);
+    }
+
+    .profile-name {
+      grid-column: 1 / 5;
+      grid-row: 2 / 2;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .profile-photo {
+      text-align: right;
+      grid-column: 4 / 4;
+      grid-row: 1 / 3;
+    }
+
+    .profile-text {
+      grid-column: 1 / 5;
+      grid-row: 3 / 5;
+    }
+
+
+    #imgId {
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+    }
+
+
+
+    .vote-top-wrapper {
+      width: 100%;
+      display: none;
+    }
+
+    .vote-text {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .info-box {
+      grid-column: 1 / 3;
+      grid-row: 2 / 2;
+      display: none;
+    }
+
+
+    .grid-vote {
+      margin-top: 1%;
+      padding: 1%;
+      margin-left: 5%;
+      margin-right: 5%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2);
+      column-gap: 4px;
+      width: 80%;
+      border: solid 3px;
+      border-color: rgb(27, 3, 3);
+      box-shadow: #151616;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .grid-vote:hover {
+      background: rgba(97, 123, 209, 0.397);
+    }
+
+    .vote-box {
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+      background: black;
+      color: white;
+      border: solid 1 px;
+      border-radius: 12px;
+      padding: 2%;
+      text-align: center;
+      height: 18px;
+    }
+
+    .pool {
+      width: 94%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 20% 20% 20% 20% 20%;
+      grid-column-gap: 2%;
+    }
+
+    .img-box {
+      width: 100%;
+      height: 100%;
+      padding: 7%;
+
+    }
+
+    .fa-times-circle:hover {
+      color: red;
+      cursor: pointer;
+    }
+
+
+
+
+    .pool-img {
+      height: 40px;
+      width: 40px;
+      border: solid 5px;
+      border-radius: 50%;
+      border-color: rgba(255, 255, 255, 0);
+
+    }
+
+    .pool-img:hover {
+      cursor: pointer;
+      background: black;
+      opacity: 0.6;
+      border-color: crimson;
+    }
+
+    .img-text {
+      text-align: left;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 520px) {
+      .pool {
+      width: 94%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-column-gap: 2%;
+    }
+      .img-box {
+      width: 80%;
+      height: 80%;
+      padding: 5%;
+    }
+    .pool-img {
+      height: 40px;
+      width: 40px;
+      border: solid 5px;
+      border-radius: 50%;
+      border-color: rgba(255, 255, 255, 0);
+    }
+    .img-text {
+      text-align: left;
+      font-size: 12px;
+    }
+    }
+
+    @media screen and (max-width: 400px) {
+      
+      .img-box {
+      width: 70%;
+      height: 70%;
+      padding: 4%;
+    }
+      .pool {
+      width: 88%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-column-gap: 4%;
+    }
+
+      .pool-img {
+      height: 38px;
+      width: 38px;
+      border: solid 5px;
+      border-radius: 50%;
+      border-color: rgba(255, 255, 255, 0);
+    }
+      .img-text {
+      text-align: left;
+      font-size: 10px;
+    }
+    }
+
+    .button-wrapper {
+      margin-top: 2%;
+      margin-left: 5%;
+      margin-right: 5%;
+      width: 80%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2);
+      column-gap: 9px;
+    }
+
+    .btn-filter {
+      margin: 1%;
+      padding: 1%;
+      background: black;
+      color: white;
+      border: solid 1px;
+      cursor: pointer;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .btn-filter:hover {
+      text-decoration: underline;
+      background: rgb(8, 74, 141);
+
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="voting-wrapper">
+    <div class="pool">
+      <div class="imgBox"><img class="pool-img" id="augustinic" src="https://a-static.projektn.sk/2018/09/augustinic.png">
+        <div class="img-text">Augustinič</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="bajan" src="https://a-static.projektn.sk/2018/09/bajan.png">
+        <div class="img-text">Bajan</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="borgula" src="https://a-static.projektn.sk/2018/09/borgula.png">
+        <div class="img-text">Borguľa</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="budaj" src="https://a-static.projektn.sk/2018/09/budaj.png">
+        <div class="img-text">Budaj</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="bulla" src="https://a-static.projektn.sk/2018/09/bulla.png">
+        <div class="img-text">Bulla</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="buocik" src="https://a-static.projektn.sk/2018/09/buocik.png">
+        <div class="img-text">Buocik</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="cahojova" src="https://a-static.projektn.sk/2018/09/cahojova.png">
+        <div class="img-text">Čahojová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="cerna" src="https://a-static.projektn.sk/2018/09/cerna.png">
+        <div class="img-text">Černá</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="cerny" src="https://a-static.projektn.sk/2018/09/cerny.png">
+        <div class="img-text">Černý</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="chren" src="https://a-static.projektn.sk/2018/09/chren.png">
+        <div class="img-text">Chren</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="dostal" src="https://a-static.projektn.sk/2018/09/dostal.png">
+        <div class="img-text">Dostál</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="drozd" src="https://a-static.projektn.sk/2018/09/drozd.png">
+        <div class="img-text">Drozd</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="farkasovska" src="https://a-static.projektn.sk/2018/09/farkasovska.png">
+        <div class="img-text">Farkašovská</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="ferencakova" src="https://a-static.projektn.sk/2018/09/ferencakova.png">
+        <div class="img-text">Ferenčáková</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="greksa" src="https://a-static.projektn.sk/2018/09/greksa.png">
+        <div class="img-text">Greksa</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="grendel" src="https://a-static.projektn.sk/2018/09/grendel.png">
+        <div class="img-text">Grendel</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="hanulik" src="https://a-static.projektn.sk/2018/09/hanulik.png">
+        <div class="img-text">Hanulík</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="hanulikova" src="https://a-static.projektn.sk/2018/09/hanulikova.png">
+        <div class="img-text">Hanulíková</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="hochschorner" src="https://a-static.projektn.sk/2018/09/hochschorner.png">
+        <div class="img-text">Hochschorner</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="hrcka" src="https://a-static.projektn.sk/2018/09/hrcka.png">
+        <div class="img-text">Hrčka</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="jambor" src="https://a-static.projektn.sk/2018/09/jambor.png">
+        <div class="img-text">Jambor</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="jegh" src="https://a-static.projektn.sk/2018/09/jegh.png">
+        <div class="img-text">Jégh</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="jencik" src="https://a-static.projektn.sk/2018/09/jencik.png">
+        <div class="img-text">Jenčík</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kacer" src="https://a-static.projektn.sk/2018/09/kacer.png">
+        <div class="img-text">Káčer</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kalisky" src="https://a-static.projektn.sk/2018/09/kalisky.png">
+        <div class="img-text">Kaliský</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kimerlingova" src="https://a-static.projektn.sk/2018/09/kimerlingova.png">
+        <div class="img-text">Kimerlingová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kolek" src="https://a-static.projektn.sk/2018/09/kolek.png">
+        <div class="img-text">Kolek</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="korcek" src="https://a-static.projektn.sk/2018/09/korcek.png">
+        <div class="img-text">Korček</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kriz" src="https://a-static.projektn.sk/2018/09/kriz.png">
+        <div class="img-text">Kríž</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="kuruc" src="https://a-static.projektn.sk/2018/09/kuruc.png">
+        <div class="img-text">Kuruc</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="mikulec" src="https://a-static.projektn.sk/2018/09/mikulec.png">
+        <div class="img-text">Mikulec</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="mrva" src="https://a-static.projektn.sk/2018/09/mrva.png">
+        <div class="img-text">Mrva</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="oleksak" src="https://a-static.projektn.sk/2018/09/oleksak.png">
+        <div class="img-text">Olekšák</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="patoprsta" src="https://a-static.projektn.sk/2018/09/patoprsta.png">
+        <div class="img-text">Pätoprstá</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="pilinsky" src="https://a-static.projektn.sk/2018/09/pilinsky.png">
+        <div class="img-text">Pilinský</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="plsekova" src="https://a-static.projektn.sk/2018/09/plsekova.png">
+        <div class="img-text">Plšeková</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="simoncicova" src="https://a-static.projektn.sk/2018/09/simoncicova.png">
+        <div class="img-text">Šimončičová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="stasselova" src="https://a-static.projektn.sk/2018/09/stasselova.png">
+        <div class="img-text">Štasselová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="svorenova" src="https://a-static.projektn.sk/2018/09/svorenova.png">
+        <div class="img-text">Svoreňová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="tvrda" src="https://a-static.projektn.sk/2018/09/tvrda.png">
+        <div class="img-text">Tvrdá</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="uhler" src="https://a-static.projektn.sk/2018/09/uhler.png">
+        <div class="img-text">Uhler</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="vetrak" src="https://a-static.projektn.sk/2018/09/vetrak.png">
+        <div class="img-text">Vetrák</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="weinstuk" src="https://a-static.projektn.sk/2018/09/weinstuk.png">
+        <div class="img-text">Weinštuk</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="zatovicova" src="https://a-static.projektn.sk/2018/09/zatovicova.png">
+        <div class="img-text">Zaťovičová</div>
+      </div>
+      <div class="imgBox"><img class="pool-img" id="zitny" src="https://a-static.projektn.sk/2018/09/zitny.png">
+        <div class="img-text">Žitný</div>
+      </div>
+
+    </div>
+
+
+    <div class="button-wrapper">
+      <div class="btn-filter" id="filter-candidates">
+        Kandidáti na starostov
+      </div>
+      <div class="btn-filter" id="filter-smer">
+        Poslanci blízki Smeru
+      </div>
+      <div class="btn-filter" id="filter-right">
+        Poslanci pravice
+      </div>
+      <div class="btn-filter" id="filter-without">
+        Nezávislí poslanci
+      </div>
+    </div>
+    <div class="wrapper-grid">
+      <div class="voting-header">
+
+
+        <div class="profile-wrapper">
+          <div id="voting-btn"><i class="fas fa-times-circle fa-3x"></i></div>
+          <div class="profile-name"></div>
+          <div class="profile-club"></div>
+          <div class="profile-photo"></div>
+          <div class="profile-text"></div>
+        </div>
+      </div>
+      <div class="vote-top-wrapper">
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+
+    function removeSpace(word) {
+      let newWord = "";
+      for (let i = 0; i < word.length; i++) {
+        if (word[i] != " ") {
+          newWord += word[i]
+        }
+      }
+      return newWord;
+    }
+
+    function getData(name) {
+      document.querySelector(".za").textContent = ""
+      let person = data.dataset[0]
+      for (let i = 0; i < 8; i++) {
+        let list = document.createElement("li")
+        list.textContent = "Zákaz hazardu";
+        document.querySelector(".za").appendChild(list)
+      }
+    }
+    let candidates = false;
+    let smer = false;
+    let right = false;
+    let without = false;
+
+
+    document.getElementById("filter-smer").addEventListener("click", function () {
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+      selectNames(selectRight, "rgba(255, 255, 255, 0)")
+      right = false;
+      document.getElementById("filter-without").style.background = "black";
+      selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+      without = false;
+
+      if (smer) {
+        document.getElementById("filter-smer").style.background = "black";
+        selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+        smer = false;
+
+      } else {
+        document.getElementById("filter-smer").style.background = "dodgerblue";
+        selectNames(selectSmer, "red")
+        smer = true;
+      }
+    })
+
+
+    document.getElementById("filter-candidates").addEventListener("click", function () {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+      selectNames(selectRight, "rgba(255, 255, 255, 0)")
+      right = false;
+      document.getElementById("filter-without").style.background = "black";
+      selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+      without = false;
+
+      if (candidates) {
+        document.getElementById("filter-candidates").style.background = "black";
+        selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+        candidates = false;
+      } else {
+        document.getElementById("filter-candidates").style.background = "dodgerblue";
+        selectNames(selectCandidates, "dodgerblue")
+        candidates = true;
+      }
+    })
+
+    document.getElementById("filter-right").addEventListener("click", function () {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+      without = false;
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-without").style.background = "black";
+      selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+      without = false;
+
+      if (right) {
+        document.getElementById("filter-right").style.background = "black";
+        selectNames(selectRight, "rgba(255, 255, 255, 0)")
+        right = false;
+      } else {
+        document.getElementById("filter-right").style.background = "dodgerblue";
+        selectNames(selectRight, "orange")
+        right = true;
+      }
+    })
+
+
+    document.getElementById("filter-without").addEventListener("click", function () {
+      selectNames(selectSmer, "rgba(255, 255, 255, 0)")
+      smer = false;
+      document.getElementById("filter-smer").style.background = "black";
+      selectNames(selectCandidates, "rgba(255, 255, 255, 0)")
+      candidates = false;
+      document.getElementById("filter-candidates").style.background = "black";
+      document.getElementById("filter-right").style.background = "black";
+      selectNames(selectRight, "rgba(255, 255, 255, 0)")
+      right = false;
+
+      if (without) {
+        document.getElementById("filter-without").style.background = "black";
+        selectNames(selectWithout, "rgba(255, 255, 255, 0)")
+        without = false;
+      } else {
+        document.getElementById("filter-without").style.background = "dodgerblue";
+        selectNames(selectWithout, "green")
+        without = true;
+      }
+    })
+    const namesRaw = ['augustinic', 'bajan', 'borgula', 'budaj', 'bulla', 'buocik', 'cahojova', 'cerna', 'cerny', 'chren', 'dostal', 'drozd', 'farkasovska', 'ferencakova', 'greksa', 'grendel', 'hanulik', 'hanulikova', 'hochschorner', 'hrcka', 'jambor', 'jegh', 'jencik', 'kacer', 'kalisky', 'kimerlingova', 'kolek', 'korcek', 'kriz', 'kuruc', 'mikulec', 'mrva', 'oleksak', 'patoprsta', 'pilinsky', 'plsekova', 'simoncicova', 'stasselova', 'svorenova', 'tvrda', 'uhler', 'vetrak', 'weinstuk', 'zatovicova', 'zitny']
+
+    const selectSmer = ["bajan", "borgula", "drozd", "farkasovska", "hanulik", "hanulikova", "oleksak"]
+    const selectCandidates = ["borgula", "buocik", "cahojova", "chren", "drozd", "hrcka", "mrva", "patoprstva", "uhler", "pilinsky", "farkasovska", "ferencakova", "greksa", "hanulik"]
+    const selectRight = ["buocik", "chren", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer", "zatovicova", "zitny", "plsekova", "augustinic", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky"]
+    const selectWithout =  ["mrva", "pilinsky", "greksa", "svorenova", "mikulec", "cahojova", "hrcka", "stasselova"]
+
+    function selectNames(group, color) {
+      for (let i = 0; i < namesRaw.length; i++) {
+        for (let j = 0; j < group.length; j++) {
+          if (namesRaw[i] === group[j]) {
+            document.getElementById(namesRaw[i]).style.borderColor = color;
+          }
+        }
+      }
+    }
+
+
+
+    const voting = [["Zákaz hazardu", "Zákaz hazardu v Bratislave poslanci schválili až na druhý pokus. Na prvom hlasovaní im chýbal jeden hlas a platnosť zákazu preto spochybnil prokurátor aj súd."], ["Parkovacia politika", "Väčšina poslancov podporila spoplatnenie parkovania, no parkovacia politika stále reálne nefunguje, lebo poslanci nechcú schváliť aj potrebné zmeny v štatúte hlavného mesta."], ["Odmietnutie významnej investície", "Po tom, ako mesto a primátor odmietali prezradiť svoj postoj k úľavám pre developerov HB Reavis a J&T RE mestskí poslanci odmietli podporiť výhody pre developerov a žiadali, aby mesto ich postoj tlmočilo aj vláde."], ["Mestské podniky", "Hlasovanie o výmene vedení v Dopravnom podniku, OLO, BVS a ďalších mestských firmách malo podľa primátora prebehnúť transparentným konkurzom pod dohľadom Transparency International. TIS však na záver poslancom neodporúčila zmeny schváliť, objavili sa pochybnosti najmä v súvislosti s uniknutou nahrávkou, na ktorej Nesrovnalov človek údajne kšeftoval so stoličkami výmenou za hlasy poslancov."], ["Predaj PKO", "Primátor Ivo Nesrovnal presvedčil väčšinu poslancov, aby predali developerovi Henbury Development budovy PKO za euro výmenou za urovnanie vyše 40-miliónového dlhu."], ["Štatút k parkovaniu", "Poslanci ani na desiaty pokus neschválili potrebný štatút k parkovacej politike, ktorý mal určiť napríklad kompetencie mestských častí."], ["Developerský poplatok", "Developeri musia pri každej väčšej bytovke či kanceláriách zaplatiť za meter štvorcový 35 eur. Peniaze určené napríklad na infraštruktúru si delí mesto s mestskými časťami."], ["Prenájom Trnavského mýta", "Developer Immocap Group získal od poslancov do prenájmu podchod Trnavské mýto za nájom jedno euro na najmenej 15 rokov výmenou za miliónovú rekonštrukciu. Eskalátory a výťahy za necelého pol milióna zaplatilo mesto."], ["Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina", "Poslanci odmietli prenajať podnikateľovi Alexandrovi Rozinovi mestské vinice za ročné jednoeurové nájomné výmenou za časť Rozinovej úrody a schválili podmienky verejnej súťaže."], ["Dotácia pre LGBT centrum", "Dotácia pre poradenské a komunitné centrum Q-centrum pre LGBT ľudí vo výške 10-tisíc eur."]]
+
+    function createList(parrent, text, infoText) {
+      let parrentElement = document.querySelector(parrent);
+      let wrapperElement = document.createElement("div");
+      wrapperElement.setAttribute("class", "grid-vote");
+      wrapperElement.id = "vote" + removeSpace(text);
+      parrentElement.appendChild(wrapperElement);
+      let textElement = document.createElement("div");
+      textElement.setAttribute("class", "vote-text")
+      textElement.textContent = text;
+      wrapperElement.appendChild(textElement);
+      let voteElement = document.createElement("div");
+      voteElement.textContent = " ";
+      voteElement.setAttribute("class", "vote-box")
+      voteElement.id = removeSpace(text)
+      wrapperElement.appendChild(voteElement);
+      let isClicked = false;
+      let voteId = `vote${removeSpace(text)}`
+      let boxId = `box${removeSpace(text)}`
+      infoBox(`#vote${removeSpace(text)}`, infoText, `box${removeSpace(text)}`)
+      wrapperElement.addEventListener("click", function () {
+        for (let i=0; i<boxes.length; i++) {
+          if (document.getElementById(boxes[i])) {
+            if (boxes[i] !== `box${removeSpace(text)}`) {
+              document.getElementById(boxes[i]).style.display = "none"
+
+            }
+          }
+        }
+        if (isClicked) {
+          document.getElementById(`box${removeSpace(text)}`).style.display = "none"
+          isClicked = false
+        } else {
+          isClicked = true
+          document.getElementById(`box${removeSpace(text)}`).style.display = "block"
+
+        }
+      })
+    }
+    const boxes = ["boxZákazhazardu", "boxParkovaciapolitika", "boxOdmietnutievýznamnejinvestície", "boxMestsképodniky", "boxPredajPKO", "boxŠtatútkparkovaniu", "boxDeveloperskýpoplatok", "boxPrenájomTrnavskéhomýta", "boxSchválenieverejnejsúťaženaprenájomvinícpoodmietnutíprenájmupreRozina", "boxDotáciapreLGBTcentrum"]
+
+    function createVotes(parrent, child, text) {
+      let parrentElement = document.querySelector(parrent);
+      let element = document.createElement("div");
+      element.setAttribute("class", "vote-text");
+      element.textContent = " ";
+      parrentElement.appendChild(element);
+
+    }
+
+    function vote(parrent, text) {
+      let element = document.querySelector(parrent)
+      if (text === "za") {
+        element.style.background = "green"
+      } else if (text === "proti") {
+        element.style.background = "#BB0A21"
+      } else if (text === "zdržal/a sa") {
+        element.style.background = "#4B88A2"
+      } else if (text === "nehlasoval/a") {
+        element.style.background = "dodgerblue"
+      } else if (text === "neprítomný/á") {
+        element.style.background = "gray"
+      } else if (text === "neschválený" || text === "neschválená") {
+        element.style.background = "#BB0A21"
+      } else if (text === "schválený" || text === "schválená") {
+        element.style.background = "green"
+      }
+      element.textContent = text;
+    }
+
+    voting.map(vote => createList(".vote-top-wrapper", vote[0], vote[1]))
+
+    let img = document.createElement("img");
+    img.setAttribute("class", "profile-img")
+    img.id = "imgId"
+    document.querySelector(".profile-photo").appendChild(img)
+
+
+    function getVote(politic) {
+      for (var prop in politic) {
+        let parrentEle = "#" + removeSpace(prop)
+        vote(parrentEle, politic[prop])
+      }
+    }
+    function getText(name, text, pic) {
+      document.querySelector(".profile-name").textContent = name;
+      document.querySelector(".profile-text").textContent = text;
+      document.querySelector("#imgId").src = pic;
+      document.querySelector(".pool").style.display = "none"
+      document.querySelector(".profile-wrapper").style.display = "grid"
+      document.querySelector(".vote-top-wrapper").style.display = "block"
+      document.querySelector(".button-wrapper").style.display = "none";
+
+    }
+
+    function showPool() {
+      console.log("pool")
+      document.querySelector(".pool").style.display = "grid";
+      document.querySelector(".button-wrapper").style.display = "grid";
+      document.querySelector(".profile-wrapper").style.display = "none"
+      document.querySelector(".vote-top-wrapper").style.display = "none"
+
+    }
+
+
+
+
+    document.getElementById("voting-btn").addEventListener("click", showPool)
+    function infoBox(node, text, boxId) {
+
+      let parrentNode = document.querySelector(node);
+      let box = document.createElement("div");
+      box.setAttribute("class", "info-box");
+      box.textContent = text;
+      box.id = boxId;
+      parrentNode.appendChild(box);
+    }
+
+
+    document.getElementById("augustinic").addEventListener("click", function () { getVote(augustinic); getText("Katarína Augustinič", "Bola v SaS, Lide, Nove a naposledy v strane Skok, v súčasnosti je nezávislá.", "https://a-static.projektn.sk/2018/09/augustinic.png") })
+    document.getElementById("bajan").addEventListener("click", function () { getVote(bajan); getText("Vladimír Bajan", "Súčasný starosta Petržalky už funkciu neplánuje obhajovať. Vystriedal viacero strán - SDKÚ aj HZDS, je nezávislý poslanec,no má blízko aj k Smeru.", "https://a-static.projektn.sk/2018/09/bajan.png") })
+    document.getElementById("borgula").addEventListener("click", function () { getVote(borgula); getText("Martin Borguľa", "Dlhoročný komunálny politik za Smer tento rok vystúpil zo strany. Kandiduje na starostu Starého Mesta už ako nezávislý.", "https://a-static.projektn.sk/2018/09/borgula.png") })
+    document.getElementById("budaj").addEventListener("click", function () { getVote(budaj); getText("Ján Budaj", "Parlamentný poslanec zo Zmeny zdola šéfuje najväčšiemu Bratislavskému klubu v zastupiteľstve. Je aj parlamentným poslancom za stranu OĽaNO.", "https://a-static.projektn.sk/2018/09/budaj.png") })
+    document.getElementById("bulla").addEventListener("click", function () { getVote(bulla); getText("Pavol Bulla", "Do zastupiteľstva kandidoval ako nezávislý za koalíciu Sieť, SaS, Most-Híd, SDKÚ.", "https://a-static.projektn.sk/2018/09/bulla.png") })
+    document.getElementById("buocik").addEventListener("click", function () { getVote(buocik); getText(" Ján Buocik", "Poslanec za Most-Híd bol v minulosti v SDKÚ. Kandiduje na starostu Ružinova s podporou pravicových strán.", "https://a-static.projektn.sk/2018/09/buocik.png") })
+    document.getElementById("cahojova").addEventListener("click", function () { getVote(cahojova); getText("Dana Čahojová", "Nezávislá kandidátka a starostka Karlovej Vsi plánuje opäť kandidovať.", "https://a-static.projektn.sk/2018/09/cahojova.png") })
+    document.getElementById("cerna").addEventListener("click", function () { getVote(cerna); getText(" Marta Černá", "Kandidovala za nezávislé fóum, združuje sa v Klube pre Bratislavu, kde sú najmä ľudia zo Smeru.", "https://a-static.projektn.sk/2018/09/cerna.png") })
+    document.getElementById("cerny").addEventListener("click", function () { getVote(cerny); getText("Milan Černý", "Kandidoval za SDKÚ.", "https://a-static.projektn.sk/2018/09/cerny.png") })
+    document.getElementById("chren").addEventListener("click", function () { getVote(chren); getText("Martin Chren", "Bol v SaS, Lido, Nove, v súčasnosti pôsobí v Skoku. Kandiduje na starostu Ružinova.", "https://a-static.projektn.sk/2018/09/chren.png") })
+    document.getElementById("dostal").addEventListener("click", function () { getVote(dostal); getText("Ondrej Dostál", "Kandidoval za OKS, je aj poslancom parlamentu v klube SaS.", "https://a-static.projektn.sk/2018/09/dostal.png") })
+    document.getElementById("drozd").addEventListener("click", function () { getVote(drozd); getText("Slavomír Drozd", "Poslanec za Smer a bývalý starosta Ružinova, ktorý chce opäť získať funkciu.", "https://a-static.projektn.sk/2018/09/drozd.png") })
+    document.getElementById("farkasovska").addEventListener("click", function () { getVote(farkasovska); getText("Ľudmila Farkašovská", "Bratislavská viceprimátorka za Smer kandiduje na starostku Petržalky.", "https://a-static.projektn.sk/2018/09/farkasovska.png") })
+    document.getElementById("ferencakova").addEventListener("click", function () { getVote(ferencakova); getText("Gabriela Ferenčáková", "Starostka Čunova bola v Most-Híd, teraz je nezávislá. Do funkcie kandiduje opäť.", "https://a-static.projektn.sk/2018/09/ferencakova.png") })
+    document.getElementById("greksa").addEventListener("click", function () { getVote(greksa); getText("Marian Greksa", "Bol v strane SaS aj Nova, teraz je nezávislý. Kandiduje na starostu Petržalky. ", "https://a-static.projektn.sk/2018/09/greksa.png") })
+    document.getElementById("grendel").addEventListener("click", function () { getVote(grendel); getText("Gábor Grendel", "Pôsobí v strane Nova, je aj poslancom parlamentu v klube OĽaNO.", "https://a-static.projektn.sk/2018/09/grendel.png") })
+    document.getElementById("hanulik").addEventListener("click", function () { getVote(hanulik); getText("Peter Hanulík", "Kandidát Smeru, zvažuje súboj o post starostu Devínskej Novej Vsi. ", "https://a-static.projektn.sk/2018/09/hanulik.png") })
+    document.getElementById("hanulikova").addEventListener("click", function () { getVote(hanulikova); getText("Iveta Hanulíková", "Poslankyňa za Smer, bývalá starostka Karlovej Vsi.", "https://a-static.projektn.sk/2018/09/hanulikova.png") })
+    document.getElementById("hochschorner").addEventListener("click", function () { getVote(hochschorner); getText("Peter Hochschorner", "Kandidoval za Zmenu zdola.", "https://a-static.projektn.sk/2018/09/hochschorner.png") })
+    document.getElementById("hrcka").addEventListener("click", function () { getVote(hrcka); getText("Ján Hrčka", "Nezávislý, kandiduje na starostu Petržalky.", "https://a-static.projektn.sk/2018/09/hrcka.png") })
+    document.getElementById("jambor").addEventListener("click", function () { getVote(jambor); getText("Milan Jambor", " Pôvodne bol v SDKÚ, kandidoval širokú pravicovú koalíciu", "https://a-static.projektn.sk/2018/09/jambor.png") })
+    document.getElementById("jegh").addEventListener("click", function () { getVote(jegh); getText("Izabella Jégh", "Odišla z klubu strany Most-Híd, kandidátka Siete, SaS, Mosta-Híd, SDKÚ.", "https://a-static.projektn.sk/2018/09/jegh.png") })
+    document.getElementById("jencik").addEventListener("click", function () { getVote(jencik); getText("Radovan Jenčík", "Bol v Sieti, no za hlasovanie o mestských podnikoch ho strana vylúčila.", "https://a-static.projektn.sk/2018/09/jencik.png") })
+    document.getElementById("kacer").addEventListener("click", function () { getVote(kacer); getText("Juraj Káčer", "Kandidát za SDKÚ.", "https://a-static.projektn.sk/2018/09/kacer.png") })
+    document.getElementById("kalisky").addEventListener("click", function () { getVote(kalisky); getText("Branislav Kaliský", "Kandidoval za širokú pravicovú koalíciu.", "https://a-static.projektn.sk/2018/09/kalisky.png") })
+    document.getElementById("kimerlingova").addEventListener("click", function () { getVote(kimerlingova); getText("Viera Kimerlingová", "Kandidátka za KDH.", "https://a-static.projektn.sk/2018/09/kimerlingova.png") })
+    document.getElementById("kolek").addEventListener("click", function () { getVote(kolek); getText("Ignác Kolek", "Poslanec za KDH.", "https://a-static.projektn.sk/2018/09/kolek.png") })
+    document.getElementById("korcek").addEventListener("click", function () { getVote(korcek); getText("Tomáš Korček", "Nezávislý kandidát.", "https://a-static.projektn.sk/2018/09/korcek.png") })
+    document.getElementById("kriz").addEventListener("click", function () { getVote(kriz); getText("Oliver Kríž", "Kandidát Siete, SaS, Mosta-Híd, SDKÚ", "https://a-static.projektn.sk/2018/09/kriz.png") })
+    document.getElementById("kuruc").addEventListener("click", function () { getVote(kuruc); getText("Martin Kuruc", "Nezávislý, v minulosti bol v SDKÚ.", "https://a-static.projektn.sk/2018/09/kuruc.png") })
+    document.getElementById("mikulec").addEventListener("click", function () { getVote(mikulec); getText("Richard Mikulec", "Nezávislý.", "https://a-static.projektn.sk/2018/09/mikulec.png") })
+    document.getElementById("mrva").addEventListener("click", function () { getVote(mrva); getText("Ján Mrva", "Bol v SDKÚ, v Sieti, teraz kandiduje na primátora ako nezávislý s podporou pravicových strán.", "https://a-static.projektn.sk/2018/09/mrva.png") })
+    document.getElementById("oleksak").addEventListener("click", function () { getVote(oleksak); getText("Radoslav Olekšák", "Kandidát Smeru, SNS, SZS", "https://a-static.projektn.sk/2018/09/oleksak.png") })
+    document.getElementById("patoprsta").addEventListener("click", function () { getVote(patoprsta); getText("Elena Pätoprstá", "Pôsobí v Zmene zdola. Kandiduje na starostku Petržalky.", "https://a-static.projektn.sk/2018/09/patoprsta.png") })
+    document.getElementById("pilinsky").addEventListener("click", function () { getVote(pilinsky); getText("Peter Pilinský", "Kandidoval za Stranu zelených, plánuje opäť kandidovať aj na starostu Rače.", "https://a-static.projektn.sk/2018/09/pilinsky.png") })
+    document.getElementById("plsekova").addEventListener("click", function () { getVote(plsekova); getText("Iveta Plšeková", "Po vražde Jána Kuciaka a Martiny Kušnírovej odišla z Mosta-Híd.", "https://a-static.projektn.sk/2018/09/plsekova.png") })
+    document.getElementById("simoncicova").addEventListener("click", function () { getVote(simoncicova); getText("Katarína Šimončičová", "Poslankyňa za Zmenu zdola.", "https://a-static.projektn.sk/2018/09/simoncicova.png") })
+    document.getElementById("stasselova").addEventListener("click", function () { getVote(stasselova); getText("Lucia Štasselová", "Nezávislá, kandidovala za Sieť, SaS, Most-Híd a SDKÚ.", "https://a-static.projektn.sk/2018/09/stasselova.png") })
+    document.getElementById("svorenova").addEventListener("click", function () { getVote(svorenova); getText("Soňa Svoreňová", "Nezávislá, bývalá členka Mladých sociálnych demokratov.", "https://a-static.projektn.sk/2018/09/svorenova.png") })
+    document.getElementById("tvrda").addEventListener("click", function () { getVote(tvrda); getText("Jarmila Tvrdá", "Kandidovala za KDH.", "https://a-static.projektn.sk/2018/09/tvrda.png") })
+    document.getElementById("uhler").addEventListener("click", function () { getVote(uhler); getText("Jozef Uhler", "Bol v SDKÚ, neskôr v Sieti, no po hlasovaní o mestských podnikoch ho strana vylúčila. Teraz je nezávislý a kandiduje na starostu Jaroviec.", "https://a-static.projektn.sk/2018/09/uhler.png") })
+    document.getElementById("vetrak").addEventListener("click", function () { getVote(vetrak); getText("Milan Vetrák", "Kandidoval za OĽaNO.", "https://a-static.projektn.sk/2018/09/vetrak.png") })
+    document.getElementById("weinstuk").addEventListener("click", function () { getVote(weinstuk); getText("Roman Weinštuk", "Kandidoval ako nezávislý.", "https://a-static.projektn.sk/2018/09/weinstuk.png") })
+    document.getElementById("zatovicova").addEventListener("click", function () { getVote(zatovicova); getText("Zdenka Zaťovičová", "Kandidovala za EDS, predtým za SDKÚ.", "https://a-static.projektn.sk/2018/09/zatovicova.png") })
+    document.getElementById("zitny").addEventListener("click", function () { getVote(zitny); getText("Rastislav Žitný", "Kandidoval za Most-Híd.", "https://a-static.projektn.sk/2018/09/zitny.png") })
+
+
+    const allVotes = { "Zákaz hazardu": "neschválený", "Parkovacia politika": "schválená", "Odmietnutie významnej investície": "schválený", "Mestské podniky": "schválený", "Predaj PKO": "schválený", "Štatút k parkovaniu": "neschválený", "Developerský poplatok": "schválený", "Prenájom Trnavského mýta": "schválený", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neschválený", "Dotácia pre LGBT centrum": "schválený" }
+
+    const augustinic = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const bajan = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const borgula = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const budaj = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const bulla = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný", "Dotácia pre LGBT centrum": "nehlasoval/a" }
+
+    const buocik = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const cahojova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const cerna = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const cerny = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const chren = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const dostal = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "proti", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "zdržal/a sa", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const drozd = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const farkasovska = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const ferencakova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "nehlasoval/a", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const greksa = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const grendel = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const hanulik = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const hanulikova = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const hochschorner = { "Zákaz hazardu": "za", "Parkovacia politika": "neprítomný/á", "Odmietnutie významnej investície": "za", "Mestské podniky": "zdržal/a sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const hrcka = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "nehlasoval/a", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const jambor = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const jegh = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "nehlasoval/a", "Predaj PKO": "za", "Štatút k parkovaniu": "nehlasoval/a", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "proti" }
+
+    const jencik = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "za", "Odmietnutie významnej investície": "nehlasoval/a", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const kacer = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const kalisky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "nehlasoval/a", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const kimerlingova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "nehlasoval/a", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "nehlasoval/a", "Dotácia pre LGBT centrum": "proti" }
+
+    const kolek = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "zdržal/a sa", "Dotácia pre LGBT centrum": "proti" }
+
+    const korcek = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const kriz = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const kuruc = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const mikulec = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const mrva = { "Zákaz hazardu": "za", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "zdržal/a sa", "Štatút k parkovaniu": "neprítomný/á", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const oleksak = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const patoprsta = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "neprítomný/á", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const pilinsky = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "za" }
+
+    const plsekova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "nehlasoval/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const simoncicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "zdržal/a sa", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "proti", "Dotácia pre LGBT centrum": "za" }
+
+    const stasselova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "zdržal/a sa", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "proti", "Dotácia pre LGBT centrum": "za" }
+
+    const svorenova = { "Zákaz hazardu": "nehlasoval/a", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "nehlasoval/a", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "neprítomný/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const tvrda = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "nehlasoval/a", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+    const uhler = { "Zákaz hazardu": "neprítomný/á", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "za" }
+
+    const vetrak = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "za", "Mestské podniky": "proti", "Predaj PKO": "proti", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "neprítomný/á", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const weinstuk = { "Zákaz hazardu": "zdržal/a sa", "Parkovacia politika": "zdržal/a sa", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "zdržal/a sa", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "za", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const zatovicova = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "zdržal/a sa", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "zdržal/a sa", "Dotácia pre LGBT centrum": "zdržal/a sa" }
+
+    const zitny = { "Zákaz hazardu": "za", "Parkovacia politika": "za", "Odmietnutie významnej investície": "neprítomný/á", "Mestské podniky": "za", "Predaj PKO": "za", "Štatút k parkovaniu": "za", "Developerský poplatok": "za", "Prenájom Trnavského mýta": "za", "Schválenie verejnej súťaže na prenájom viníc po odmietnutí prenájmu pre Rozina": "zdržal/a sa", "Dotácia pre LGBT centrum": "neprítomný/á" }
+
+
+    getVote(allVotes)
+
+  </script>
+
+</body>
+
+</html>
