@@ -542,9 +542,9 @@
     const namesRaw = ['augustinic', 'bajan', 'borgula', 'budaj', 'bulla', 'buocik', 'cahojova', 'cerna', 'cerny', 'chren', 'dostal', 'drozd', 'farkasovska', 'ferencakova', 'greksa', 'grendel', 'hanulik', 'hanulikova', 'hochschorner', 'hrcka', 'jambor', 'jegh', 'jencik', 'kacer', 'kalisky', 'kimerlingova', 'kolek', 'korcek', 'kriz', 'kuruc', 'mikulec', 'mrva', 'oleksak', 'patoprsta', 'pilinsky', 'plsekova', 'simoncicova', 'stasselova', 'svorenova', 'tvrda', 'uhler', 'vetrak', 'weinstuk', 'zatovicova', 'zitny']
 
     const selectSmer = ["bajan", "borgula", "drozd", "farkasovska", "hanulik", "hanulikova", "oleksak"]
-    const selectCandidates = ["borgula", "buocik", "cahojova", "chren", "drozd", "hrcka", "mrva", "patoprstva", "uhler", "pilinsky", "farkasovska", "ferencakova", "greksa", "hanulik"]
-    const selectRight = ["buocik", "chren", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer", "zatovicova", "zitny", "plsekova", "augustinic", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky"]
-    const selectWithout =  ["mrva", "pilinsky", "greksa", "svorenova", "mikulec", "cahojova", "hrcka", "stasselova"]
+    const selectCandidates = ["borgula", "buocik", "cahojova", "chren", "drozd", "hrcka", "mrva", "patoprstva", "uhler", "pilinsky", "farkasovska", "ferencakova", "hanulik"]
+    const selectRight = ["buocik", "chren", "mrva", "uhler", "jencik", "kriz", "cerny", "ferencakova", "jambor", "jegh", "kacer", "zatovicova", "zitny", "plsekova", "augustinic", "dostal", "grendel", "kimerlingova", "kolek", "tvrda", "vetrak", "kalisky", "stasselova", "simoncicova"]
+    const selectWithout =  ["pilinsky", "greksa", "svorenova", "mikulec", "cahojova", "hrcka"]
 
     function selectNames(group, color) {
       for (let i = 0; i < namesRaw.length; i++) {
@@ -683,7 +683,7 @@
     document.getElementById("borgula").addEventListener("click", function () { getVote(borgula); getText("Martin Borguľa", "Dlhoročný komunálny politik za Smer tento rok vystúpil zo strany. Kandiduje na starostu Starého Mesta už ako nezávislý.", "https://a-static.projektn.sk/2018/09/borgula.png") })
     document.getElementById("budaj").addEventListener("click", function () { getVote(budaj); getText("Ján Budaj", "Parlamentný poslanec zo Zmeny zdola šéfuje najväčšiemu Bratislavskému klubu v zastupiteľstve. Je aj parlamentným poslancom za stranu OĽaNO.", "https://a-static.projektn.sk/2018/09/budaj.png") })
     document.getElementById("bulla").addEventListener("click", function () { getVote(bulla); getText("Pavol Bulla", "Do zastupiteľstva kandidoval ako nezávislý za koalíciu Sieť, SaS, Most-Híd, SDKÚ.", "https://a-static.projektn.sk/2018/09/bulla.png") })
-    document.getElementById("buocik").addEventListener("click", function () { getVote(buocik); getText(" Ján Buocik", "Poslanec za Most-Híd bol v minulosti v SDKÚ. Kandiduje na starostu Ružinova s podporou pravicových strán.", "https://a-static.projektn.sk/2018/09/buocik.png") })
+    document.getElementById("buocik").addEventListener("click", function () { getVote(buocik); getText(" Ján Buocik", "Do zastupiteľstva kandidoval za SDKÚ. Kandiduje na starostu Ružinova s podporou pravicových strán.", "https://a-static.projektn.sk/2018/09/buocik.png") })
     document.getElementById("cahojova").addEventListener("click", function () { getVote(cahojova); getText("Dana Čahojová", "Nezávislá kandidátka a starostka Karlovej Vsi plánuje opäť kandidovať.", "https://a-static.projektn.sk/2018/09/cahojova.png") })
     document.getElementById("cerna").addEventListener("click", function () { getVote(cerna); getText(" Marta Černá", "Kandidovala za nezávislé fóum, združuje sa v Klube pre Bratislavu, kde sú najmä ľudia zo Smeru.", "https://a-static.projektn.sk/2018/09/cerna.png") })
     document.getElementById("cerny").addEventListener("click", function () { getVote(cerny); getText("Milan Černý", "Kandidoval za SDKÚ.", "https://a-static.projektn.sk/2018/09/cerny.png") })
@@ -692,7 +692,7 @@
     document.getElementById("drozd").addEventListener("click", function () { getVote(drozd); getText("Slavomír Drozd", "Poslanec za Smer a bývalý starosta Ružinova, ktorý chce opäť získať funkciu.", "https://a-static.projektn.sk/2018/09/drozd.png") })
     document.getElementById("farkasovska").addEventListener("click", function () { getVote(farkasovska); getText("Ľudmila Farkašovská", "Bratislavská viceprimátorka za Smer kandiduje na starostku Petržalky.", "https://a-static.projektn.sk/2018/09/farkasovska.png") })
     document.getElementById("ferencakova").addEventListener("click", function () { getVote(ferencakova); getText("Gabriela Ferenčáková", "Starostka Čunova bola v Most-Híd, teraz je nezávislá. Do funkcie kandiduje opäť.", "https://a-static.projektn.sk/2018/09/ferencakova.png") })
-    document.getElementById("greksa").addEventListener("click", function () { getVote(greksa); getText("Marian Greksa", "Bol v strane SaS aj Nova, teraz je nezávislý. Kandiduje na starostu Petržalky. ", "https://a-static.projektn.sk/2018/09/greksa.png") })
+    document.getElementById("greksa").addEventListener("click", function () { getVote(greksa); getText("Marian Greksa", "Bol v strane SaS aj Nova, teraz je nezávislý.", "https://a-static.projektn.sk/2018/09/greksa.png") })
     document.getElementById("grendel").addEventListener("click", function () { getVote(grendel); getText("Gábor Grendel", "Pôsobí v strane Nova, je aj poslancom parlamentu v klube OĽaNO.", "https://a-static.projektn.sk/2018/09/grendel.png") })
     document.getElementById("hanulik").addEventListener("click", function () { getVote(hanulik); getText("Peter Hanulík", "Kandidát Smeru, zvažuje súboj o post starostu Devínskej Novej Vsi. ", "https://a-static.projektn.sk/2018/09/hanulik.png") })
     document.getElementById("hanulikova").addEventListener("click", function () { getVote(hanulikova); getText("Iveta Hanulíková", "Poslankyňa za Smer, bývalá starostka Karlovej Vsi.", "https://a-static.projektn.sk/2018/09/hanulikova.png") })
