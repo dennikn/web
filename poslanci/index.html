@@ -92,14 +92,14 @@ function selectDistrict() {
 function mainApp() {
     createElement("div", ".app", "main-wrapper")
     createElement("div", ".main-wrapper", "main-box")
- 
+    createElement("div", ".main-wrapper", "buttons-box")
+
 }
 
 function elements() {
     let districtTitle = districts[myDistrict].slice(districts[myDistrict].indexOf("- ") + 2)
 
     createElement("div", ".main-box", "text-box") 
-    createElement("div", ".main-box", "buttons-box")
 
     createElement("p", ".text-box", "question")
 
