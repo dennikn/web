@@ -74,7 +74,7 @@ function districtsChoice() {
         createElement("option", ".dropdown", "dropdown-content",districtId, districts[i], i)
     }
     createElement("div", ".district-wrapper", "btn-box")
-    createElement("a", ".btn-box", "btn-start", "", "Spustiť")
+    createElement("button", ".btn-box", "btn-start", "", "Spustiť")
     document.querySelector(".btn-start").addEventListener("click", selectDistrict);
 }
 
@@ -102,9 +102,9 @@ function elements() {
     createElement("div", ".main-box", "text-box") 
     createElement("p", ".text-box", "question")
 
-    createElement("a", ".buttons-box", "btn", "yes", "áno")
-    createElement("a", ".buttons-box", "btn", "no", "nie")
-    createElement("a", ".buttons-box", "btn", "none", "neviem")
+    createElement("button", ".buttons-box", "btn", "yes", "áno")
+    createElement("button", ".buttons-box", "btn", "no", "nie")
+    createElement("button", ".buttons-box", "btn", "none", "neviem")
 
 }
 

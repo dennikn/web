@@ -74,7 +74,7 @@ body {
 .main-wrapper {
   height: 100%;
   display: grid;
-  grid-template-rows: 85% 15%;
+  grid-template-rows: 75% 25%;
 }
 
 .main-box {
@@ -159,8 +159,7 @@ body {
   font-size: 24px;
   word-wrap: break-word;
   text-align: center;
-  display: grid;
-  grid-template-rows: 20% 70%;
+ 
 }
 
 .progress-box {
@@ -224,6 +223,7 @@ body {
   display: grid;
   grid-auto-rows: auto;
   height: 100%;
+  font-size: 16px;
 }
 
 
@@ -459,7 +459,7 @@ p {
 
 .results-compare-row {
   display: grid;
-  grid-template-columns: 65% 17.5% 17.5%;
+  grid-template-columns: 60% 20% 20%;
   -webkit-align-items: center;
   -webkit-box-align: center;
 }
@@ -467,7 +467,7 @@ p {
   font-size: 16px;
  height: auto;
  display: grid;
- grid-template-columns: 65% 17.5% 17.5%;
+ grid-template-columns: 60% 20% 20%;
  -ms-grid-row-align: center;
  -ms-grid-column-align: center;
  -webkit-align-items: center;
