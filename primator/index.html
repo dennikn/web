@@ -3,12 +3,14 @@
 <head>
 
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-    crossorigin="anonymous">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <script src="primatori.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+  <script src="primatori.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 
 </head>
 
@@ -264,7 +266,7 @@ function hide(element) {
     selectedElement.style.display = "none"
 }
 
-const images = [{name: "Ivo Nesrovnal", src: "https://a-static.projektn.sk/2018/11/nesrovnal-anketa.png", status: "nezávislý"}, {name: "Václav Mika", src: "https://a-static.projektn.sk/2018/11/mika_anketa.png", status: "nezávislý", status: "Naj"}, {name: "Matúš Vallo", src: "https://a-static.projektn.sk/2018/11/vallo_anketa.png", status: "nezávislý"}, {name: "Ján Mrva", src: "https://a-static.projektn.sk/2018/11/mrva_anketa.png", status: "pravicový kandidát"}, {name: "Viktor Béreš", src: "https://a-static.projektn.sk/2018/11/beres_anketa.png"}, {name: "Iveta Plšeková", src: "https://a-static.projektn.sk/2018/11/plsekova_anketa.png", status: "nezávislý"}, {name: "Jaroslav Brada", src: "https://a-static.projektn.sk/2018/11/brada_anketa.png"}, {name: "Roman Ruhig", src: "https://a-static.projektn.sk/2018/11/ruhig_anketa.png", status: "Slovenská národná jednota"}]
+const images = [{name: "Ivo Nesrovnal", src: "https://a-static.projektn.sk/2018/11/nesrovnal-anketa.png", status: "nezávislý"}, {name: "Václav Mika", src: "https://a-static.projektn.sk/2018/11/mika_anketa.png", status: "nezávislý", status: "nezávislý"}, {name: "Matúš Vallo", src: "https://a-static.projektn.sk/2018/11/vallo_anketa.png", status: "nezávislý"}, {name: "Ján Mrva", src: "https://a-static.projektn.sk/2018/11/mrva_anketa.png", status: "pravicový kandidát"}, {name: "Viktor Béreš", src: "https://a-static.projektn.sk/2018/11/beres_anketa.png", status: "Naj, Strana mladých ľudí"}, {name: "Iveta Plšeková", src: "https://a-static.projektn.sk/2018/11/plsekova_anketa.png", status: "nezávislá"}, {name: "Jaroslav Brada", src: "https://a-static.projektn.sk/2018/11/brada_anketa.png", status: "Strana moderného Slovenska"}, {name: "Roman Ruhig", src: "https://a-static.projektn.sk/2018/11/ruhig_anketa.png", status: "Slovenská národná jednota"}]
 
 function results() {
     let sorted = candidates.sort((a, b) => parseFloat(b.countPreference) - parseFloat(a.countPreference))
