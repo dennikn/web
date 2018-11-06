@@ -1,8 +1,8 @@
 html,
 body {
   width: 100%;
-  height: 100%;
-  max-height: 50px;
+  height: 100vh;
+  max-height: 400px;
   max-width: 400px;
 }
 
@@ -28,7 +28,7 @@ body {
 
 .btn-back {
   color: white;
-  font-size: 24px;
+  font-size: 22px;
   padding-left: 20%;
   padding-top: 10%;
   padding-bottom: 10%;
@@ -78,19 +78,18 @@ body {
 }
 
 .main-box {
-  height: 100%;
   text-shadow: rgb(17, 17, 17) 2px 2px 10px;
   margin: 2%;
   border-radius: 6px;
+  display: grid;
+  grid-template-rows: 80% 20%;
 }
 
 .dropdown {
-  display: block;
   width: 80%;
   margin-top: 9%;
   margin-left: 10%;
   margin-right: 10%;
-  padding: 2%;
   background: #832232;
   border-color: #832232;
   border-radius: 6px;
@@ -116,10 +115,10 @@ body {
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
+  padding: 2%;
   background: #272727;
   position: absolute;
   min-width: 160px;
-  padding: 12px 16px;
   z-index: 1;
 }
 .btn-box {
@@ -129,7 +128,7 @@ body {
 .btn-start {
   display: block;
   background: #832232;
-  font-size: 28px;
+  font-size: 18px;
   text-align: center;
   width: 50%;
   margin-left: 22.5%;
@@ -144,20 +143,22 @@ body {
   background: #832232;
 }
 
-
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 .text-box {
   width: 90%;
   height: 80%;
-  margin-top: 4%;
-  margin-bottom: 5%;
+  margin-top: 10%;
+  margin-bottom: 10%;
   margin-left: 5%;
   margin-right: 5%;
-  font-size: 22px;
+  font-size: 24px;
   word-wrap: break-word;
   text-align: center;
   display: grid;
-  grid-template-rows: 10% 80%;
+  grid-template-rows: 20% 70%;
 }
 
 .progress-box {
@@ -226,7 +227,7 @@ body {
 
 .all-question-title {
   text-shadow: rgb(17, 17, 17) 2px 2px 10px;
-  font-size: 30px;
+  font-size: 26px;
   padding: 2%;
 }
 .all-questions-btn-box {
@@ -235,7 +236,7 @@ body {
   margin-right: 20%;
   padding: 2.5%;
   text-align: center;
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .btn-continue {
@@ -255,7 +256,7 @@ body {
   grid-auto-rows: auto;
   padding: 2%;
   color: white;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .container input:checked ~ .checkmark {
