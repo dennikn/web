@@ -1,0 +1,515 @@
+html,
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  background:  linear-gradient(
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)
+  ), url("https://a-static.projektn.sk/2018/11/TBEN7754.jpg");
+  background-clip: content-box;
+  background-size: 300%;
+  background-position: 40%;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  color: white;
+  
+}
+
+.btn-back {
+  color: white;
+  font-size: 26px;
+  padding-left: 20%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  cursor: pointer;
+}
+
+.district-wrapper {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  height: 100%;
+
+}
+
+.district-box {
+  margin: 2%;
+  border-radius: 6px;
+  color: white;
+}
+
+
+.district-title {
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+
+  border-radius: 6px;
+  font-size: 26px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: center;
+}
+
+.district-info {
+  width: 80%;
+  margin-left: 8%;
+  margin-right: 8%;
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 20px;
+  padding: 2%;
+}
+
+.main-wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 70% 30%;
+}
+
+.main-box {
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+  margin: 2%;
+  border-radius: 6px;
+  display: grid;
+  grid-template-rows: 80% 20%;
+}
+
+.dropdown {
+  width: 80%;
+  margin-top: 9%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2%;
+  background: #832232;
+  border-color: #832232;
+  border-radius: 6px;
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  box-shadow: 0 0 3pt 2pt #832232;
+
+}
+
+.dropdown:focus {
+  border-color: #832232;
+  box-shadow: 0 0 3pt 2pt #832232;
+}
+
+.dropdown.content:focus {
+  border-color: #832232;
+  box-shadow: 0 0 3pt 2pt #832232;
+}
+
+.dropdown-content {
+  display: none;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 2%;
+  background: #272727;
+  position: absolute;
+  min-width: 160px;
+  padding: 12px 16px;
+  z-index: 1;
+}
+.btn-box {
+  width: 80%;
+  margin: 10%;
+}
+.btn-start {
+  display: block;
+  background: #832232;
+  font-size: 36px;
+  text-align: center;
+  width: 50%;
+  margin-left: 22.5%;
+  margin-right: 22.5%;
+  padding: 2%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-start:hover {
+
+  background: #832232;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.text-box {
+  width: 90%;
+  height: 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 30px;
+  word-wrap: break-word;
+  text-align: center;
+  display: grid;
+  grid-template-rows: 20% 70%;
+}
+
+.progress-box {
+  margin-top: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
+  width: 98%;
+  height: 90%;
+  display: inline-block;
+}
+
+.circle {
+  float: left;
+  margin-left: 5px;
+  width: 5px;
+  height: 5px;
+  border: solid 0.8px;
+  border-radius: 50%;
+  border-color: white;
+  background: rgba(255, 255, 255, 0);
+  z-index: 10;
+}
+
+.dash {
+  font-size: 5px;
+  text-align: center;
+}
+
+.full {
+  background: white;
+}
+
+
+.buttons-box {
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+  
+  width: 100%;
+  display: grid;
+  grid-template-rows: 25% 25% 25%;
+  grid-row-gap: 8%;
+}
+
+.btn {
+  background: #832232;
+  color: white;
+  
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.btn:hover {
+  background: rgb(43, 37, 37);
+}
+
+.all-questions-wrapper{
+  background: #272727;
+  display: grid;
+  grid-auto-rows: auto;
+  height: 100%;
+}
+
+
+.all-question-title {
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+  font-size: 30px;
+  padding: 2%;
+}
+.all-questions-btn-box {
+  width: 50%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 2.5%;
+  text-align: center;
+  font-size: 28px;
+}
+
+.btn-continue {
+  background: #832232;
+  padding: 2%;
+  border-radius: 6px;
+  width: 100%;
+  
+  color: white;
+}
+
+
+.all-questions-box{
+  background: #131519;
+  height: auto;
+  display: grid;
+  grid-auto-rows: auto;
+  padding: 2%;
+  color: white;
+  font-size: 22px;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.questions-label {
+  padding: 5%;
+}
+.questions-label-selected {
+  padding: 5%;
+  box-shadow: 0 0 3pt 2pt #a1273c;
+}
+
+input[type="radio"] {
+  padding: 2%;
+  font-size: 20px;
+}
+
+
+.results-box {
+  background: rgb(43, 37, 37);
+  top: 0;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  height: auto;
+}
+
+.results {
+  text-shadow: rgb(17, 17, 17) 2px 2px 10px;
+  padding: 0;
+  margin-top: 4%;
+  margin-left: 4%;
+  margin-right: 4%;
+  height: 100%;
+  background: rgb(43, 37, 37);
+  font-size: 22px;
+  word-wrap: break-word;
+  display:grid;
+  grid-auto-rows: auto;
+  grid-row-gap: 1%;
+}
+
+.ul-results {
+  margin: 4%;
+
+}
+
+.results-name {
+  margin: 0;
+}
+.results-sum {
+  width: 100%;
+  margin: 0;
+}
+.results-row {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  cursor: pointer;
+}
+
+.results-row:hover {
+  background: crimson;
+}
+
+.light-preference {
+  border-radius: 4px;
+  box-shadow: 0 0 1pt 1pt #f07676;
+
+}
+.middle-preference {
+  border-radius: 4px;
+  box-shadow: 0 0 1pt 1pt #c91e1e;
+}
+.strong-preference {
+  border-radius: 4px;
+  box-shadow: 0 0 1pt 1pt #80091d;
+}
+.results-text {
+  margin: 0
+}
+
+#img-wrapper {
+  background-color: #d71920;
+  box-shadow: 0 0 3pt 2pt #a1273c;
+}
+
+#img {
+  width: 30%;
+  height: 30%;
+  margin-top: 1%;
+  margin-left: 68%;
+}
+#main {
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 5%;
+  margin-bottom: 2%;
+  width: 80%;
+  height: 100%;
+  max-height: 500px;
+  max-width: 360px;
+  border-color: #090909;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  color: white;
+  border: solid;
+  border-radius: 9px;
+}
+
+#chat_box {
+  display: none;
+}
+
+#text-box {
+  margin-top: 1%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  height: 100%;
+  max-height: 150px;
+  min-height: 120px;
+  width: 96%;
+  text-align: center;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  color: white;
+}
+
+
+#buttons {
+  text-align: center;
+  margin-top: 4%;
+  padding-top: 2%;
+  margin-bottom: 1%;
+  line-height: normal;
+  background-color: #090909;
+  visibility: visible;
+  height: 100px;
+  width: 100%;
+}
+
+#title {
+  margin-top: 4%;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+  text-align: center;
+  font-size: 20px;
+}
+
+#line {
+  height: 1px;
+  width: 100%;
+  background-color: #534b62;
+}
+
+.answer-same{
+  background: green;
+  color: white;
+}
+
+.answer-different{
+  background: crimson;
+  color: white;
+}
+p {
+  margin: 0;
+}
+
+.results-compare-wrapper {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background: #131519;
+
+  top: 0;
+  z-index: 100;
+}
+.results-compare-header {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width: 100%;
+  background: #272a30;
+}
+
+.results-compare-title {
+  font-size: 24px;
+  padding: 2%;
+  text-align: center;
+}
+
+.results-compare-row {
+  display: grid;
+  grid-template-columns: 65% 17.5% 17.5%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+}
+.results-compare {
+  font-size: 16px;
+ height: auto;
+ display: grid;
+ grid-template-columns: 65% 17.5% 17.5%;
+ -ms-grid-row-align: center;
+ -ms-grid-column-align: center;
+ -webkit-align-items: center;
+    -webkit-box-align: center;
+ padding: 1%;
+ background: black;
+ border-color: black;
+ text-align: center;
+ align-items: center;
+}
+
+.results-questions-row {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 65% 17.5% 17.5%;
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  
+}
+
+.question {
+  text-align: center;
+
+  padding: 5%;
+}
+
+.my-answer {
+  padding: 5%;
+  text-align: center;
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+}
+
+.candidate-answer {
+  -ms-grid-row-align: center;
+  -ms-grid-column-align: center;
+  
+}
+.shade-light {
+  background: rgb(212, 212, 212);
+  color: black;
+}
+
+.shade-dark {
+  color: white;
+  background: #272727;
+}
