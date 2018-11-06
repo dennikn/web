@@ -1,7 +1,7 @@
 html,
 body {
   width: 100%;
-  height: 100vh;
+  height: 60vh;
 }
 
 body {
@@ -84,6 +84,7 @@ body {
 }
 
 .dropdown {
+  display: block;
   width: 80%;
   margin-top: 9%;
   margin-left: 10%;
