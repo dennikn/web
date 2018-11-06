@@ -4,6 +4,8 @@
 
   <meta charset="utf-8">
   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" type="text/css" href="poslanci.css" media="screen" />
   <script src="poslanci.js"></script>
@@ -99,9 +101,7 @@ function elements() {
 
     createElement("div", ".main-box", "text-box") 
 
-    createElement("p", ".text-box", "title", "", districtTitle)
     createElement("p", ".text-box", "question")
-    createElement("div", ".main-box", "progress-box") 
 
     createElement("a", ".buttons-box", "btn", "yes", "áno")
     createElement("a", ".buttons-box", "btn", "no", "nie")
@@ -113,21 +113,10 @@ function removeElement(parrent, child) {
     selector(parrent).removeChild(selector(child))
 }
 
-function box() {
-    for (let i=0; i<24; i++) {
-        let circleId = `circle${i}`;
-        if (i === 0) {
-            createElement("div", ".progress-box", "circle full", circleId) 
-        } else {
-        createElement("div", ".progress-box", "circle", circleId) 
-}
-    }
-}
 
 function startApp () {
     mainApp();
 elements();
-box();
 selector(".question").textContent = questions[stateQuestion]
 
 selector("#yes").addEventListener("click", function() {chooseAnswer("áno")})
@@ -353,6 +342,12 @@ function  goBack() {
     removeElement(".app", ".results-compare-wrapper")
 
 }
+
+//TODO 
+//results
+//show user answer and compare them with candidates answer on click
+//if same, background green
+//if different, background red
 
 
 </script>
