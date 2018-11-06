@@ -92,7 +92,6 @@ function selectDistrict() {
 function mainApp() {
     createElement("div", ".app", "main-wrapper")
     createElement("div", ".main-wrapper", "main-box")
-    createElement("div", ".main-wrapper", "buttons-box")
  
 }
 
@@ -100,6 +99,7 @@ function elements() {
     let districtTitle = districts[myDistrict].slice(districts[myDistrict].indexOf("- ") + 2)
 
     createElement("div", ".main-box", "text-box") 
+    createElement("div", ".main-box", "buttons-box")
 
     createElement("p", ".text-box", "question")
 
@@ -137,10 +137,7 @@ function chooseAnswer(btn) {
   let questionText = selector(".question").textContent;
   let answerText = btn;
   count = count + 1;
-  let circleId = `circle${count}`;
-  if (count < 24) {
-  document.getElementById(circleId).style.background = "white"
-  }
+  
   // store user's answers in array
   data.push({question: questionText, answer: answerText})
   stateQuestion++;
@@ -203,7 +200,7 @@ function importantAnswers() {
     createElement("div", ".app", "all-questions-wrapper")
 
     createElement("p", ".all-questions-wrapper", "all-question-title", "", "Nepovinné: Vyberte si najviac tri otázky, na ktorých vám najviac záleží. Ak na ne aj kandidát odpovedal rovnako, zohľadní to jeho poradie.")
-    createElement("div", ".all-questions-wrapper", "all-questions-btn-box")
+    createElement("div", ".all-questions-progrewrapper", "all-questions-btn-box")
     createElement("a", ".all-questions-btn-box", "btn-continue", "", "Preskočiť")
     createElement("div", ".all-questions-wrapper", "all-questions-box")
     selector(".btn-continue").addEventListener("click", function() {
