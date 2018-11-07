@@ -258,12 +258,16 @@ body {
   font-size: 24px;
 }
 
+.all-questions-btn-box:hover {
+  background: maroon;
+}
+
 .btn-continue {
   background: #832232;
   padding: 2%;
   border-radius: 6px;
   width: 100%;
-  
+  cursor: pointer;
   color: white;
 }
 
