@@ -103,9 +103,9 @@ function elements() {
     createElement("p", ".text-box", "question")
     createElement("p", ".question-count-box", "question-count") 
 
-    createElement("button", ".buttons-box", "btn", "yes", "áno")
-    createElement("button", ".buttons-box", "btn", "no", "nie")
-    createElement("button", ".buttons-box", "btn", "none", "neviem")
+    createElement("a", ".buttons-box", "btn", "yes", "áno")
+    createElement("a", ".buttons-box", "btn", "no", "nie")
+    createElement("a", ".buttons-box", "btn", "none", "neviem")
 
 }
 
@@ -129,7 +129,7 @@ selector("#none").addEventListener("click", function() {chooseAnswer("neviem")})
 districtsChoice();
 
 let stateQuestion = 0;
-const questions = ['Námestie SNP by malo byť celé bez áut', 'Do centra Bratislavy by mali mať dízlové autá zákaz vjazdu', 'Na ulici Trnavské mýto-Šancová ulica by mal byť autobusový pruh', 'Z Filiálky by mala byť nová vlaková stanica', 'Bary by cez týždeň mali zatvárať o polnoci', 'Mesto by malo vybudovať nové PKO', 'Parkovanie by sa malo plošne spoplatniť (so zvýhodnením rezidentov)', 'Z časti bytov v novostavbách by mali developeri urobiť sociálne byty, ktoré by výhodne prenajali mestu', 'Farbu fasády by mal schvaľovať stavebný úrad', 'Vodiči Uberu by mohli jazdiť iba s taxikárskymi licenciami', 'Airbnb byty by mali byť zdanené dvojnásobne', 'Všetky automaty, herne a kasína by mali byť zakázané', 'Nová električka od Šafárikovho námestia po Miletičku má ísť okolo Eurovey, pred SND a po Košickej ako navrhuje J&T', 'Obyvatelia s trvalým pobytom by mali mať MHD zadarmo', 'Vstup autom do mesta by mal byť pre nerezidentov spoplatnený mýtom', 'Mesto by malo finančne a organizačne podporovať podujatie Biela noc', 'Vedenie mestských podnikov by nevyberali poslanci, ale iba komisia zložená z odborníkov a neziskoviek', 'Cyklisti by mali dočasne dostať výnimku na jazdu po chodníkoch', 'V mestských lesoch by mala byť zakázaná hospodárska ťažba', 'Výrub stromov by mal byť povolený, len ak ohrozujú okolie', 'Mestských častí Bratislavy by malo byť výrazne menej ako dnešných 17', 'Na miesto v mestských centrách pre seniorov čaká 1600 ľudi, mesto by malo tento počet znížiť na polovicu', 'Mesto by malo rázne vymáhať dlhy od hokejového Slovana', 'Mesto by malo výhodne prenajímať svoje pozemky k projektom ako je napríklad Národný futbalový štadión Ivana Kmotríka']
+const questions = ['Námestie SNP by malo byť celé bez áut', 'Do centra Bratislavy by mali mať dieselové autá zákaz vjazdu', 'Na ulici Trnavské mýto-Šancová ulica by mal byť autobusový pruh', 'Z Filiálky by mala byť nová vlaková stanica', 'Bary by cez týždeň mali zatvárať o polnoci', 'Mesto by malo vybudovať nové PKO', 'Parkovanie by sa malo plošne spoplatniť (so zvýhodnením rezidentov)', 'Z časti bytov v novostavbách by mali developeri urobiť sociálne byty, ktoré by výhodne prenajali mestu', 'Farbu fasády by mal schvaľovať stavebný úrad', 'Vodiči Uberu by mohli jazdiť iba s taxikárskymi licenciami', 'Airbnb byty by mali byť zdanené dvojnásobne', 'Všetky automaty, herne a kasína by mali byť zakázané', 'Nová električka od Šafárikovho námestia po Miletičovu má ísť okolo Eurovey, pred SND a po Košickej ako navrhuje J&T', 'Obyvatelia s trvalým pobytom by mali mať MHD zadarmo', 'Vstup autom do mesta by mal byť pre nerezidentov spoplatnený mýtom', 'Mesto by malo finančne a organizačne podporovať podujatie Biela noc', 'Vedenie mestských podnikov by nevyberali poslanci, ale iba komisia zložená z odborníkov a neziskoviek', 'Cyklisti by mali dočasne dostať výnimku na jazdu po chodníkoch', 'V mestských lesoch by mala byť zakázaná hospodárska ťažba', 'Výrub stromov by mal byť povolený, len ak ohrozujú okolie', 'Mestských častí Bratislavy by malo byť výrazne menej ako dnešných 17', 'Na miesto v mestských centrách pre seniorov čaká 1600 ľudi, mesto by malo tento počet znížiť na polovicu', 'Mesto by malo rázne vymáhať dlhy od hokejového Slovana', 'Mesto by malo výhodne prenajímať svoje pozemky k projektom ako je napríklad Národný futbalový štadión Ivana Kmotríka']
 
 
 let data = [];
