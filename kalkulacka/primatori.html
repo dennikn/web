@@ -84,15 +84,14 @@ function mainApp() {
 }
 
 function elements() {
-
+    createElement("div", ".main-box", "question-count-box") 
     createElement("div", ".main-box", "text-box") 
-
     createElement("p", ".text-box", "question")
-    createElement("div", ".main-box", "progress-box") 
+    createElement("p", ".question-count-box", "question-count") 
 
-    createElement("a", ".buttons-box", "btn", "yes", "áno")
-    createElement("a", ".buttons-box", "btn", "no", "nie")
-    createElement("a", ".buttons-box", "btn", "none", "neviem")
+    createElement("button", ".buttons-box", "btn", "yes", "áno")
+    createElement("button", ".buttons-box", "btn", "no", "nie")
+    createElement("button", ".buttons-box", "btn", "none", "neviem")
 
 }
 
@@ -100,22 +99,11 @@ function removeElement(parrent, child) {
     selector(parrent).removeChild(selector(child))
 }
 
-function box() {
-    for (let i=0; i<24; i++) {
-        let circleId = `circle${i}`;
-        if (i === 0) {
-            createElement("div", ".progress-box", "circle full", circleId) 
-        } else {
-        createElement("div", ".progress-box", "circle", circleId) 
-}
-    }
-}
-
 
 function startApp () {
     mainApp();
 elements();
-box();
+selector(".question-count").textContent = `${stateQuestion + 1}/24`;
 
 selector(".question").textContent = questions[stateQuestion]
 
@@ -136,20 +124,18 @@ function chooseAnswer(btn) {
   let questionText = selector(".question").textContent;
   let answerText = btn;
   count = count + 1;
-  let circleId = `circle${count}`;
-  if (count < 24) {
-  document.getElementById(circleId).style.background = "white"
-  }
+  
   // store user's answers in array
   data.push({question: questionText, answer: answerText})
   stateQuestion++;
-
+  selector(".question-count").textContent = `${stateQuestion + 1}/24`;
   selector(".question").textContent = questions[stateQuestion]
     if (data.length === questions.length) {
         //end of questions compare user's answers with candidates and show final results
         importantAnswers();
     }
 }
+
 
 let importantQuestionsArray = [];
 let importantQuestionsArraySame = [];
@@ -201,25 +187,34 @@ function importantAnswers() {
     let importantQuestionsCount = 0;
     createElement("div", ".app", "all-questions-wrapper")
 
-    createElement("p", ".all-questions-wrapper", "all-question-title", "", "Nepovinné: Vyberte si najviac tri otázky, na ktorých vám najviac záleží. Ak na ne aj kandidát odpovedal rovnako, zohľadní to jeho poradie.")
+    createElement("p", ".all-questions-wrapper", "all-question-title", "", "Nepovinné: Vyberte si najviac tri otázky, na ktorých vám najviac záleží. Ak na ne kandidát odpovedal rovnako, zohľadní to jeho poradie.")
     createElement("div", ".all-questions-wrapper", "all-questions-btn-box")
     createElement("a", ".all-questions-btn-box", "btn-continue", "", "Preskočiť")
     createElement("div", ".all-questions-wrapper", "all-questions-box")
+
+
     selector(".btn-continue").addEventListener("click", function() {
             compare()
             end()
         }
         )
     for (let i = 0; i < data.length; i++) {
-        createElement("label", ".all-questions-box", "questions-label", data[i].question)
+        createElement("div", ".all-questions-box", "all-questions-row", `questionRow${i}`)
+
+        createElement("label", `#questionRow${i}`, "questions-label", data[i].question)
         createInput(data[i].question, "", "radio", `radio${data[i].question}`, data[i].question)
         createElement("span", `#${data[i].question}`, "checkmark", "", data[i].question)
-        document.getElementById(`radio${data[i].question}`).addEventListener("click", function() { savePreference( this.value, data[i].question)})
+        createElement("div", `#questionRow${i}`, "all-questions-answer-box", `answerRow${i}`)
+        createElement("p", `#answerRow${i}`, "all-questions-answer", " ", data[i].answer)
+
+
+        document.getElementById(`radio${data[i].question}`).addEventListener("click", function() { savePreference( this.value, `#answerRow${i}`)})
        
 
     }
        
 }
+
 
 
 function savePreference(selectedQuestion, id) {
@@ -227,27 +222,38 @@ function savePreference(selectedQuestion, id) {
     console.log(id)
     selector(".btn-continue").textContent = "Pokračovať";
     if (importantQuestionsArray.length < 3) {
+        if (importantQuestionsArray.includes(selectedQuestion)) {
+        }else {
         importantQuestionsArray.push(selectedQuestion)
-        document.getElementById(id).setAttribute("class","questions-label-selected")
+        createElement("i", id, "fas fa-thumbs-up thumb-icon-select")
+
         console.log(importantQuestionsArray)
+        }
     } else {
         console.log("limit")
     }
     if (importantQuestionsArray.length == 3) {
         console.log("end")
+        scrollToTop()
         compare()
             end()
     }
     return importantQuestionsArray
 }
 
+function scrollToTop() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0;
+}
 
 
 function end() {
-  
+
 removeElement(".app", ".all-questions-wrapper")
 
 createElement("div", ".app", "results-box")
+createElement("li", ".results-box", "results-row-header")
+createElement("div", ".results-row-header", "results-name-box")
 
 createElement("ul", ".results-box", "results")
 
@@ -266,7 +272,8 @@ function hide(element) {
     selectedElement.style.display = "none"
 }
 
-const images = [{name: "Ivo Nesrovnal", src: "https://a-static.projektn.sk/2018/11/nesrovnal-anketa.png", status: "nezávislý"}, {name: "Václav Mika", src: "https://a-static.projektn.sk/2018/11/mika_anketa.png", status: "nezávislý", status: "Naj"}, {name: "Matúš Vallo", src: "https://a-static.projektn.sk/2018/11/vallo_anketa.png", status: "nezávislý"}, {name: "Ján Mrva", src: "https://a-static.projektn.sk/2018/11/mrva_anketa.png", status: "pravicový kandidát"}, {name: "Viktor Béreš", src: "https://a-static.projektn.sk/2018/11/beres_anketa.png"}, {name: "Iveta Plšeková", src: "https://a-static.projektn.sk/2018/11/plsekova_anketa.png", status: "nezávislý"}, {name: "Jaroslav Brada", src: "https://a-static.projektn.sk/2018/11/brada_anketa.png"}, {name: "Roman Ruhig", src: "https://a-static.projektn.sk/2018/11/ruhig_anketa.png", status: "Slovenská národná jednota"}]
+const images = [{name: "Ivo Nesrovnal", src: "https://a-static.projektn.sk/2018/11/nesrovnal-anketa.png", status: "nezávislý"}, {name: "Václav Mika", src: "https://a-static.projektn.sk/2018/11/mika_anketa.png", status: "nezávislý"}, {name: "Matúš Vallo", src: "https://a-static.projektn.sk/2018/11/vallo_anketa.png", status: "nezávislý"}, {name: "Ján Mrva", src: "https://a-static.projektn.sk/2018/11/mrva_anketa.png", status: "pravicový kandidát"}, {name: "Viktor Béreš", src: "https://a-static.projektn.sk/2018/11/beres_anketa.png", status: "Naj, SMĽ"}, {name: "Iveta Plšeková", src: "https://a-static.projektn.sk/2018/11/plsekova_anketa.png", status: "nezávislý"}, {name: "Jaroslav Brada", src: "https://a-static.projektn.sk/2018/11/brada_anketa.png", status: "SMS"}, {name: "Roman Ruhig", src: "https://a-static.projektn.sk/2018/11/ruhig_anketa.png", status: "Slovenská národná jednota"}]
+
 
 function results() {
     let sorted = candidates.sort((a, b) => parseFloat(b.countPreference) - parseFloat(a.countPreference))
@@ -274,36 +281,44 @@ function results() {
    for (let i=0; i<sorted.length; i++) {
        console.log("Basic count: " + sorted[i].name + ": " + sorted[i].count)
        console.log("Preference count: " + sorted[i].name + ": " + sorted[i].countPreference)
-
        let candidateName = sorted[i].name;
-       let rowId = "#li" + candidateName
+       let rowId = "#" + candidateName
+       let nameId = `#name${candidateName}`
        let finalNumber = Math.round(percents(sorted[i].count),1)
+       createElement("li", ".results", "results-row", `${candidateName}`)
+       createElement("div", `#${candidateName}`, "results-image", `image${candidateName}`)
 
-       if (sorted[i].countPreference === sorted[i].count + 1) {
-        createElement("li", ".results", "results-row light-preference", `li${candidateName}`)
-       } else if (sorted[i].countPreference === sorted[i].count + 2) {
-        createElement("li", ".results", "results-row middle-preference", `li${candidateName}`)
-       } else if (sorted[i].countPreference === sorted[i].count + 3) {
-        createElement("li", ".results", "results-row strong-preference", `li${candidateName}`)
-       } else {
-        createElement("li", ".results", "results-row", `li${candidateName}`)
-       }
-       createElement("div", rowId, "results-header", `header${candidateName}`)
-       createElement("div", `#header${candidateName}`, "results-image", `image${candidateName}`)
        for (let i=0; i<images.length; i++) {
            if (images[i].name === candidateName) {
                createImage(`image${candidateName}`, "candidate-image", images[i].src)
            }
        }
-        createElement("p", `#header${candidateName}`, "results-name", `name${candidateName}`, candidateName)
-        for (let i=0; i<images.length; i++) {
-           if (images[i].name === candidateName) {
-            createElement("p", `#header${candidateName}`, "results-status", `name${candidateName}`, images[i].status)
-           }
-       }
+       createElement("div", rowId, "results-name-box-name", `name${candidateName}`)
+       createElement("div", `#name${candidateName}`, "results-name-box", `top${candidateName}`)
+       createElement("p", `#top${candidateName}`, "results-name", candidateName, candidateName)
 
-        createElement("p", `#header${candidateName}`, "results-sum", `number${candidateName}`, `${finalNumber} %`)
-        document.getElementById(`li${candidateName}`).addEventListener("click", function() {showCompared(candidateName, data, sorted[i].data)})
+       if (sorted[i].countPreference === sorted[i].count + 1) {
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+       } else if (sorted[i].countPreference === sorted[i].count + 2) {
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+
+       } else if (sorted[i].countPreference === sorted[i].count + 3) {
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+        createElement("i", `#top${candidateName}`, "fas fa-thumbs-up thumb-icon")
+
+       }
+        
+       // for (let i=0; i<images.length; i++) {
+         //  if (images[i].name === candidateName) {
+           // createElement("p", `#${candidateName}`, "results-status", `name${candidateName}`, images[i].status)
+           //}
+       //}
+       createElement("div", nameId, "results-sum-box", `sum${candidateName}`)
+
+        createElement("p", `#sum${candidateName}`, "results-sum", " ", `${finalNumber} %`)
+        document.getElementById(candidateName).addEventListener("click", function() {showCompared(candidateName, data, sorted[i].data)})
        
    }
 }
@@ -329,34 +344,36 @@ function showCompared(name, userData, candidateData) {
     createElement("div", "#main-row", "my-answer", "", "Ja")
     createElement("div", "#main-row", "candidate-answer", "", "Kandidát")
 
-   
-   for (let i=0; i<userData.length; i++) {
+    for (let i=0; i<userData.length; i++) {
         let shadeClass;
-        let rowId = userData[i].question;
+        let rowId = `#${userData[i].question}`;
+        let questionId = `#questionId${i}`;
         if (i % 2 === 0 ) {
             shadeClass = " shade-light"
         } else {
             shadeClass = " shade-dark"
         }
-        createElement("div", ".results-compare-wrapper", "results-compare-row" + shadeClass, rowId)
-        createElement("p", "#" + rowId, "question " + shadeClass, " ", userData[i].question)
-        createElement("p", "#" + rowId, "my-answer " + shadeClass, " ", userData[i].answer)
-        createElement("p", "#" + rowId, "candidate-answer " + shadeClass, " ", candidateData[i].answer)
+        createElement("div", ".results-compare-wrapper", "results-compare-row" + shadeClass, `${userData[i].question}`)
+        createElement("div", rowId, "question-box" + shadeClass, `questionId${i}`)
+        createElement("p", questionId, "question " + shadeClass, `questionId${i}`, userData[i].question)
+        createElement("p", rowId, "my-answer " + shadeClass, " ", userData[i].answer)
+        createElement("p", rowId, "candidate-answer " + shadeClass, " ", candidateData[i].answer)
+        if (userData[i].answer === candidateData[i].answer) {
+            if (importantQuestionsArray.includes(userData[i].question)) {
+                createElement("i", questionId, "fas fa-thumbs-up thumb-icon-expand")
+            }
+        }
         
     }
 
 }
+
 
 function  goBack() {
     removeElement(".app", ".results-compare-wrapper")
 
 }
 
-//TODO 
-//results
-//show user answer and compare them with candidates answer on click
-//if same, background green
-//if different, background red
 
 
 </script>
