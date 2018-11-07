@@ -219,16 +219,43 @@ body {
 }
 
 .btn {
+  display: block;
   background: #c32640;
-  color: white;
-  
+  font-size: 18px;
+  text-align: center;
+  width: 50%;
   margin-left: 25%;
   margin-right: 25%;
   padding: 2%;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  padding-top: 4%;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
   font-size: 18px;
+}
+
+@media (min-width: 400px) {
+ 
+.btn {
+  display: block;
+  background: #c32640;
+  font-size: 18px;
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 2%;
+  border-radius: 6px;
+  cursor: pointer;
+  
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+}
 }
 
 .btn:hover {
