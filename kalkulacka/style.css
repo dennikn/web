@@ -215,7 +215,6 @@ body {
   grid-template-rows: 25% 25% 25%;
   grid-row-gap: 8%;
 }
-
 .btn {
   display: block;
   background: #c32640;
@@ -227,33 +226,14 @@ body {
   padding: 2%;
   border-radius: 6px;
   cursor: pointer;
-  
   border-radius: 12px;
   text-align: center;
+  font-size: 90%;
+  vertical-align: middle;
   cursor: pointer;
   font-size: 18px;
 }
 
-@media (min-width: 400px) {
- 
-.btn {
-  display: block;
-  background: #c32640;
-  font-size: 18px;
-  text-align: center;
-  width: 50%;
-  margin-left: 25%;
-  margin-right: 25%;
-  padding: 2%;
-  border-radius: 6px;
-  cursor: pointer;
-  
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 18px;
-}
-}
 .btn:hover {
   background: maroon;
 }
