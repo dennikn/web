@@ -216,13 +216,13 @@ body {
   grid-template-rows: 25% 25% 25%;
   grid-row-gap: 8%;
 }
-
 .btn {
-  background: #832232;
+  background: #c32640;
   color: white;
   
   margin-left: 25%;
   margin-right: 25%;
+  padding: 2%;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
@@ -230,7 +230,7 @@ body {
 }
 
 .btn:hover {
-  background: rgb(43, 37, 37);
+  background: maroon;
 }
 
 .all-questions-wrapper{
