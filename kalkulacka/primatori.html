@@ -141,7 +141,6 @@ let importantQuestionsArray = [];
 let importantQuestionsArraySame = [];
 
 function compare() {
-    console.log(candidates[0].data[3])
     let count = 0;
     for (let i=0; i<data.length; i++) {
         //loop user's anwers
@@ -218,8 +217,6 @@ function importantAnswers() {
 
 
 function savePreference(selectedQuestion, id) {
-    console.log(selectedQuestion)
-    console.log(id)
     selector(".btn-continue").textContent = "Pokračovať";
     if (importantQuestionsArray.length < 3) {
         if (importantQuestionsArray.includes(selectedQuestion)) {
@@ -227,13 +224,9 @@ function savePreference(selectedQuestion, id) {
         importantQuestionsArray.push(selectedQuestion)
         createElement("i", id, "fas fa-thumbs-up thumb-icon-select")
 
-        console.log(importantQuestionsArray)
         }
-    } else {
-        console.log("limit")
     }
     if (importantQuestionsArray.length == 3) {
-        console.log("end")
         scrollToTop()
         compare()
             end()
@@ -263,7 +256,6 @@ results()
 
 function percents(number) {
     let sum = (100 * number) / 24;
-    console.log(sum)
     return sum;
 }
 
@@ -277,10 +269,7 @@ const images = [{name: "Ivo Nesrovnal", src: "https://a-static.projektn.sk/2018/
 
 function results() {
     let sorted = candidates.sort((a, b) => parseFloat(b.countPreference) - parseFloat(a.countPreference))
-        console.log(sorted)
    for (let i=0; i<sorted.length; i++) {
-       console.log("Basic count: " + sorted[i].name + ": " + sorted[i].count)
-       console.log("Preference count: " + sorted[i].name + ": " + sorted[i].countPreference)
        let candidateName = sorted[i].name;
        let rowId = "#" + candidateName
        let nameId = `#name${candidateName}`
@@ -330,7 +319,6 @@ function results() {
 
 
 function showCompared(name, userData, candidateData) {
-    console.log("click")
     createElement("div", ".app", "results-compare-wrapper")
     createElement("div", ".results-compare-wrapper", "results-compare-header")
     createElement("i", ".results-compare-header", "fas fa-backspace btn-back", "btnbtn")
