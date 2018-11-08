@@ -334,7 +334,6 @@ input[type="radio"] {
 
 
 .results-box {
-  background: rgb(43, 37, 37);
   top: 0;
   width: 100%;
 }
@@ -349,7 +348,6 @@ input[type="radio"] {
   word-wrap: break-word;
   display:grid;
   grid-auto-rows: auto;
-  grid-row-gap: 1%;
 }
 
 .ul-results {
@@ -370,6 +368,28 @@ input[type="radio"] {
   text-align: right;
   font-size: 32px;
 }
+
+@media (max-width: 400px) {
+  .results {
+    padding: 0;
+    margin-top: 0;
+    margin-left: 4%;
+    margin-right: 4%;
+    background: rgb(43, 37, 37);
+    font-size: 18px;
+    word-wrap: break-word;
+    display:grid;
+    grid-auto-rows: auto;
+  }
+  .results-sum {
+    width: 100%;
+    margin: 0;
+    text-align: right;
+    font-size: 24px;
+  }
+  
+}
+
 .results-row {
   display: grid;
   height: 100%;
