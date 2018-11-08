@@ -260,9 +260,6 @@ body {
   font-size: 24px;
 }
 
-.all-questions-btn-box:hover {
-  background: maroon;
-}
 
 .btn-continue {
   background: #832232;
@@ -318,8 +315,14 @@ input[type="radio"] {
 }
 
 .questions-label {
+  cursor: pointer;
   padding: 5%;
 }
+.questions-label:hover {
+  background: #83223260;
+
+}
+
 .questions-label-selected {
   box-shadow: 0 0 3pt 2pt #a1273c;
 }
@@ -419,7 +422,8 @@ input[type="radio"] {
 
 }
 .results-row:hover {
-  background: crimson;
+  border-radius: 6px;
+  background: #83223260;
 }
 
 .light-preference {
@@ -586,7 +590,7 @@ p {
 }
 
 .question {
-  text-align: left;
+  text-align: center;
   display: inline-block;
   position: relative;
 }
